@@ -27,7 +27,7 @@ public class Booking {
     private String messageToAS;
     private String personalNote;
 
-    public Booking(int bookingID, int packageID, int activityID, int organizationID, String firstName, String lastName, String position, String phone, String email, String åbenSkoleForløb, String transportType, String transportArrival, String transportDeparture, int participants, LocalDate startDate, LocalDate endDate, LocalDate bookingDate, boolean temporaryBooking, String assistance, boolean noShow, String messageToAS, String personalNote) {
+ /*   private Booking(int bookingID, int packageID, int activityID, int organizationID, String firstName, String lastName, String position, String phone, String email, String åbenSkoleForløb, String transportType, String transportArrival, String transportDeparture, int participants, LocalDate startDate, LocalDate endDate, LocalDate bookingDate, boolean temporaryBooking, String assistance, boolean noShow, String messageToAS, String personalNote) {
         this.bookingID = bookingID;
         this.packageID = packageID;
         this.activityID = activityID;
@@ -50,8 +50,19 @@ public class Booking {
         this.noShow = noShow;
         this.messageToAS = messageToAS;
         this.personalNote = personalNote;
+    }*/
+    private static Booking instance = null;
+
+    private Booking() {
+
     }
 
+    public static Booking getInstance() {
+        if (instance == null) {
+            instance = new Booking();
+        }
+        return instance;
+    }
     public int getBookingID() {
         return bookingID;
     }
