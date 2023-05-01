@@ -57,7 +57,7 @@ public class Booking {
 
     }
 
-    private static Booking getInstance() {
+    public static Booking getInstance() {
         if (instance == null) {
             instance = new Booking();
         }
