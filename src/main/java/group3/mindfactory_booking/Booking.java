@@ -57,12 +57,13 @@ public class Booking {
 
     }
 
-    public static Booking getInstance() {
+    private static Booking getInstance() {
         if (instance == null) {
             instance = new Booking();
         }
         return instance;
     }
+
     public int getBookingID() {
         return bookingID;
     }
