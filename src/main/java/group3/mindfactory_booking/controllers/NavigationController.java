@@ -60,7 +60,6 @@ public class NavigationController {
         if (currentViewIndex != loaderList.size() - 1) {
             stackPane.getChildren().clear();
             stackPane.getChildren().add(views.get(++currentViewIndex));
-            næsteButton.setDisable(true);
         } else {
             // If the current view is the last view, save the booking and go to the opening view
             //bookingDao.saveBooking(booking);
