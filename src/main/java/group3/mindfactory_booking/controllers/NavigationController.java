@@ -18,7 +18,6 @@ public class NavigationController {
     private BookingDao bookingDao;
     private Booking booking;
 
-    private LinkedList<FXMLLoader> loaderList;
     private LinkedList<BorderPane> views;
     private int currentViewIndex;
 
@@ -47,17 +46,8 @@ public class NavigationController {
 
     @FXML
     public void handleNæste() {
-        // Add the next view to the list if it doesn't exist
-        // This is done to prevent the views from being reloaded every time the user switches between views
-        if (views.size() != loaderList.size() || currentViewIndex == views.size() - 1 && currentViewIndex != loaderList.size() - 1) {
-            try {
-                views.add(loaderList.get(currentViewIndex + 1).load());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
         // Switch to the next view
-        if (currentViewIndex != loaderList.size() - 1) {
+        if (currentViewIndex != views.size() - 1) {
             stackPane.getChildren().clear();
             stackPane.getChildren().add(views.get(++currentViewIndex));
         } else {
@@ -84,7 +74,7 @@ public class NavigationController {
         FXMLLoader view5Loader = new FXMLLoader(BookingApplication.class.getResource("ConfirmBookingGUI.fxml"));
 
         // Add the fxmlLoaders to the list
-        loaderList = new LinkedList<>();
+        LinkedList<FXMLLoader> loaderList = new LinkedList<>();
         loaderList.add(view1Loader);
         loaderList.add(view2Loader);
         loaderList.add(view3Loader);
@@ -94,7 +84,9 @@ public class NavigationController {
         views = new LinkedList<>();
         // Load the first view into the list
         try {
-            views.add(view1Loader.load());
+            for (FXMLLoader loader : loaderList) {
+                views.add(loader.load());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
