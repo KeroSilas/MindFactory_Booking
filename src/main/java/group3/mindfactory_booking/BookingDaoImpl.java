@@ -1,8 +1,12 @@
+package group3.mindfactory_booking;
+
+import group3.mindfactory_booking.BookingDao;
+
 import java.sql.*;
 import java.time.LocalDateTime;
 
 
-public class BookingDaoImpl implements BookingDao{
+public class BookingDaoImpl implements BookingDao {
 
     private final DatabaseConnector databaseConnector;
 

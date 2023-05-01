@@ -1,3 +1,5 @@
+package group3.mindfactory_booking;
+
 import java.sql.*;
 import java.time.LocalDateTime;
 

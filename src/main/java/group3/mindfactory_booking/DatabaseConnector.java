@@ -1,3 +1,5 @@
+package group3.mindfactory_booking;
+
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
