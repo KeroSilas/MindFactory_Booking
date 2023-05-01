@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXRadioButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <HBox alignment="TOP_CENTER" spacing="32.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox spacing="12.0">
+               <children>
+                  <HBox alignment="CENTER_RIGHT" spacing="8.0">
+                     <children>
+                        <Label text="Forløb" />
+                        <MFXComboBox fx:id="forløbCB" maxHeight="30.0" minHeight="30.0" prefHeight="30.0" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+                  <MFXRadioButton fx:id="offentligRB" text="Offentlig transport">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="transportType" />
+                     </toggleGroup>
+                  </MFXRadioButton>
+                  <MFXRadioButton fx:id="busRB" text="Bus" toggleGroup="$transportType" />
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" spacing="12.0">
+               <children>
+                  <HBox alignment="CENTER_RIGHT" spacing="8.0">
+                     <children>
+                        <Label text="Ankomst" />
+                        <MFXTextField fx:id="ankomstTF" maxHeight="30.0" minHeight="30.0" prefHeight="30.0" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" spacing="8.0">
+                     <children>
+                        <Label text="Afgang" />
+                        <MFXTextField fx:id="afgangTF" maxHeight="30.0" minHeight="30.0" prefHeight="30.0" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </center>
+   <top>
+      <Label text="Åben-Skole information" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Roboto Black" size="24.0" />
+         </font>
+         <padding>
+            <Insets bottom="24.0" />
+         </padding>
+      </Label>
+   </top>
+</BorderPane>

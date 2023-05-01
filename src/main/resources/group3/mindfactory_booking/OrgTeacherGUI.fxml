@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="35.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="TOP_CENTER" spacing="8.0">
+               <children>
+                  <Label text="Speciel udstyr/materiale">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <HBox spacing="8.0">
+                     <children>
+                        <ComboBox fx:id="udstyrComboBox" prefWidth="150.0" />
+                        <Button mnemonicParsing="false" onAction="#handleTilføjUdstyr" text="Tilføj" />
+                     </children>
+                  </HBox>
+                  <ListView fx:id="forløbListView" prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" spacing="12.0">
+               <children>
+                  <Label text="Brug for assistence?">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" spacing="8.0">
+                     <children>
+                        <RadioButton mnemonicParsing="false" text="Lærings Konsulent">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="assistenceToggleGroup" />
+                           </toggleGroup>
+                        </RadioButton>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="8.0">
+                     <children>
+                        <RadioButton mnemonicParsing="false" text="Anne-Sofie" toggleGroup="$assistenceToggleGroup" />
+                     </children>
+                     <padding>
+                        <Insets bottom="30.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" spacing="8.0" />
+                  <HBox alignment="CENTER_RIGHT" spacing="8.0" />
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                     <children>
+                        <Label text="Aktiviteter:" />
+                        <ComboBox prefWidth="150.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets top="40.0" />
+         </padding>
+      </HBox>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#tilbage" text="Tilbage" />
+            <Button mnemonicParsing="false" onAction="#næste" text="Næste" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>
