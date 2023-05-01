@@ -1,4 +1,4 @@
-package group3.mindfactory_booking;
+package group3.mindfactory_booking.dao;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;

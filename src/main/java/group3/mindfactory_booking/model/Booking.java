@@ -1,4 +1,4 @@
-package group3.mindfactory_booking;
+package group3.mindfactory_booking.model;
 
 import java.time.LocalDate;
 

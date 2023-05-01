@@ -1,6 +1,6 @@
-package group3.mindfactory_booking;
+package group3.mindfactory_booking.dao;
 
-import group3.mindfactory_booking.BookingDao;
+import group3.mindfactory_booking.model.Booking;
 
 import java.sql.*;
 import java.time.LocalDateTime;
