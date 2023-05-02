@@ -1,6 +1,7 @@
 package group3.mindfactory_booking.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Booking {
 
@@ -18,14 +19,15 @@ public class Booking {
     private String transportArrival;
     private String transportDeparture;
     private int participants;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private LocalDate bookingDate;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
+    private LocalDateTime bookingDate;
     private boolean temporaryBooking;
     private String assistance;
     private boolean noShow;
     private String messageToAS;
     private String personalNote;
+    private String bookingType;
 
  /*   private Booking(int bookingID, int packageID, int activityID, int organizationID, String firstName, String lastName, String position, String phone, String email, String åbenSkoleForløb, String transportType, String transportArrival, String transportDeparture, int participants, LocalDate startDate, LocalDate endDate, LocalDate bookingDate, boolean temporaryBooking, String assistance, boolean noShow, String messageToAS, String personalNote) {
         this.bookingID = bookingID;
@@ -176,27 +178,27 @@ public class Booking {
         this.participants = participants;
     }
 
-    public LocalDate getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
 
-    public LocalDate getBookingDate() {
+    public LocalDateTime getBookingDate() {
         return bookingDate;
     }
 
-    public void setBookingDate(LocalDate bookingDate) {
+    public void setBookingDate(LocalDateTime bookingDate) {
         this.bookingDate = bookingDate;
     }
 
@@ -238,5 +240,13 @@ public class Booking {
 
     public void setPersonalNote(String personalNote) {
         this.personalNote = personalNote;
+    }
+
+    public String getBookingType() {
+        return bookingType;
+    }
+
+    public void setBookingType(String bookingType) {
+        this.bookingType = bookingType;
     }
 }

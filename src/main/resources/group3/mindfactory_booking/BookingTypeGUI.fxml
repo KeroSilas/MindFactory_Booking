@@ -7,23 +7,23 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group3.mindfactory_booking.controllers.BookingTypeController">
    <center>
-      <HBox alignment="TOP_CENTER" spacing="20.0">
+      <HBox alignment="TOP_CENTER" spacing="12.0" BorderPane.alignment="CENTER">
          <children>
-            <MFXButton buttonType="RAISED" onAction="#handleÅbenSkole" prefHeight="30.0" prefWidth="100.0" text="Åben-Skole" />
-            <MFXButton buttonType="RAISED" onAction="#handleOrganisation" prefHeight="30.0" prefWidth="100.0" text="Organisation" />
-            <MFXButton buttonType="RAISED" onAction="#handleLærer" prefHeight="30.0" prefWidth="100.0" text="Lærer" />
+            <MFXButton fx:id="åbenSkoleBtn" buttonType="RAISED" onAction="#handleÅbenSkole" prefHeight="40.0" prefWidth="120.0" text="Åben-Skole" />
+            <MFXButton fx:id="organisationBtn" buttonType="RAISED" onAction="#handleOrganisation" prefHeight="40.0" prefWidth="120.0" text="Organisation" />
+            <MFXButton fx:id="lærerBtn" buttonType="RAISED" onAction="#handleLærer" prefHeight="40.0" prefWidth="120.0" text="Lærer" />
          </children>
       </HBox>
    </center>
    <top>
       <Label text="Hvad vil du booke som?" BorderPane.alignment="CENTER">
          <font>
-            <Font name="Roboto Black" size="24.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
          <BorderPane.margin>
-            <Insets bottom="24.0" />
+            <Insets bottom="14.0" />
          </BorderPane.margin>
       </Label>
    </top>

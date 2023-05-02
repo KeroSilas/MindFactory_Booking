@@ -1,87 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXListView?>
+<?import io.github.palexdev.materialfx.controls.MFXRadioButton?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group3.mindfactory_booking.controllers.OrgTeacherController">
    <center>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="35.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" spacing="32.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="TOP_CENTER" spacing="8.0">
+            <VBox spacing="12.0">
                <children>
                   <Label text="Speciel udstyr/materiale">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="-6.0" />
+                     </padding>
+                  </Label>
+                  <HBox alignment="CENTER" spacing="8.0">
+                     <children>
+                        <MFXComboBox fx:id="udstyrCB" maxWidth="175.0" minHeight="30.0" minWidth="175.0" prefWidth="175.0" />
+                        <MFXButton buttonType="RAISED" minHeight="30.0" minWidth="50.0" onAction="#handleTilføj" text="Tilføj" />
+                     </children>
+                  </HBox>
+                  <MFXListView fx:id="udstyrLV" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" />
+               </children>
+            </VBox>
+            <VBox spacing="12.0">
+               <children>
+                  <Label text="Brug for assistance?">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="-14.0" />
+                     </padding>
+                  </Label>
+                  <HBox alignment="CENTER" spacing="8.0" />
+                  <MFXRadioButton fx:id="læringsRB" text="Lærings konsulent">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="assistanceType" />
+                     </toggleGroup>
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <HBox spacing="8.0">
-                     <children>
-                        <ComboBox fx:id="udstyrComboBox" prefWidth="150.0" />
-                        <Button mnemonicParsing="false" onAction="#handleTilføjUdstyr" text="Tilføj" />
-                     </children>
-                  </HBox>
-                  <ListView fx:id="forløbListView" prefHeight="200.0" prefWidth="200.0" />
-               </children>
-            </VBox>
-            <VBox alignment="TOP_CENTER" spacing="12.0">
-               <children>
-                  <Label text="Brug for assistence?">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <HBox alignment="CENTER_LEFT" spacing="8.0">
-                     <children>
-                        <RadioButton mnemonicParsing="false" text="Lærings Konsulent">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="assistenceToggleGroup" />
-                           </toggleGroup>
-                        </RadioButton>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" spacing="8.0">
-                     <children>
-                        <RadioButton mnemonicParsing="false" text="Anne-Sofie" toggleGroup="$assistenceToggleGroup" />
-                     </children>
+                  </MFXRadioButton>
+                  <MFXRadioButton fx:id="annesofieRB" text="Anne-Sofie" toggleGroup="$assistanceType">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
                      <padding>
-                        <Insets bottom="30.0" />
+                        <Insets bottom="32.0" />
                      </padding>
-                  </HBox>
-                  <HBox alignment="CENTER_RIGHT" spacing="8.0" />
-                  <HBox alignment="CENTER_RIGHT" spacing="8.0" />
-                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
-                     <children>
-                        <Label text="Aktiviteter:" />
-                        <ComboBox prefWidth="150.0" />
-                     </children>
-                  </VBox>
+                  </MFXRadioButton>
+                  <Label text="Aktivitet">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="-6.0" />
+                     </padding>
+                  </Label>
+                  <MFXComboBox fx:id="aktivitetCB" maxWidth="175.0" minHeight="30.0" minWidth="175.0" prefWidth="175.0" />
                </children>
             </VBox>
          </children>
-         <padding>
-            <Insets top="40.0" />
-         </padding>
       </HBox>
    </center>
-   <bottom>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button mnemonicParsing="false" onAction="#tilbage" text="Tilbage" />
-            <Button mnemonicParsing="false" onAction="#næste" text="Næste" />
-         </children>
-      </HBox>
-   </bottom>
+   <top>
+      <Label text="Speciel udstyr, assistance &amp; aktivitet" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <padding>
+            <Insets bottom="12.0" />
+         </padding>
+      </Label>
+   </top>
 </BorderPane>
