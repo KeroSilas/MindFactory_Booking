@@ -38,7 +38,7 @@ public class ActivityDaoImpl implements ActivityDao {
 
     public List<Activity> getAllActivity() {
 
-        List<Activity> caterings = new ArrayList<>();
+        List<Activity> activities = new ArrayList<>();
         try(Connection con = databaseConnector.getConnection()){
             PreparedStatement ps = con.prepareStatement("SELECT * FROM Activity;");
             ResultSet rs = ps.executeQuery();
@@ -49,13 +49,13 @@ public class ActivityDaoImpl implements ActivityDao {
                 String activityName = rs.getString(2);
 
                 activity = new Activity(activityID, activityName);
-                caterings.add(activity);
+                activities.add(activity);
             }
 
         } catch (SQLException e) {
-            System.err.println("cannot access AllCaterings (CateringDaoImpl) " + e.getMessage());
+            System.err.println("cannot access AllActivities (ActivityDaoImpl) " + e.getMessage());
         }
-        return caterings;
+        return activities;
 
     }
 }
