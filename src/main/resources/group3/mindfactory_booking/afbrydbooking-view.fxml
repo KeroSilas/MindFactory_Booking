@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group3.mindfactory_booking.controllers.AfbrydBookingController">
+   <center>
+      <VBox alignment="TOP_CENTER" spacing="16.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Ønsker du at afbryde din booking, så skal du bare indtaste dit booking nummer du fik i din e-mail, da du først bookede hos os." wrapText="true" />
+            <HBox alignment="CENTER_RIGHT" spacing="8.0">
+               <children>
+                  <Label text="Booking nummer:" />
+                  <MFXTextField fx:id="bookingNummerTF" maxWidth="1.7976931348623157E308" minHeight="30.0" prefHeight="30.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+         </padding>
+      </VBox>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER_RIGHT" prefHeight="50.0" spacing="12.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                  <Label fx:id="statusLabel" textFill="#00a400" />
+               </children>
+            </HBox>
+            <MFXProgressSpinner fx:id="progressSpinner" prefHeight="20.0" prefWidth="20.0" visible="false">
+               <color1>
+                  <Color red="0.501960813999176" green="0.501960813999176" blue="0.501960813999176" />
+               </color1>
+               <color2>
+                  <Color red="0.501960813999176" green="0.501960813999176" blue="0.501960813999176" />
+               </color2>
+               <color3>
+                  <Color red="0.501960813999176" green="0.501960813999176" blue="0.501960813999176" />
+               </color3>
+               <color4>
+                  <Color red="0.501960813999176" green="0.501960813999176" blue="0.501960813999176" />
+               </color4>
+            </MFXProgressSpinner>
+            <MFXButton fx:id="afbrydBtn" buttonType="RAISED" minHeight="30.0" minWidth="80.0" onAction="#handleAfbryd" prefHeight="30.0" prefWidth="80.0" rippleColor="WHITE" style="-fx-background-color: #BD2323FF;" text="Afbryd" textFill="WHITE" />
+            <MFXButton buttonType="RAISED" minHeight="30.0" minWidth="80.0" onAction="#handleAnnuller" prefHeight="30.0" prefWidth="80.0" text="Luk" />
+         </children>
+         <padding>
+            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+         </padding>
+      </HBox>
+   </bottom>
+</BorderPane>
