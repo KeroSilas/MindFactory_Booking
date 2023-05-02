@@ -17,7 +17,7 @@ public class BookingDaoImpl implements BookingDao {
     @Override
     public void saveBooking(Booking booking) {
         try (Connection con = databaseConnector.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO MOVIE VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Booking VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
 
             ps.setInt(1, booking.getBookingID());
             ps.setInt(2, booking.getPackageID());
@@ -44,7 +44,7 @@ public class BookingDaoImpl implements BookingDao {
 
 
         } catch (SQLException e) {
-            System.err.println("cannot access records (StationDaoImpl)");
+            System.err.println("cannot access records (BookingDaoImpl)");
 
         }
 
@@ -53,7 +53,13 @@ public class BookingDaoImpl implements BookingDao {
 
     @Override
     public void deleteBooking(int bookingID) {
-
+        try (Connection con = databaseConnector.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Booking WHERE BookingID = ?");
+            ps.setInt(1, (Booking.getInstance().getBookingID()));
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
