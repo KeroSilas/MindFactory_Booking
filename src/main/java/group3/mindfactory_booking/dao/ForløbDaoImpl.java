@@ -19,7 +19,7 @@ public class ForløbDaoImpl implements ForløbDao{
     @Override
     public void saveForløb(Forløb forløb) {
         try (Connection con = databaseConnector.getConnection()){
-            PreparedStatement ps = con.prepareStatement("INSERT INTO Equipment VALUES(?,?);");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO ÅbenSkoleForløb VALUES(?,?);");
             ps.setInt(1, forløb.getForløbID());
             ps.setString(1, forløb.getForløbName());
 
@@ -58,6 +58,5 @@ public class ForløbDaoImpl implements ForløbDao{
         }
         return forløber;
     }
-
 
 }

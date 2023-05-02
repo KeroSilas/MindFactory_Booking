@@ -1,7 +1,6 @@
 package group3.mindfactory_booking.dao;
 import group3.mindfactory_booking.model.Booking;
 import group3.mindfactory_booking.model.Equipment;
-import group3.mindfactory_booking.model.File;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,7 +17,7 @@ public class BookingEquipmentDaoImpl implements BookingEquipmentDao{
     }
 
     @Override
-    public void addBookingEquip(int bookingID, int equipmentID){
+    public void addToBookingEquipment(int bookingID, int equipmentID){
         try (Connection con = databaseConnector.getConnection()){
             PreparedStatement ps = con.prepareStatement("INSERT INTO BookingEquipment VALUES(?,?);");
             ps.setInt(1, bookingID);
@@ -29,38 +28,44 @@ public class BookingEquipmentDaoImpl implements BookingEquipmentDao{
         } catch (SQLException e) {
             System.err.println("cannot insert record (BookingEquipment) " + e.getMessage());
         }
-
-    };
+    }
 
     @Override
-    public void removeFromBookingEquip(Equipment equipment) {
+    public void removeFromBookingEquipment(Equipment equipment) {
+        try (Connection con = databaseConnector.getConnection()){
 
+        PreparedStatement ps = con.prepareStatement("DELETE FROM BookingEquipment WHERE equipmentID = ?;");
+        ps.setInt(1, (equipment.getEquipmentID()));
+
+        ps.executeUpdate();
+
+        } catch (SQLException e) {
+        System.err.println("Cannot delete equipment (BookingEquipment) " + e.getMessage());
+        }
     }
 
 
-/*
-    List<Equipment> getAllEquipmentOnBookingEquip(Booking booking){
-        List<File> files = new ArrayList<>();
+    public List<Equipment> getAllEquipmentOnBookingEquipment(Booking booking){
+        List<Equipment> equipments = new ArrayList<>();
         try(Connection con = databaseConnector.getConnection()){
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM BookingEquip;");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM Booking, BookingEquipment, Equipment WHERE Booking.bookingID = " +
+                    "BookingEquipment.bookingID AND BookingEquipment.equipmentID = Equipment.equipmentID;");
             ResultSet rs = ps.executeQuery();
 
-            File file;
+            Equipment equipment;
             while (rs.next()) {
-                int fileID = rs.getInt(1);
-                String filePath = rs.getString(2);
-                String fileName = rs.getString(3);
+                int equipmentID = rs.getInt(1);
+                String equipmentName = rs.getString(2);
 
-                file = new File(fileID, filePath, fileName);
-                files.add(file);
+                equipment = new Equipment(equipmentID, equipmentName);
+                equipments.add(equipment);
             }
 
         } catch (SQLException e) {
-            System.err.println("cannot access AllFiles (FileDaoImpl) " + e.getMessage());
+            System.err.println("cannot access AllEquipment (BookingEquipmentDaoImpl) " + e.getMessage());
         }
-        return files;
-
-      }  */
+        return equipments;
     }
+}
 
 

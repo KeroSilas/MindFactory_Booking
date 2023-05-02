@@ -53,10 +53,8 @@ public class OrganizationDaoImpl implements OrganizationDao{
             }
 
         } catch (SQLException e) {
-            System.err.println("cannot access AllActivities (ActivityDaoImpl) " + e.getMessage());
+            System.err.println("cannot access AllOrganizations (OrganizationDaoImpl) " + e.getMessage());
         }
         return organizations;
-
-
     }
 }

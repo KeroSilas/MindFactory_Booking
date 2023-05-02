@@ -7,10 +7,11 @@ import java.util.List;
 
 public interface BookingEquipmentDao {
 
-    public void addBookingEquip(int bookingID, int equipmentID);
+    public void addToBookingEquipment(int bookingID, int equipmentID);
 
-    public void removeFromBookingEquip(Equipment equipment);
+    public void removeFromBookingEquipment(Equipment equipment);
 
- //   List<Equipment> getAllEquipmentOnBookingEquip(Booking booking);
-
+    List<Equipment> getAllEquipmentOnBookingEquipment(Booking booking);
 }
+
+

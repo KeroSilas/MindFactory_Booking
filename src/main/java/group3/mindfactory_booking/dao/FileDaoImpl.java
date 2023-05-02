@@ -19,7 +19,7 @@ public class FileDaoImpl implements FileDao{
     @Override
     public void saveFile(File file) {
         try (Connection con = databaseConnector.getConnection()){
-            PreparedStatement ps = con.prepareStatement("INSERT INTO File VALUES(?,?,?);");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Files VALUES(?,?,?);");
             ps.setInt(1, file.getFileID());
             ps.setString(2, file.getFilePath());
             ps.setString(3, file.getFileName());
@@ -42,7 +42,7 @@ public class FileDaoImpl implements FileDao{
     public List<File> getAllFiles() {
         List<File> files = new ArrayList<>();
         try(Connection con = databaseConnector.getConnection()){
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM File;");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM Files;");
             ResultSet rs = ps.executeQuery();
 
             File file;
