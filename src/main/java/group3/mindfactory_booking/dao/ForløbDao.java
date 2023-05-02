@@ -9,7 +9,7 @@ public interface ForløbDao {
 
     public void saveForløb(Forløb forløb);
 
-    void deleteForløb(int forløbID);
+    public void deleteForløb(int forløbID);
 
     List<Forløb> getAllForløb();
 }

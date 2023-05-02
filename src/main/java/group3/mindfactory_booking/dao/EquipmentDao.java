@@ -8,7 +8,7 @@ public interface EquipmentDao {
 
     public void saveEquipment(Equipment equipment);
 
-    void deleteEquipment(int equipmentID);
+    public void deleteEquipment(int equipmentID);
 
     List<Equipment> getAllEquipment();
 }
