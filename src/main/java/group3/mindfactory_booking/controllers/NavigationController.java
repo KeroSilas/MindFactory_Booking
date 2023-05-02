@@ -4,6 +4,7 @@ import group3.mindfactory_booking.BookingApplication;
 import group3.mindfactory_booking.dao.BookingDao;
 import group3.mindfactory_booking.dao.BookingDaoImpl;
 import group3.mindfactory_booking.model.Booking;
+import group3.mindfactory_booking.model.tasks.SaveBookingTask;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,14 +53,24 @@ public class NavigationController {
             stackPane.getChildren().add(views.get(++currentViewIndex));
         } else {
             // If the current view is the last view, save the booking and go to the opening view
-            //bookingDao.saveBooking(booking);
-            FXMLLoader fxmlLoader = new FXMLLoader(BookingApplication.class.getResource("OpeningGUI.fxml"));
-            try {
-                bookingDao.saveBooking(booking);
-                stackPane.getScene().setRoot(fxmlLoader.load());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            SaveBookingTask saveBookingTask = new SaveBookingTask();
+            saveBookingTask.setOnSucceeded(event -> {
+                if (saveBookingTask.getValue()) {
+                    System.out.println("Booking saved successfully");
+
+                    FXMLLoader fxmlLoader = new FXMLLoader(BookingApplication.class.getResource("OpeningGUI.fxml"));
+                    try {
+                        stackPane.getScene().setRoot(fxmlLoader.load());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    System.out.println("Booking failed to save");
+                }
+            });
+            Thread thread = new Thread(saveBookingTask);
+            thread.setDaemon(true);
+            thread.start();
         }
     }
 
@@ -98,7 +109,12 @@ public class NavigationController {
         stackPane.getChildren().add(views.get(currentViewIndex));
     }
 
-    private void checkBooking() {
+    // TODO: Implement this method
+    // Check if the booking is valid by looking at what view the user is currently on
+    // and then check if the user has filled out the required fields correctly via the Booking singleton
+    // This method should be called whenever the user clicks the "Næste" button
+    // If the booking is valid, the user should be able to go to the next view
+    private boolean checkBooking() {
         switch (currentViewIndex) {
             case 0:
             case 1:
@@ -106,6 +122,7 @@ public class NavigationController {
             case 3:
             case 4:
         }
+        return false; // TODO: Remove this line
     }
 
 }
