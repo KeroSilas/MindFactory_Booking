@@ -55,6 +55,7 @@ public class NavigationController {
             //bookingDao.saveBooking(booking);
             FXMLLoader fxmlLoader = new FXMLLoader(BookingApplication.class.getResource("OpeningGUI.fxml"));
             try {
+                bookingDao.saveBooking(booking);
                 stackPane.getScene().setRoot(fxmlLoader.load());
             } catch (IOException e) {
                 e.printStackTrace();
@@ -81,8 +82,8 @@ public class NavigationController {
         loaderList.add(view4Loader);
         loaderList.add(view5Loader);
 
-        views = new LinkedList<>();
         // Load the first view into the list
+        views = new LinkedList<>();
         try {
             for (FXMLLoader loader : loaderList) {
                 views.add(loader.load());
@@ -95,6 +96,16 @@ public class NavigationController {
         currentViewIndex = 0;
         stackPane.getChildren().clear();
         stackPane.getChildren().add(views.get(currentViewIndex));
+    }
+
+    private void checkBooking() {
+        switch (currentViewIndex) {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+        }
     }
 
 }
