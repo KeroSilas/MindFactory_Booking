@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="openingBP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group3.mindfactory_booking.controllers.OpeningController">
    <center>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" spacing="8.0">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="250.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@MF_POSITVE_COLOR_KANT.jpg" />
+                  <Image url="@images/MF_POSITVE_COLOR_KANT.jpg" />
                </image>
+               <VBox.margin>
+                  <Insets bottom="12.0" />
+               </VBox.margin>
             </ImageView>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="25.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#handleBookNu" prefHeight="40.0" prefWidth="100.0" text="Book nu" />
-                  <Button mnemonicParsing="false" onAction="#handleAnnullerBooking" prefHeight="40.0" prefWidth="110.0" text="Annuller Booking" />
-               </children>
-            </HBox>
+            <MFXButton buttonType="RAISED" minHeight="50.0" minWidth="150.0" onAction="#handleBookNu" prefHeight="50.0" prefWidth="150.0" rippleColor="WHITE" style="-fx-background-color: #94c83d;" text="Book nu" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </MFXButton>
+            <MFXButton buttonType="RAISED" minHeight="35.0" minWidth="150.0" onAction="#handleAnnullerBooking" prefHeight="35.0" prefWidth="150.0" text="Annuller booking" />
          </children>
       </VBox>
    </center>

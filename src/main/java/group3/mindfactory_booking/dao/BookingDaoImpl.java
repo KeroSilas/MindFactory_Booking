@@ -15,36 +15,36 @@ public class BookingDaoImpl implements BookingDao {
     }
 
     @Override
-    public void saveBooking(int bookingID, int packageID, int activityID, int organizationID, String firstName, String lastName, String position, String phone, String email, String åbenSkoleForløb, String transportType, String transportArrival, String transportDeparture, int participants, LocalDateTime startDate, LocalDateTime endDate, LocalDateTime bookingDate, boolean temporaryBooking, String assistance, boolean noShow, String messageToAS, String personalNote) {
+    public void saveBooking(Booking booking) {
         try (Connection con = databaseConnector.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO MOVIE VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Booking VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
 
-            ps.setInt(1, bookingID);
-            ps.setInt(2, packageID);
-            ps.setInt(3, activityID);
-            ps.setInt(4, organizationID);
-            ps.setString(5, firstName);
-            ps.setString(6, lastName);
-            ps.setString(7, position);
-            ps.setString(8, phone);
-            ps.setString(9, email);
-            ps.setString(10, åbenSkoleForløb);
-            ps.setString(11, transportType);
-            ps.setString(12, transportArrival);
-            ps.setString(13, transportDeparture);
-            ps.setInt(14, participants);
-            ps.setTimestamp(15, Timestamp.valueOf(startDate));
-            ps.setTimestamp(16, Timestamp.valueOf(endDate));
-            ps.setTimestamp(17, Timestamp.valueOf(bookingDate));
-            ps.setBoolean(18, temporaryBooking);
-            ps.setString(19, assistance);
-            ps.setBoolean(20, noShow);
-            ps.setString(21, messageToAS);
-            ps.setString(22, personalNote);
+            ps.setInt(1, booking.getBookingID());
+            ps.setInt(2, booking.getPackageID());
+            ps.setInt(3, booking.getActivityID());
+            ps.setInt(4, booking.getOrganizationID());
+            ps.setString(5, booking.getFirstName());
+            ps.setString(6, booking.getLastName());
+            ps.setString(7, booking.getPosition());
+            ps.setString(8, booking.getPhone());
+            ps.setString(9, booking.getEmail());
+            ps.setString(10, booking.getÅbenSkoleForløb());
+            ps.setString(11, booking.getTransportType());
+            ps.setString(12, booking.getTransportArrival());
+            ps.setString(13, booking.getTransportDeparture());
+            ps.setInt(14, booking.getParticipants());
+            ps.setTimestamp(15, Timestamp.valueOf(booking.getStartDate()));
+            ps.setTimestamp(16, Timestamp.valueOf(booking.getEndDate()));
+            ps.setTimestamp(17, Timestamp.valueOf(booking.getBookingDate()));
+            ps.setBoolean(18, booking.isTemporaryBooking());
+            ps.setString(19, booking.getAssistance());
+            ps.setBoolean(20, booking.isNoShow());
+            ps.setString(21, booking.getMessageToAS());
+            ps.setString(22, booking.getPersonalNote());
 
 
         } catch (SQLException e) {
-            System.err.println("cannot access records (StationDaoImpl)");
+            System.err.println("cannot access records (BookingDaoImpl)");
 
         }
 
@@ -52,8 +52,14 @@ public class BookingDaoImpl implements BookingDao {
     }
 
     @Override
-    public void deleteBooking(Booking booking) {
-
+    public void deleteBooking(int bookingID) {
+        try (Connection con = databaseConnector.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Booking WHERE BookingID = ?");
+            ps.setInt(1, (Booking.getInstance().getBookingID()));
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
