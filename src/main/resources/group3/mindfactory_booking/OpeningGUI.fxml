@@ -25,7 +25,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </MFXButton>
-            <MFXButton buttonType="RAISED" minHeight="35.0" minWidth="150.0" onAction="#handleAnnullerBooking" prefHeight="35.0" prefWidth="150.0" text="Annuller booking" />
+            <MFXButton buttonType="RAISED" minHeight="35.0" minWidth="150.0" onAction="#handleAfbrydBooking" prefHeight="35.0" prefWidth="150.0" text="Afbryd booking" />
          </children>
       </VBox>
    </center>

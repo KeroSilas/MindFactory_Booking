@@ -45,14 +45,13 @@ public class BookingDaoImpl implements BookingDao {
 
         } catch (SQLException e) {
             System.err.println("cannot access records (BookingDaoImpl)");
-
         }
 
 
     }
 
     @Override
-    public void deleteBooking(int bookingID) {
+    public void deleteBooking(int bookingID) throws RuntimeException {
         try (Connection con = databaseConnector.getConnection()) {
             PreparedStatement ps = con.prepareStatement("DELETE FROM Booking WHERE BookingID = ?");
             ps.setInt(1, (Booking.getInstance().getBookingID()));
