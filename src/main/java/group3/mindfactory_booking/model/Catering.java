@@ -1,4 +1,4 @@
-package group3.mindfactory_booking.dao;
+package group3.mindfactory_booking.model;
 
 public class Catering {
     private int packageID;

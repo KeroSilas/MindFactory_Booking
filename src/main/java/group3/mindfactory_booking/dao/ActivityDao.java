@@ -1,6 +1,6 @@
 package group3.mindfactory_booking.dao;
 
-import group3.mindfactory_booking.model.Forløb;
+import group3.mindfactory_booking.model.Activity;
 
 import java.util.List;
 
