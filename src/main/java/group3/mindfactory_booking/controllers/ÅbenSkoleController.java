@@ -33,6 +33,9 @@ public class ÅbenSkoleController {
     public void initialize() {
         booking = Booking.getInstance();
 
+        busRB.setUserData("Bus");
+        offentligRB.setUserData("Offentlig transport");
+
         // Checks if text has changed, if it has, it updates the booking object
         ankomstTF.textProperty().addListener((observable, oldValue, newValue) -> {
             if(!oldValue.equals(newValue))
@@ -43,6 +46,18 @@ public class ÅbenSkoleController {
             if(!oldValue.equals(newValue))
                 booking.setTransportDeparture(newValue);
         });
+
+        forløbCB.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if(!oldValue.equals(newValue))
+                booking.setÅbenSkoleForløb(newValue.toString());
+        });
+
+        transportType.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            if(!oldValue.equals(newValue))
+                booking.setTransportType(newValue.getUserData().toString());
+        });
+
+
     }
 
 }
