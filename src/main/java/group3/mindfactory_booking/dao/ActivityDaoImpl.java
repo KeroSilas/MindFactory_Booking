@@ -22,7 +22,7 @@ public class ActivityDaoImpl implements ActivityDao {
         try (Connection con = databaseConnector.getConnection()){
             PreparedStatement ps = con.prepareStatement("INSERT INTO Activity VALUES(?,?);");
             ps.setInt(1, activity.getActivityID());
-            ps.setString(1, activity.getActivityName());
+            ps.setString(2, activity.getActivityName());
 
             ps.executeUpdate();
 

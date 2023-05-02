@@ -21,7 +21,7 @@ public class CateringDaoImpl implements CateringDao {
             try (Connection con = databaseConnector.getConnection()){
                 PreparedStatement ps = con.prepareStatement("INSERT INTO Equipment VALUES(?,?);");
                 ps.setInt(1, catering.getPackageID());
-                ps.setString(1, catering.getPackageName());
+                ps.setString(2, catering.getPackageName());
 
                 ps.executeUpdate();
 

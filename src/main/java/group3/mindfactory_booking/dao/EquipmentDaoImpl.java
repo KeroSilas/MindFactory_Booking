@@ -22,7 +22,7 @@ public class EquipmentDaoImpl implements EquipmentDao{
         try (Connection con = databaseConnector.getConnection()){
             PreparedStatement ps = con.prepareStatement("INSERT INTO Equipment VALUES(?,?);");
             ps.setInt(1, equipment.getEquipmentID());
-            ps.setString(1, equipment.getEquipmentName());
+            ps.setString(2, equipment.getEquipmentName());
 
             ps.executeUpdate();
 
