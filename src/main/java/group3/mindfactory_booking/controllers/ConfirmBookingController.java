@@ -37,10 +37,20 @@ public class ConfirmBookingController {
                     orgLabel.setText("?");
                     specielUdstyrLabel.setText("?");
                     stillingLabel.setText("?");
-                    slutDatoLabel.setText("?");
-                    startDatoLabel.setText("?");
-                    fraLabel.setText("?");
-                    tilLabel.setText("?");
+                    slutDatoLabel.setText(String.format("%s/%s/%s",
+                            booking.getEndDate().getDayOfMonth(),
+                            booking.getEndDate().getMonthValue(),
+                            booking.getEndDate().getYear()));
+                    startDatoLabel.setText(String.format("%s/%s/%s",
+                            booking.getStartDate().getDayOfMonth(),
+                            booking.getStartDate().getMonthValue(),
+                            booking.getStartDate().getYear()));
+                    fraLabel.setText(String.format("%s:%s",
+                            booking.getStartTime().getHour(),
+                            booking.getStartTime().getMinute()));
+                    tilLabel.setText(String.format("%s:%s",
+                            booking.getEndTime().getHour(),
+                            booking.getEndTime().getMinute()));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
