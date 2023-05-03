@@ -41,9 +41,10 @@ public class BookingDaoImpl implements BookingDao {
             ps.setBoolean(20, booking.isNoShow());
             ps.setString(21, booking.getMessageToAS());
             ps.setString(22, booking.getPersonalNote());
-
+            ps.executeUpdate();
 
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
 
