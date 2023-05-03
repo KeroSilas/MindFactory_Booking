@@ -13,9 +13,9 @@ public class BookingApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(BookingApplication.class.getResource("homepage-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setWidth(850);
-        stage.setHeight(700);
+        stage.setHeight(775);
         stage.setMinWidth(850);
-        stage.setMinHeight(700);
+        stage.setMinHeight(775);
         stage.setTitle("Mind Factory Booking");
         stage.setScene(scene);
         stage.show();

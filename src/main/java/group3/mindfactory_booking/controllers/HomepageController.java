@@ -8,12 +8,15 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.util.Objects;
+
 import static javafx.stage.Modality.APPLICATION_MODAL;
 
 public class HomepageController {
 
     @FXML
-    private BorderPane openingBP, navigationBP;
+    private BorderPane openingBP;
 
     @FXML
     void handleAfbrydBooking() {
@@ -40,16 +43,23 @@ public class HomepageController {
 
     @FXML
     void handleBookNu() {
-        openingBP.getScene().setRoot(navigationBP);
+        Stage stage;
+        Parent root;
+
+        stage = (Stage) openingBP.getScene().getWindow();
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(BookingApplication.class.getResource("bookingType-1-view.fxml")));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void initialize() {
-        FXMLLoader fxmlLoader = new FXMLLoader(BookingApplication.class.getResource("bookingType-1-view.fxml"));
-        try {
-            navigationBP = fxmlLoader.load();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
 }
