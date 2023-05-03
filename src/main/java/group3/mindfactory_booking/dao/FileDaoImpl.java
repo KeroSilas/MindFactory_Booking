@@ -1,5 +1,6 @@
 package group3.mindfactory_booking.dao;
 
+import group3.mindfactory_booking.model.Booking;
 import group3.mindfactory_booking.model.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -35,10 +36,17 @@ public class FileDaoImpl implements FileDao{
 
     @Override
     public void deleteFile(int fileID) {
+        try (Connection con = databaseConnector.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Files WHERE fileID = ?");
+            ps.setInt(1, fileID);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
 
+        }
     }
 
-
+    @Override
     public List<File> getAllFiles() {
         List<File> files = new ArrayList<>();
         try(Connection con = databaseConnector.getConnection()){
@@ -59,7 +67,6 @@ public class FileDaoImpl implements FileDao{
             System.err.println("cannot access AllFiles (FileDaoImpl) " + e.getMessage());
         }
         return files;
-
-
     }
+
 }

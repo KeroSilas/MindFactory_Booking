@@ -32,7 +32,17 @@ public class CateringDaoImpl implements CateringDao {
     }
 
     @Override
-    public void deleteCatering(int cateringID) {
+    public void deleteCatering(int packageID) {
+        try (Connection con = databaseConnector.getConnection()){
+
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Catering WHERE packageID = ?;");
+            ps.setInt(1, packageID);
+
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.err.println("Cannot delete catering (Catering) " + e.getMessage());
+        }
 
     }
 
@@ -56,7 +66,6 @@ public class CateringDaoImpl implements CateringDao {
             System.err.println("cannot access AllCaterings (CateringDaoImpl) " + e.getMessage());
         }
         return caterings;
-
 
     }
 }

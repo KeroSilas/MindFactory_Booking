@@ -1,5 +1,6 @@
 package group3.mindfactory_booking.dao;
 
+import group3.mindfactory_booking.model.Booking;
 import group3.mindfactory_booking.model.Equipment;
 
 import java.sql.Connection;
@@ -34,7 +35,13 @@ public class EquipmentDaoImpl implements EquipmentDao{
 
     @Override
     public void deleteEquipment(int equipmentID) {
-
+        try (Connection con = databaseConnector.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Equipment WHERE equipmentID = ?");
+            ps.setInt(1, equipmentID);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public List<Equipment> getAllEquipment() {

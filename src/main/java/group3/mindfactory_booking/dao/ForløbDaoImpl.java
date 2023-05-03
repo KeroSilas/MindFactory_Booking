@@ -34,6 +34,14 @@ public class ForløbDaoImpl implements ForløbDao{
 
     @Override
     public void deleteForløb(int forløbID) {
+        try (Connection con = databaseConnector.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Forløb WHERE forløbID = ?");
+            ps.setInt(1, forløbID);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+
+        }
 
     }
 

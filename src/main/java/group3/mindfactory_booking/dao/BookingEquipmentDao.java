@@ -9,7 +9,7 @@ public interface BookingEquipmentDao {
 
     public void addToBookingEquipment(int bookingID, int equipmentID);
 
-    public void removeFromBookingEquipment(Equipment equipment);
+    public void removeFromBookingEquipment(int equipmentID);
 
     List<Equipment> getAllEquipmentOnBookingEquipment(Booking booking);
 }
