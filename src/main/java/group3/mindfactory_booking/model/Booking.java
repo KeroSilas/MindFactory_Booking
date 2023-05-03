@@ -6,9 +6,9 @@ import java.util.List;
 public class Booking {
 
     private int bookingID;
-    private int packageID;
-    private int activityID;
-    private int organizationID;
+    private Catering catering;
+    private Activity activity;
+    private Organization organization;
     private String firstName;
     private String lastName;
     private String position;
@@ -77,28 +77,28 @@ public class Booking {
         this.bookingID = bookingID;
     }
 
-    public int getPackageID() {
-        return packageID;
+    public Catering getCatering() {
+        return catering;
     }
 
-    public void setPackageID(int packageID) {
-        this.packageID = packageID;
+    public void setCatering(Catering catering) {
+        this.catering = catering;
     }
 
-    public int getActivityID() {
-        return activityID;
+    public Activity getActivity() {
+        return activity;
     }
 
-    public void setActivityID(int activityID) {
-        this.activityID = activityID;
+    public void setActivity(Activity activity) {
+        this.activity = activity;
     }
 
-    public int getOrganizationID() {
-        return organizationID;
+    public Organization getOrganization() {
+        return organization;
     }
 
-    public void setOrganizationID(int organizationID) {
-        this.organizationID = organizationID;
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
     }
 
     public String getFirstName() {
@@ -279,9 +279,9 @@ public class Booking {
 
     public void clearBooking() {
         this.bookingID = 0;
-        this.packageID = 0;
-        this.activityID = 0;
-        this.organizationID = 0;
+        this.catering = null;
+        this.activity = null;
+        this.organization = null;
         this.firstName = "";
         this.lastName = "";
         this.position = "";
@@ -292,17 +292,17 @@ public class Booking {
         this.transportArrival = "";
         this.transportDeparture = "";
         this.participants = 0;
-        this.startDate = null;
-        this.endDate = null;
-        this.bookingDate = null;
+        this.startDate = LocalDateTime.of(2000, 1, 1, 0, 0, 0);
+        this.endDate = LocalDateTime.of(2000, 1, 1, 0, 0, 0);
+        this.bookingDate = LocalDateTime.of(2000, 1, 1, 0, 0, 0);
         this.temporaryBooking = false;
         this.assistance = "";
         this.noShow = false;
         this.messageToAS = "";
         this.personalNote = "";
         this.bookingType = "";
-        this.startTime = null;
-        this.endTime = null;
+        this.startTime = LocalDateTime.of(2000, 1, 1, 0, 0, 0);
+        this.endTime = LocalDateTime.of(2000, 1, 1, 0, 0, 0);
         this.equipmentList = null;
     }
 }

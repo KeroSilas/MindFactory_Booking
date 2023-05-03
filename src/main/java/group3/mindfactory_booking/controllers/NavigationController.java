@@ -13,6 +13,7 @@ import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.Objects;
 
 public class NavigationController {
 
@@ -32,8 +33,16 @@ public class NavigationController {
     public void handleForrige() {
         // Switch to the previous view
         if (currentViewIndex != 0) {
+            if (currentViewIndex == 3 && booking.getBookingType().equals("Åben-Skole")) {
+                currentViewIndex = 1;
+            } else if (currentViewIndex == 2) {
+                currentViewIndex = 0;
+            } else {
+                // Otherwise, go back to the previous view
+                currentViewIndex--;
+            }
             stackPane.getChildren().clear();
-            stackPane.getChildren().add(views.get(--currentViewIndex));
+            stackPane.getChildren().add(views.get(currentViewIndex));
         } else {
             // If the current view is the first view, go back to the opening view
             FXMLLoader fxmlLoader = new FXMLLoader(BookingApplication.class.getResource("OpeningGUI.fxml"));
@@ -48,35 +57,15 @@ public class NavigationController {
     @FXML
     public void handleNæste() {
         // Switch to the next view
-        if (currentViewIndex != views.size() - 1) {
-            stackPane.getChildren().clear();
-            stackPane.getChildren().add(views.get(++currentViewIndex));
-        } else {
-            // If the current view is the last view, save the booking and go to the opening view
-            SaveBookingTask saveBookingTask = new SaveBookingTask();
-            saveBookingTask.setOnSucceeded(event -> {
-                if (saveBookingTask.getValue()) {
-                    System.out.println("Booking saved successfully");
-
-                    FXMLLoader fxmlLoader = new FXMLLoader(BookingApplication.class.getResource("OpeningGUI.fxml"));
-                    try {
-                        stackPane.getScene().setRoot(fxmlLoader.load());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    System.out.println("Booking failed to save");
-                }
-            });
-            Thread thread = new Thread(saveBookingTask);
-            thread.setDaemon(true);
-            thread.start();
-        }
+        checkBooking();
+        stackPane.getChildren().clear();
+        stackPane.getChildren().add(views.get(currentViewIndex));
     }
 
     public void initialize() {
         bookingDao = new BookingDaoImpl();
         booking = Booking.getInstance();
+        booking.clearBooking();
 
         // Get the views from the FXML files
         FXMLLoader view1Loader = new FXMLLoader(BookingApplication.class.getResource("BookingTypeGUI.fxml"));
@@ -114,15 +103,58 @@ public class NavigationController {
     // and then check if the user has filled out the required fields correctly via the Booking singleton
     // This method should be called whenever the user clicks the "Næste" button
     // If the booking is valid, the user should be able to go to the next view
-    private boolean checkBooking() {
+    private void checkBooking() {
         switch (currentViewIndex) {
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-            case 4:
+            case 0 -> {
+                if (Objects.equals(booking.getBookingType(), "Åben-Skole")) {
+                    currentViewIndex = 1;
+                } else if (Objects.equals(booking.getBookingType(), "")) {
+                    System.out.println("Booking type not selected");
+                } else {
+                    currentViewIndex = 2;
+                }
+            }
+            case 1 -> {
+                if (Objects.equals(booking.getTransportArrival(), "") || Objects.equals(booking.getTransportDeparture(), "")
+                        || Objects.equals(booking.getTransportType(), "") || Objects.equals(booking.getÅbenSkoleForløb(), "")) {
+                    System.out.println("All fields not filled out");
+                } else {
+                    currentViewIndex = 3;
+                }
+            }
+            case 2 -> currentViewIndex = 3;
+            case 3 -> {
+                if (booking.getFirstName().isBlank() || booking.getLastName().isBlank() || booking.getPhone().isBlank()
+                        || booking.getEmail().isBlank() || booking.getOrganization() == null || booking.getPosition().isBlank()
+                        || booking.getParticipants() == 0 || booking.getStartDate().isEqual(booking.getEndDate())
+                        || booking.getStartDate().equals(booking.getBookingDate()) || booking.getStartTime().isEqual(booking.getEndTime())) {
+                    System.out.println("All fields not filled out");
+                } else {
+                    currentViewIndex = 4;
+                }
+            }
+            case 4 -> {
+                næsteButton.setText("Bekræft");
+                SaveBookingTask saveBookingTask = new SaveBookingTask();
+                saveBookingTask.setOnSucceeded(event -> {
+                    if (saveBookingTask.getValue()) {
+                        System.out.println("Booking saved successfully");
+
+                        FXMLLoader fxmlLoader = new FXMLLoader(BookingApplication.class.getResource("OpeningGUI.fxml"));
+                        try {
+                            stackPane.getScene().setRoot(fxmlLoader.load());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("Booking failed to save");
+                    }
+                });
+                Thread thread = new Thread(saveBookingTask);
+                thread.setDaemon(true);
+                thread.start();
+            }
         }
-        return false; // TODO: Remove this line
     }
 
 }

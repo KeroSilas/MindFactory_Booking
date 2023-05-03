@@ -20,9 +20,9 @@ public class BookingDaoImpl implements BookingDao {
             PreparedStatement ps = con.prepareStatement("INSERT INTO Booking VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
 
             ps.setInt(1, booking.getBookingID());
-            ps.setInt(2, booking.getPackageID());
-            ps.setInt(3, booking.getActivityID());
-            ps.setInt(4, booking.getOrganizationID());
+            ps.setInt(2, booking.getCatering().getPackageID());
+            ps.setInt(3, booking.getActivity().getActivityID());
+            ps.setInt(4, booking.getOrganization().getOrganizationID());
             ps.setString(5, booking.getFirstName());
             ps.setString(6, booking.getLastName());
             ps.setString(7, booking.getPosition());
@@ -54,7 +54,7 @@ public class BookingDaoImpl implements BookingDao {
     public void deleteBooking(int bookingID) throws RuntimeException {
         try (Connection con = databaseConnector.getConnection()) {
             PreparedStatement ps = con.prepareStatement("DELETE FROM Booking WHERE BookingID = ?");
-            ps.setInt(1, (Booking.getInstance().getBookingID()));
+            ps.setInt(1, bookingID);
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

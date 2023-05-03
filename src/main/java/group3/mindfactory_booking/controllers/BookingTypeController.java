@@ -13,7 +13,7 @@ public class BookingTypeController {
 
     @FXML
     private void handleÅbenSkole() {
-        booking.setBookingType("Åben Skole");
+        booking.setBookingType("Åben-Skole");
         åbenSkoleBtn.setStyle("-fx-background-color:  #94c83d; -fx-text-fill: #ffffff");
         organisationBtn.setStyle("-fx-background-color:  #ffffff; -fx-text-fill: #000000");
         lærerBtn.setStyle("-fx-background-color:  #ffffff; -fx-text-fill: #000000");
