@@ -1,5 +1,6 @@
 package group3.mindfactory_booking.dao;
 
+import group3.mindfactory_booking.model.Booking;
 import group3.mindfactory_booking.model.Organization;
 
 import java.sql.Connection;
@@ -33,7 +34,13 @@ public class OrganizationDaoImpl implements OrganizationDao{
 
     @Override
     public void deleteOrganization(int organizationID) {
-
+        try (Connection con = databaseConnector.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Organization WHERE organizationID = ?");
+            ps.setInt(1, organizationID);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

@@ -8,7 +8,7 @@ public interface CateringDao {
 
     public void saveCatering(Catering catering);
 
-    public void deleteCatering(int cateringID);
+    public void deleteCatering(int packageID);
 
     List<Catering> getAllCatering();
 }

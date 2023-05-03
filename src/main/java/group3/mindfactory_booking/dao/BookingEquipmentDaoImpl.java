@@ -31,11 +31,11 @@ public class BookingEquipmentDaoImpl implements BookingEquipmentDao{
     }
 
     @Override
-    public void removeFromBookingEquipment(Equipment equipment) {
+    public void removeFromBookingEquipment(int equipmentID) {
         try (Connection con = databaseConnector.getConnection()){
 
         PreparedStatement ps = con.prepareStatement("DELETE FROM BookingEquipment WHERE equipmentID = ?;");
-        ps.setInt(1, (equipment.getEquipmentID()));
+        ps.setInt(1, equipmentID);
 
         ps.executeUpdate();
 

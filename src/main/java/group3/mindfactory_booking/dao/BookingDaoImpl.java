@@ -54,7 +54,7 @@ public class BookingDaoImpl implements BookingDao {
     public void deleteBooking(int bookingID) throws RuntimeException {
         try (Connection con = databaseConnector.getConnection()) {
             PreparedStatement ps = con.prepareStatement("DELETE FROM Booking WHERE BookingID = ?");
-            ps.setInt(1, (Booking.getInstance().getBookingID()));
+            ps.setInt(1, bookingID);
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

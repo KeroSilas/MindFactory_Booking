@@ -26,13 +26,23 @@ public class BookingFilesDaoImpl implements BookingFilesDao{
             ps.executeUpdate();
 
         } catch (SQLException e) {
-            System.err.println("cannot insert record (BookingFiles) " + e.getMessage());
+            System.err.println("cannot add file (BookingFiles) " + e.getMessage());
         }
 
     }
 
     @Override
-    public void deleteBookingFiles(File file) {
+    public void deleteBookingFiles(int fileID) {
+        try (Connection con = databaseConnector.getConnection()){
+
+            PreparedStatement ps = con.prepareStatement("DELETE FROM BookingEquipment WHERE fileID = ?;");
+            ps.setInt(1, fileID);
+
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.err.println("Cannot delete File (BookingFiles) " + e.getMessage());
+        }
 
     }
 

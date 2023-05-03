@@ -33,7 +33,14 @@ public class ActivityDaoImpl implements ActivityDao {
 
     @Override
     public void deleteActivity(int activityID) {
+        try (Connection con = databaseConnector.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Activities WHERE activityID = ?");
+            ps.setInt(1, activityID);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
 
+        }
 
     }
 

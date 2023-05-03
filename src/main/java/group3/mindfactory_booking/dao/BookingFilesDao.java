@@ -8,7 +8,7 @@ public interface BookingFilesDao {
 
     public void addBookingFiles(int bookingID, int fileID);
 
-    public void deleteBookingFiles(File file);
+    public void deleteBookingFiles(int fileID);
 
     List<File> getAllFilesOnBookingFile(Booking booking);
 
