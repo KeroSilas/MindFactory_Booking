@@ -33,10 +33,10 @@ public class ConfirmBookingController {
                     fornavnLabel.setText(booking.getFirstName());
                     telefonLabel.setText(booking.getPhone());
                     transportLabel.setText(booking.getTransportType());
-                    forplejningLabel.setText("?");
-                    orgLabel.setText("?");
+                    forplejningLabel.setText(booking.getCatering().getPackageName());
+                    orgLabel.setText(booking.getOrganization().getOrganizationName());
                     specielUdstyrLabel.setText("?");
-                    stillingLabel.setText("?");
+                    stillingLabel.setText(booking.getPosition());
                     slutDatoLabel.setText(String.format("%s/%s/%s",
                             booking.getEndDate().getDayOfMonth(),
                             booking.getEndDate().getMonthValue(),

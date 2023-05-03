@@ -279,9 +279,9 @@ public class Booking {
 
     public void clearBooking() {
         this.bookingID = 0;
-        this.catering = null;
-        this.activity = null;
-        this.organization = null;
+        this.catering = new Catering(1, ""); // Testing
+        this.activity = new Activity(1, ""); // Testing
+        this.organization = new Organization(1,""); // Testing
         this.firstName = "";
         this.lastName = "";
         this.position = "";

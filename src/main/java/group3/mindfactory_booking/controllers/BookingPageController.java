@@ -84,10 +84,10 @@ public class BookingPageController {
                 booking.setFirstName(newValue);
         });
 
-        /*organisationTF.textProperty().addListener((observable, oldValue, newValue) -> {
+        organisationTF.textProperty().addListener((observable, oldValue, newValue) -> {
             if(!oldValue.equals(newValue))
-                booking.setOrganizationID(newValue);
-        });*/
+                booking.getOrganization().setOrganizationName(newValue);
+        });
 
         stillingTF.textProperty().addListener((observable, oldValue, newValue) -> {
             if(!oldValue.equals(newValue))

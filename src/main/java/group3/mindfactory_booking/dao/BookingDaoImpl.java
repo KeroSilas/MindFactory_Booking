@@ -15,7 +15,7 @@ public class BookingDaoImpl implements BookingDao {
     }
 
     @Override
-    public void saveBooking(Booking booking) {
+    public void saveBooking(Booking booking) throws RuntimeException {
         try (Connection con = databaseConnector.getConnection()) {
             PreparedStatement ps = con.prepareStatement("INSERT INTO Booking VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
 
@@ -44,7 +44,7 @@ public class BookingDaoImpl implements BookingDao {
 
 
         } catch (SQLException e) {
-            System.err.println("cannot access records (BookingDaoImpl)");
+            throw new RuntimeException(e);
         }
 
 

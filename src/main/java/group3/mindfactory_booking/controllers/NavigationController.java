@@ -52,6 +52,7 @@ public class NavigationController {
                 e.printStackTrace();
             }
         }
+        næsteButton.setText("Næste");
     }
 
     @FXML
@@ -125,16 +126,18 @@ public class NavigationController {
             case 2 -> currentViewIndex = 3;
             case 3 -> {
                 if (booking.getFirstName().isBlank() || booking.getLastName().isBlank() || booking.getPhone().isBlank()
-                        || booking.getEmail().isBlank() || booking.getOrganization() == null || booking.getPosition().isBlank()
-                        || booking.getParticipants() == 0 || booking.getStartDate().isEqual(booking.getEndDate())
-                        || booking.getStartDate().equals(booking.getBookingDate()) || booking.getStartTime().isEqual(booking.getEndTime())) {
+                        || booking.getEmail().isBlank() || booking.getOrganization().getOrganizationName().isBlank() || booking.getPosition().isBlank()
+                        || booking.getParticipants() == 0 /* || booking.getStartDate().isEqual(booking.getEndDate())
+                        || booking.getStartDate().equals(booking.getBookingDate()) || booking.getStartTime().isEqual(booking.getEndTime())*/) {
                     System.out.println("All fields not filled out");
+                } else if (booking.getBookingType().equals("Lærer") && !booking.getEmail().substring(booking.getEmail().length() - 11).equals("skoletdr.dk")) {
+                    System.out.println("Forkert email, skal være skoletdr.dk mail");
                 } else {
                     currentViewIndex = 4;
+                    næsteButton.setText("Bekræft");
                 }
             }
             case 4 -> {
-                næsteButton.setText("Bekræft");
                 SaveBookingTask saveBookingTask = new SaveBookingTask();
                 saveBookingTask.setOnSucceeded(event -> {
                     if (saveBookingTask.getValue()) {
