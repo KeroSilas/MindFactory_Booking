@@ -49,7 +49,7 @@ public class ActivityDaoImpl implements ActivityDao {
 
         List<Activity> activities = new ArrayList<>();
         try(Connection con = databaseConnector.getConnection()){
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM Activity;");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM Activities;");
             ResultSet rs = ps.executeQuery();
 
             Activity activity;

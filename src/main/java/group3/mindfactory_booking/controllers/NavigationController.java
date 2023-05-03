@@ -135,6 +135,7 @@ public class NavigationController {
                 } else {
                     currentViewIndex = 4;
                     næsteButton.setText("Bekræft");
+                    booking.printBooking();
                 }
             }
             case 4 -> {

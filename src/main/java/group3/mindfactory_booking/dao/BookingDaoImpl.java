@@ -28,7 +28,7 @@ public class BookingDaoImpl implements BookingDao {
             ps.setString(7, booking.getPosition());
             ps.setString(8, booking.getPhone());
             ps.setString(9, booking.getEmail());
-            ps.setString(10, booking.getÅbenSkoleForløb());
+            ps.setInt(10, booking.getÅbenSkoleForløb().getForløbID());
             ps.setString(11, booking.getTransportType());
             ps.setString(12, booking.getTransportArrival());
             ps.setString(13, booking.getTransportDeparture());

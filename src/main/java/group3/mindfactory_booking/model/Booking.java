@@ -14,7 +14,7 @@ public class Booking {
     private String position;
     private String phone;
     private String email;
-    private String åbenSkoleForløb;
+    private Forløb åbenSkoleForløb;
     private String transportType;
     private String transportArrival;
     private String transportDeparture;
@@ -141,11 +141,11 @@ public class Booking {
         this.email = email;
     }
 
-    public String getÅbenSkoleForløb() {
+    public Forløb getÅbenSkoleForløb() {
         return åbenSkoleForløb;
     }
 
-    public void setÅbenSkoleForløb(String åbenSkoleForløb) {
+    public void setÅbenSkoleForløb(Forløb åbenSkoleForløb) {
         this.åbenSkoleForløb = åbenSkoleForløb;
     }
 
@@ -287,7 +287,7 @@ public class Booking {
         this.position = "";
         this.phone = "";
         this.email = "";
-        this.åbenSkoleForløb = "";
+        this.åbenSkoleForløb = new Forløb(1, "");
         this.transportType = "";
         this.transportArrival = "";
         this.transportDeparture = "";
@@ -304,5 +304,34 @@ public class Booking {
         this.startTime = LocalDateTime.of(2000, 1, 1, 0, 0, 0);
         this.endTime = LocalDateTime.of(2000, 1, 1, 0, 0, 0);
         this.equipmentList = null;
+    }
+
+    public void printBooking() {
+        System.out.println("Booking ID: " + bookingID);
+        System.out.println("Catering: " + catering);
+        System.out.println("Activity: " + activity.getActivityID() + " " + activity.getActivityName());
+        System.out.println("Organization: " + organization.getOrganizationID() + " " + organization.getOrganizationName());
+        System.out.println("First name: " + firstName);
+        System.out.println("Last name: " + lastName);
+        System.out.println("Position: " + position);
+        System.out.println("Phone: " + phone);
+        System.out.println("Email: " + email);
+        System.out.println("Åben skole forløb: " + åbenSkoleForløb.getForløbID() + " " + åbenSkoleForløb.getForløbName());
+        System.out.println("Transport type: " + transportType);
+        System.out.println("Transport arrival: " + transportArrival);
+        System.out.println("Transport departure: " + transportDeparture);
+        System.out.println("Participants: " + participants);
+        System.out.println("Start date: " + startDate);
+        System.out.println("End date: " + endDate);
+        System.out.println("Booking date: " + bookingDate);
+        System.out.println("Temporary booking: " + temporaryBooking);
+        System.out.println("Assistance: " + assistance);
+        System.out.println("No show: " + noShow);
+        System.out.println("Message to AS: " + messageToAS);
+        System.out.println("Personal note: " + personalNote);
+        System.out.println("Booking type: " + bookingType);
+        System.out.println("Start time: " + startTime);
+        System.out.println("End time: " + endTime);
+        System.out.println("Equipment list: " + equipmentList);
     }
 }

@@ -1,5 +1,7 @@
 package group3.mindfactory_booking.controllers;
 
+import group3.mindfactory_booking.dao.ForløbDao;
+import group3.mindfactory_booking.dao.ForløbDaoImpl;
 import group3.mindfactory_booking.model.Booking;
 import group3.mindfactory_booking.model.Forløb;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
@@ -10,6 +12,7 @@ import javafx.scene.control.ToggleGroup;
 
 public class ÅbenSkoleController {
 
+    private ForløbDao forløbDao;
     private Booking booking;
 
     @FXML
@@ -32,6 +35,7 @@ public class ÅbenSkoleController {
 
     public void initialize() {
         booking = Booking.getInstance();
+        forløbDao = new ForløbDaoImpl();
 
         busRB.setUserData("Bus");
         offentligRB.setUserData("Offentlig transport");
@@ -49,7 +53,7 @@ public class ÅbenSkoleController {
 
         forløbCB.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if(!oldValue.equals(newValue))
-                booking.setÅbenSkoleForløb(newValue.toString());
+                booking.getÅbenSkoleForløb().setForløbID(newValue.getForløbID());
         });
 
         transportType.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
@@ -57,6 +61,7 @@ public class ÅbenSkoleController {
                 booking.setTransportType(newValue.getUserData().toString());
         });
 
+        forløbCB.getItems().addAll(forløbDao.getAllForløb());
 
     }
 

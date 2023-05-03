@@ -25,4 +25,9 @@ public class Forløb {
     public void setForløbName(String forløbName) {
         this.forløbName = forløbName;
     }
+
+    @Override
+    public String toString() {
+        return getForløbName();
+    }
 }

@@ -12,8 +12,8 @@ import java.util.List;
 
 public class ForløbDaoImpl implements ForløbDao{
     private final DatabaseConnector databaseConnector;
-    public ForløbDaoImpl(DatabaseConnector databaseConnector) {
-        this.databaseConnector = databaseConnector;
+    public ForløbDaoImpl() {
+        databaseConnector = new DatabaseConnector();
     }
 
     @Override

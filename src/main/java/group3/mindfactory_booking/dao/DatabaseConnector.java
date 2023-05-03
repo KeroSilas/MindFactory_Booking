@@ -19,7 +19,7 @@ public class DatabaseConnector {
         dataSource.setServerName("localhost");
         dataSource.setDatabaseName("MindFactory");
         dataSource.setUser("sa");
-        dataSource.setPassword("Whatever123");
+        dataSource.setPassword("12344321");
         dataSource.setTrustServerCertificate(true);
     }
 

@@ -37,6 +37,5 @@ public class BookingTypeController {
 
     public void initialize() {
         booking = Booking.getInstance();
-
     }
 }
