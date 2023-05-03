@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="openingBP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group3.mindfactory_booking.controllers.OpeningController">
+<BorderPane fx:id="openingBP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group3.mindfactory_booking.controllers.HomepageController">
    <center>
       <VBox alignment="CENTER" spacing="8.0">
          <children>
@@ -20,12 +20,15 @@
                   <Insets bottom="12.0" />
                </VBox.margin>
             </ImageView>
-            <MFXButton buttonType="RAISED" minHeight="50.0" minWidth="150.0" onAction="#handleBookNu" prefHeight="50.0" prefWidth="150.0" rippleColor="WHITE" style="-fx-background-color: #94c83d;" text="Book nu" textFill="WHITE">
+            <MFXButton buttonType="RAISED" minHeight="50.0" minWidth="160.0" onAction="#handleBookNu" prefHeight="60.0" prefWidth="160.0" rippleColor="WHITE" style="-fx-background-color: #94c83d;" text="Book nu" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="16.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </MFXButton>
-            <MFXButton buttonType="RAISED" minHeight="35.0" minWidth="150.0" onAction="#handleAfbrydBooking" prefHeight="35.0" prefWidth="150.0" text="Afbryd booking" />
+            <MFXButton buttonType="RAISED" minHeight="35.0" minWidth="160.0" onAction="#handleAfbrydBooking" prefHeight="40.0" prefWidth="160.0" text="Afbryd booking">
+               <font>
+                  <Font size="14.0" />
+               </font></MFXButton>
          </children>
       </VBox>
    </center>

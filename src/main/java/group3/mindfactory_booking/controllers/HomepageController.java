@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import static javafx.stage.Modality.APPLICATION_MODAL;
 
-public class OpeningController {
+public class HomepageController {
 
     @FXML
     private BorderPane openingBP, navigationBP;
@@ -44,7 +44,7 @@ public class OpeningController {
     }
 
     public void initialize() {
-        FXMLLoader fxmlLoader = new FXMLLoader(BookingApplication.class.getResource("navigation-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(BookingApplication.class.getResource("bookingType-1-view.fxml"));
         try {
             navigationBP = fxmlLoader.load();
         } catch (Exception e) {

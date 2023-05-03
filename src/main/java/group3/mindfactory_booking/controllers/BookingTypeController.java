@@ -1,6 +1,6 @@
 package group3.mindfactory_booking.controllers;
 
-import group3.mindfactory_booking.model.Booking;
+import group3.mindfactory_booking.model.singleton.Booking;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
 
@@ -9,7 +9,15 @@ public class BookingTypeController {
     private Booking booking;
 
     @FXML
-    private MFXButton åbenSkoleBtn, organisationBtn, lærerBtn;
+    private MFXButton åbenSkoleBtn, organisationBtn, lærerBtn, næsteBtn, tilbageBtn;
+
+    @FXML
+    public void handleNæste() {
+    }
+
+    @FXML
+    public void handleTilbage() {
+    }
 
     @FXML
     private void handleÅbenSkole() {

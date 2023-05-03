@@ -15,4 +15,6 @@ module group3.mindfactory_booking {
     opens group3.mindfactory_booking.model to javafx.fxml;
     exports group3.mindfactory_booking.controllers;
     opens group3.mindfactory_booking.controllers to javafx.fxml;
+    exports group3.mindfactory_booking.model.singleton;
+    opens group3.mindfactory_booking.model.singleton to javafx.fxml;
 }

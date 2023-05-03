@@ -10,12 +10,12 @@ import java.io.IOException;
 public class BookingApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(BookingApplication.class.getResource("OpeningGUI.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(BookingApplication.class.getResource("homepage-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setWidth(700);
-        stage.setHeight(600);
-        stage.setMinWidth(700);
-        stage.setMinHeight(600);
+        stage.setWidth(850);
+        stage.setHeight(700);
+        stage.setMinWidth(850);
+        stage.setMinHeight(700);
         stage.setTitle("Mind Factory Booking");
         stage.setScene(scene);
         stage.show();

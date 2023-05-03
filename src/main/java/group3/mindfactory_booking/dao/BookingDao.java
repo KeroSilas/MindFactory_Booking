@@ -1,8 +1,6 @@
 package group3.mindfactory_booking.dao;
 
-import group3.mindfactory_booking.model.Booking;
-
-import java.time.LocalDateTime;
+import group3.mindfactory_booking.model.singleton.Booking;
 
 
 public interface BookingDao {

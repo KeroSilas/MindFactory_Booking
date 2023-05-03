@@ -2,7 +2,7 @@ package group3.mindfactory_booking.model.tasks;
 
 import group3.mindfactory_booking.dao.BookingDao;
 import group3.mindfactory_booking.dao.BookingDaoImpl;
-import group3.mindfactory_booking.model.Booking;
+import group3.mindfactory_booking.model.singleton.Booking;
 import javafx.concurrent.Task;
 
 import java.time.LocalDateTime;
@@ -24,7 +24,7 @@ public class SaveBookingTask extends Task<Boolean> {
 
         try {
             booking.setBookingID(25); // TEST
-            booking.setBookingDate(LocalDateTime.now());
+            booking.setBookingDateTime(LocalDateTime.now());
             bookingDao.saveBooking(booking);
         } catch (RuntimeException e) {
             success = false;

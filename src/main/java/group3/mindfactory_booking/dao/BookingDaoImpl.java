@@ -1,9 +1,8 @@
 package group3.mindfactory_booking.dao;
 
-import group3.mindfactory_booking.model.Booking;
+import group3.mindfactory_booking.model.singleton.Booking;
 
 import java.sql.*;
-import java.time.LocalDateTime;
 
 
 public class BookingDaoImpl implements BookingDao {
@@ -17,7 +16,7 @@ public class BookingDaoImpl implements BookingDao {
     @Override
     public void saveBooking(Booking booking) throws RuntimeException {
         try (Connection con = databaseConnector.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO Booking VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Booking VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
 
             ps.setInt(1, booking.getBookingID());
             ps.setInt(2, booking.getCatering().getPackageID());
@@ -28,19 +27,22 @@ public class BookingDaoImpl implements BookingDao {
             ps.setString(7, booking.getPosition());
             ps.setString(8, booking.getPhone());
             ps.setString(9, booking.getEmail());
-            ps.setInt(10, booking.getÅbenSkoleForløb().getForløbID());
-            ps.setString(11, booking.getTransportType());
-            ps.setString(12, booking.getTransportArrival());
-            ps.setString(13, booking.getTransportDeparture());
-            ps.setInt(14, booking.getParticipants());
-            ps.setTimestamp(15, Timestamp.valueOf(booking.getStartDate()));
-            ps.setTimestamp(16, Timestamp.valueOf(booking.getEndDate()));
-            ps.setTimestamp(17, Timestamp.valueOf(booking.getBookingDate()));
-            ps.setBoolean(18, booking.isTemporaryBooking());
-            ps.setString(19, booking.getAssistance());
-            ps.setBoolean(20, booking.isNoShow());
-            ps.setString(21, booking.getMessageToAS());
-            ps.setString(22, booking.getPersonalNote());
+            ps.setString(10, booking.getAfdeling());
+            ps.setInt(11, booking.getÅbenSkoleForløb().getForløbID());
+            ps.setString(12, booking.getTransportType());
+            ps.setString(13, booking.getTransportArrival());
+            ps.setString(14, booking.getTransportDeparture());
+            ps.setInt(15, booking.getParticipants());
+            ps.setDate(16, Date.valueOf(booking.getDate()));
+            ps.setTime(17, Time.valueOf(booking.getEndTime()));
+            ps.setTime(18, Time.valueOf(booking.getStartTime()));
+            ps.setTimestamp(19, Timestamp.valueOf(booking.getBookingDateTime()));
+            ps.setBoolean(20, booking.isWholeDay());
+            ps.setBoolean(21, booking.isTemporaryBooking());
+            ps.setString(22, booking.getAssistance());
+            ps.setBoolean(23, booking.isNoShow());
+            ps.setString(24, booking.getMessageToAS());
+            ps.setString(25, booking.getPersonalNote());
             ps.executeUpdate();
 
         } catch (SQLException e) {

@@ -1,19 +1,18 @@
 package group3.mindfactory_booking.controllers;
 
-import group3.mindfactory_booking.dao.ForløbDao;
 import group3.mindfactory_booking.dao.ForløbDaoImpl;
-import group3.mindfactory_booking.model.Booking;
+import group3.mindfactory_booking.model.singleton.Booking;
 import group3.mindfactory_booking.model.Forløb;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
-import io.github.palexdev.materialfx.controls.MFXRadioButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ToggleGroup;
 
 public class ÅbenSkoleController {
 
-    private ForløbDao forløbDao;
     private Booking booking;
+    private ForløbDaoImpl forløbDao;
 
     @FXML
     private MFXTextField afgangTF;
@@ -22,47 +21,33 @@ public class ÅbenSkoleController {
     private MFXTextField ankomstTF;
 
     @FXML
-    private MFXRadioButton busRB;
-
-    @FXML
     private MFXComboBox<Forløb> forløbCB;
 
     @FXML
-    private MFXRadioButton offentligRB;
+    private MFXButton næsteBtn;
 
     @FXML
-    private ToggleGroup transportType;
+    private MFXButton tilbageBtn;
+
+    @FXML
+    private MFXComboBox<String> transportCB;
+
+    @FXML
+    void handleNæste(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleTilbage(ActionEvent event) {
+
+    }
 
     public void initialize() {
         booking = Booking.getInstance();
         forløbDao = new ForløbDaoImpl();
 
-        busRB.setUserData("Bus");
-        offentligRB.setUserData("Offentlig transport");
-
-        // Checks if text has changed, if it has, it updates the booking object
-        ankomstTF.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!oldValue.equals(newValue))
-                booking.setTransportArrival(newValue);
-        });
-
-        afgangTF.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!oldValue.equals(newValue))
-                booking.setTransportDeparture(newValue);
-        });
-
-        forløbCB.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if(!oldValue.equals(newValue))
-                booking.getÅbenSkoleForløb().setForløbID(newValue.getForløbID());
-        });
-
-        transportType.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
-            if(!oldValue.equals(newValue))
-                booking.setTransportType(newValue.getUserData().toString());
-        });
-
         forløbCB.getItems().addAll(forløbDao.getAllForløb());
-
+        transportCB.getItems().addAll("Lejet bus", "Offentlig transport");
     }
 
 }

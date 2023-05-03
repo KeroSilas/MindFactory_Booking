@@ -5,20 +5,22 @@ import group3.mindfactory_booking.dao.ActivityDaoImpl;
 import group3.mindfactory_booking.dao.EquipmentDao;
 import group3.mindfactory_booking.dao.EquipmentDaoImpl;
 import group3.mindfactory_booking.model.Activity;
-import group3.mindfactory_booking.model.Booking;
+import group3.mindfactory_booking.model.singleton.Booking;
 import group3.mindfactory_booking.model.Equipment;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXListView;
 import io.github.palexdev.materialfx.controls.MFXRadioButton;
 import javafx.collections.ListChangeListener;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ToggleGroup;
 
 public class OrgTeacherController {
 
+    private Booking booking;
     private ActivityDao activityDao;
     private EquipmentDao equipmentDao;
-    private Booking booking;
 
     @FXML
     private MFXComboBox<Activity> aktivitetCB;
@@ -33,10 +35,36 @@ public class OrgTeacherController {
     private MFXRadioButton læringsRB;
 
     @FXML
+    private MFXButton næsteBtn;
+
+    @FXML
+    private MFXButton tilbageBtn;
+
+    @FXML
     private MFXComboBox<Equipment> udstyrCB;
 
     @FXML
     private MFXListView<Equipment> udstyrLV;
+
+    @FXML
+    void handleNæste(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleSlet(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleTilbage(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleTilføj(ActionEvent event) {
+
+    }
 
     @FXML
     void handleTilføj() {
