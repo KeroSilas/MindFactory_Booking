@@ -3,6 +3,8 @@ package group3.mindfactory_booking.dao;
 import group3.mindfactory_booking.model.singleton.Booking;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class BookingDaoImpl implements BookingDao {
@@ -48,8 +50,26 @@ public class BookingDaoImpl implements BookingDao {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+    }
 
+    @Override
+    public List<Integer> getAllBookingID() {
 
+        List<Integer> bookingIDs = new ArrayList<>();
+        try (Connection con = databaseConnector.getConnection()){
+            PreparedStatement ps = con.prepareStatement("SELECT bookingID FROM Booking;");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int checkedID = rs.getInt(1);
+                bookingIDs.add(checkedID);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("cannot access Bookings (BookingDaoImpl) " + e.getMessage());
+        }
+
+        return bookingIDs;
     }
 
     @Override

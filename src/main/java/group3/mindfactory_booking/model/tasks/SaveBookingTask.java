@@ -6,6 +6,7 @@ import group3.mindfactory_booking.model.singleton.Booking;
 import javafx.concurrent.Task;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class SaveBookingTask extends Task<Boolean> {
 
@@ -23,6 +24,12 @@ public class SaveBookingTask extends Task<Boolean> {
         boolean success = true;
 
         try {
+            List<Integer> bookingIDs = bookingDao.getAllBookingID();
+            int randomNum;
+            do {
+                randomNum = (int) (Math.random()*100_000_000);
+            } while (bookingIDs.contains(randomNum));
+            booking.setBookingID(randomNum);
             booking.setBookingDateTime(LocalDateTime.now());
             bookingDao.saveBooking(booking);
         } catch (RuntimeException e) {
