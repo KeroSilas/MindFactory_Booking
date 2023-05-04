@@ -7,9 +7,7 @@ import java.util.List;
 
 public interface BookingDao {
 
-
     public void saveBooking(Booking booking);
-
 
     List<Integer> getAllBookingID();
 

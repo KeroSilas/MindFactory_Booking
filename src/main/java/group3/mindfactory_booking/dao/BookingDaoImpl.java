@@ -18,30 +18,33 @@ public class BookingDaoImpl implements BookingDao {
     @Override
     public void saveBooking(Booking booking) throws RuntimeException {
         try (Connection con = databaseConnector.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO Booking VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Booking VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
 
             ps.setInt(1, booking.getBookingID());
             ps.setInt(2, booking.getCatering().getPackageID());
             ps.setInt(3, booking.getActivity().getActivityID());
             ps.setInt(4, booking.getOrganization().getOrganizationID());
-            ps.setString(5, booking.getFirstName());
-            ps.setString(6, booking.getLastName());
-            ps.setString(7, booking.getPosition());
-            ps.setString(8, booking.getPhone());
-            ps.setString(9, booking.getEmail());
-            ps.setInt(10, booking.getÅbenSkoleForløb().getForløbID());
-            ps.setString(11, booking.getTransportType());
-            ps.setString(12, booking.getTransportArrival());
-            ps.setString(13, booking.getTransportDeparture());
-            ps.setInt(14, booking.getParticipants());
-            ps.setTimestamp(15, Timestamp.valueOf(booking.getStartDate()));
-            ps.setTimestamp(16, Timestamp.valueOf(booking.getEndDate()));
-            ps.setTimestamp(17, Timestamp.valueOf(booking.getBookingDate()));
-            ps.setBoolean(18, booking.isTemporaryBooking());
-            ps.setString(19, booking.getAssistance());
-            ps.setBoolean(20, booking.isNoShow());
-            ps.setString(21, booking.getMessageToAS());
-            ps.setString(22, booking.getPersonalNote());
+            ps.setInt(5, booking.getÅbenSkoleForløb().getForløbID());
+            ps.setString(6, booking.getFirstName());
+            ps.setString(7, booking.getLastName());
+            ps.setString(8, booking.getPosition());
+            ps.setString(9, booking.getAfdeling());
+            ps.setString(10, booking.getPhone());
+            ps.setString(11, booking.getEmail());
+            ps.setString(12, booking.getAssistance());
+            ps.setString(13, booking.getTransportType());
+            ps.setString(14, booking.getTransportArrival());
+            ps.setString(15, booking.getTransportDeparture());
+            ps.setInt(16, booking.getParticipants());
+            ps.setDate(17, Date.valueOf(booking.getDate()));
+            ps.setTime(18, Time.valueOf(booking.getStartTime()));
+            ps.setTime(19, Time.valueOf(booking.getEndTime()));
+            ps.setTimestamp(20, Timestamp.valueOf(booking.getBookingDateTime()));
+            ps.setBoolean(21, booking.isWholeDay());
+            ps.setBoolean(22, booking.isNoShow());
+            ps.setString(23, booking.getMessageToAS());
+            ps.setString(24, booking.getPersonalNote());
+            ps.setString(25, booking.getBookingType());
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -69,7 +72,6 @@ public class BookingDaoImpl implements BookingDao {
 
         return bookingIDs;
     }
-
 
     @Override
     public void deleteBooking(int bookingID) throws RuntimeException {

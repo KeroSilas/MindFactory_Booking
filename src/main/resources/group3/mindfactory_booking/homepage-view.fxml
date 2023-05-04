@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="openingBP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group3.mindfactory_booking.controllers.HomepageController">
+   <center>
+      <VBox alignment="CENTER" spacing="8.0">
+         <children>
+            <ImageView fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/MF_POSITVE_COLOR.png" />
+               </image>
+               <VBox.margin>
+                  <Insets bottom="48.0" />
+               </VBox.margin>
+            </ImageView>
+            <MFXButton buttonType="RAISED" minHeight="50.0" minWidth="160.0" onAction="#handleBookNu" prefHeight="60.0" prefWidth="160.0" rippleColor="WHITE" style="-fx-background-color: #94c83d;" text="Book nu" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </MFXButton>
+            <MFXButton buttonType="RAISED" minHeight="35.0" minWidth="160.0" onAction="#handleAfbrydBooking" prefHeight="40.0" prefWidth="160.0" text="Afbryd booking">
+               <font>
+                  <Font size="14.0" />
+               </font></MFXButton>
+         </children>
+         <padding>
+            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+         </padding>
+      </VBox>
+   </center>
+</BorderPane>

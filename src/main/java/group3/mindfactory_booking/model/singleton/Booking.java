@@ -2,7 +2,9 @@ package group3.mindfactory_booking.model.singleton;
 
 import group3.mindfactory_booking.model.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 public class Booking {
@@ -11,57 +13,34 @@ public class Booking {
     private Catering catering;
     private Activity activity;
     private Organization organization;
+    private Forløb åbenSkoleForløb;
     private String firstName;
     private String lastName;
     private String position;
+    private String department;
     private String phone;
     private String email;
-    private Forløb åbenSkoleForløb;
+    private String assistance;
     private String transportType;
     private String transportArrival;
     private String transportDeparture;
     private int participants;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
-    private LocalDateTime bookingDate;
-    private boolean temporaryBooking;
-    private String assistance;
+    private LocalDate date;
+    private LocalTime startTime;
+    private LocalTime endTime;
+    private LocalDateTime bookingDateTime;
+    private boolean isWholeDay;
     private boolean noShow;
     private String messageToAS;
     private String personalNote;
     private String bookingType;
     private List<Equipment> equipmentList;
 
- /*   private Booking(int bookingID, int packageID, int activityID, int organizationID, String firstName, String lastName, String position, String phone, String email, String åbenSkoleForløb, String transportType, String transportArrival, String transportDeparture, int participants, LocalDate startDate, LocalDate endDate, LocalDate bookingDate, boolean temporaryBooking, String assistance, boolean noShow, String messageToAS, String personalNote) {
-        this.bookingID = bookingID;
-        this.packageID = packageID;
-        this.activityID = activityID;
-        this.organizationID = organizationID;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.position = position;
-        this.phone = phone;
-        this.email = email;
-        this.åbenSkoleForløb = åbenSkoleForløb;
-        this.transportType = transportType;
-        this.transportArrival = transportArrival;
-        this.transportDeparture = transportDeparture;
-        this.participants = participants;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.bookingDate = bookingDate;
-        this.temporaryBooking = temporaryBooking;
-        this.assistance = assistance;
-        this.noShow = noShow;
-        this.messageToAS = messageToAS;
-        this.personalNote = personalNote;
-    }*/
     private static Booking instance = null;
 
     private Booking() {
-
+        this.activity = new Activity(4, ""); // Make sure that the ID matches the ID of "Ingen" in the database
+        this.åbenSkoleForløb = new Forløb(7, ""); // Make sure that the ID matches the ID of "Ikke valgt" in the database
     }
 
     public static Booking getInstance() {
@@ -183,36 +162,52 @@ public class Booking {
         this.participants = participants;
     }
 
-    public LocalDateTime getStartDate() {
-        return startDate;
+    public boolean isWholeDay() {
+        return isWholeDay;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
-        this.startDate = startDate;
+    public void setWholeDay(boolean wholeDay) {
+        isWholeDay = wholeDay;
     }
 
-    public LocalDateTime getEndDate() {
-        return endDate;
+    public String getAfdeling() {
+        return department;
     }
 
-    public void setEndDate(LocalDateTime endDate) {
-        this.endDate = endDate;
+    public void setAfdeling(String afdeling) {
+        this.department = afdeling;
     }
 
-    public LocalDateTime getBookingDate() {
-        return bookingDate;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setBookingDate(LocalDateTime bookingDate) {
-        this.bookingDate = bookingDate;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
-    public boolean isTemporaryBooking() {
-        return temporaryBooking;
+    public LocalTime getStartTime() {
+        return startTime;
     }
 
-    public void setTemporaryBooking(boolean temporaryBooking) {
-        this.temporaryBooking = temporaryBooking;
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public LocalDateTime getBookingDateTime() {
+        return bookingDateTime;
+    }
+
+    public void setBookingDateTime(LocalDateTime bookingDateTime) {
+        this.bookingDateTime = bookingDateTime;
     }
 
     public String getAssistance() {
@@ -255,85 +250,11 @@ public class Booking {
         this.bookingType = bookingType;
     }
 
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalDateTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
-    }
-
     public List<Equipment> getEquipmentList() {
         return equipmentList;
     }
 
     public void setEquipmentList(List<Equipment> equipmentList) {
         this.equipmentList = equipmentList;
-    }
-
-    public void clearBooking() {
-        this.bookingID = 0;
-        this.catering = new Catering(1, ""); // Testing
-        this.activity = new Activity(1, ""); // Testing
-        this.organization = new Organization(1,""); // Testing
-        this.firstName = "";
-        this.lastName = "";
-        this.position = "";
-        this.phone = "";
-        this.email = "";
-        this.åbenSkoleForløb = new Forløb(1, "");
-        this.transportType = "";
-        this.transportArrival = "";
-        this.transportDeparture = "";
-        this.participants = 0;
-        this.startDate = LocalDateTime.of(2000, 1, 1, 0, 0, 0);
-        this.endDate = LocalDateTime.of(2000, 1, 1, 0, 0, 0);
-        this.bookingDate = LocalDateTime.of(2000, 1, 1, 0, 0, 0);
-        this.temporaryBooking = false;
-        this.assistance = "";
-        this.noShow = false;
-        this.messageToAS = "";
-        this.personalNote = "";
-        this.bookingType = "";
-        this.startTime = LocalDateTime.of(2000, 1, 1, 0, 0, 0);
-        this.endTime = LocalDateTime.of(2000, 1, 1, 0, 0, 0);
-        this.equipmentList = null;
-    }
-
-    public void printBooking() {
-        System.out.println("Booking ID: " + bookingID);
-        System.out.println("Catering: " + catering);
-        System.out.println("Activity: " + activity.getActivityID() + " " + activity.getActivityName());
-        System.out.println("Organization: " + organization.getOrganizationID() + " " + organization.getOrganizationName());
-        System.out.println("First name: " + firstName);
-        System.out.println("Last name: " + lastName);
-        System.out.println("Position: " + position);
-        System.out.println("Phone: " + phone);
-        System.out.println("Email: " + email);
-        System.out.println("Åben skole forløb: " + åbenSkoleForløb.getForløbID() + " " + åbenSkoleForløb.getForløbName());
-        System.out.println("Transport type: " + transportType);
-        System.out.println("Transport arrival: " + transportArrival);
-        System.out.println("Transport departure: " + transportDeparture);
-        System.out.println("Participants: " + participants);
-        System.out.println("Start date: " + startDate);
-        System.out.println("End date: " + endDate);
-        System.out.println("Booking date: " + bookingDate);
-        System.out.println("Temporary booking: " + temporaryBooking);
-        System.out.println("Assistance: " + assistance);
-        System.out.println("No show: " + noShow);
-        System.out.println("Message to AS: " + messageToAS);
-        System.out.println("Personal note: " + personalNote);
-        System.out.println("Booking type: " + bookingType);
-        System.out.println("Start time: " + startTime);
-        System.out.println("End time: " + endTime);
-        System.out.println("Equipment list: " + equipmentList);
     }
 }

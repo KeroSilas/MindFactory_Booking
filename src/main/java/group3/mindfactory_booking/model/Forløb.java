@@ -28,6 +28,6 @@ public class Forløb {
 
     @Override
     public String toString() {
-        return getForløbName();
+        return forløbName;
     }
 }

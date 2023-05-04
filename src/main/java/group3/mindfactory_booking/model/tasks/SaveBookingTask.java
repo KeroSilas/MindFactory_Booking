@@ -30,7 +30,7 @@ public class SaveBookingTask extends Task<Boolean> {
                 randomNum = (int) (Math.random()*100_000_000);
             } while (bookingIDs.contains(randomNum));
             booking.setBookingID(randomNum);
-            booking.setBookingDate(LocalDateTime.now());
+            booking.setBookingDateTime(LocalDateTime.now());
             bookingDao.saveBooking(booking);
         } catch (RuntimeException e) {
             success = false;
