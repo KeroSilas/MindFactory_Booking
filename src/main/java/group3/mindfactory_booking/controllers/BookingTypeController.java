@@ -21,38 +21,16 @@ public class BookingTypeController {
 
     @FXML
     public void handleNæste() {
-        Stage stage;
-        Parent root;
-
-        stage = (Stage) næsteBtn.getScene().getWindow();
-        try {
-            root = FXMLLoader.load(Objects.requireNonNull(BookingApplication.class.getResource(Objects.equals(booking.getBookingType(), "Åben-Skole") ? "aabenSkole-2-view.fxml" : "udstyrOgAktivitet-2-view.fxml")));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
+        if (isBookingTypeSelected()) {
+            nextPage();
+        } else {
+            System.out.println("Input is not valid");
         }
-
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
 
     @FXML
     public void handleTilbage() {
-        Stage stage;
-        Parent root;
-
-        stage = (Stage) tilbageBtn.getScene().getWindow();
-        try {
-            root = FXMLLoader.load(Objects.requireNonNull(BookingApplication.class.getResource("homepage-view.fxml")));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
-
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        previousPage();
     }
 
     @FXML
@@ -81,6 +59,43 @@ public class BookingTypeController {
 
     public void initialize() {
         booking = Booking.getInstance();
-        booking.clearBooking();
+    }
+
+    private boolean isBookingTypeSelected() {
+        return booking.getBookingType() != null;
+    }
+
+    private void nextPage() {
+        Stage stage;
+        Parent root;
+
+        stage = (Stage) næsteBtn.getScene().getWindow();
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(BookingApplication.class.getResource(Objects.equals(booking.getBookingType(), "Åben-Skole") ? "aabenSkole-2-view.fxml" : "udstyrOgAktivitet-2-view.fxml")));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private void previousPage() {
+        Stage stage;
+        Parent root;
+
+        stage = (Stage) tilbageBtn.getScene().getWindow();
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(BookingApplication.class.getResource("homepage-view.fxml")));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }
