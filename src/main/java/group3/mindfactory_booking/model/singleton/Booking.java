@@ -1,4 +1,6 @@
-package group3.mindfactory_booking.model;
+package group3.mindfactory_booking.model.singleton;
+
+import group3.mindfactory_booking.model.*;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -1,17 +1,19 @@
 package group3.mindfactory_booking.dao;
 
-import group3.mindfactory_booking.model.Booking;
+import group3.mindfactory_booking.model.singleton.Booking;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 
 public interface BookingDao {
 
 
-        public void saveBooking(Booking booking);
+    public void saveBooking(Booking booking);
 
 
-        public void deleteBooking(int bookingID);
+    List<Integer> getAllBookingID();
+
+    public void deleteBooking(int bookingID);
     }
 
 

@@ -2,7 +2,7 @@ package group3.mindfactory_booking.controllers;
 
 import group3.mindfactory_booking.dao.ForløbDao;
 import group3.mindfactory_booking.dao.ForløbDaoImpl;
-import group3.mindfactory_booking.model.Booking;
+import group3.mindfactory_booking.model.singleton.Booking;
 import group3.mindfactory_booking.model.Forløb;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXRadioButton;

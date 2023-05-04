@@ -2,10 +2,11 @@ package group3.mindfactory_booking.model.tasks;
 
 import group3.mindfactory_booking.dao.BookingDao;
 import group3.mindfactory_booking.dao.BookingDaoImpl;
-import group3.mindfactory_booking.model.Booking;
+import group3.mindfactory_booking.model.singleton.Booking;
 import javafx.concurrent.Task;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class SaveBookingTask extends Task<Boolean> {
 
@@ -23,7 +24,12 @@ public class SaveBookingTask extends Task<Boolean> {
         boolean success = true;
 
         try {
-            booking.setBookingID(25); // TEST
+            List<Integer> bookingIDs = bookingDao.getAllBookingID();
+            int randomNum;
+            do {
+                randomNum = (int) (Math.random()*10);
+            } while (bookingIDs.contains(randomNum));
+            booking.setBookingID(randomNum);
             booking.setBookingDate(LocalDateTime.now());
             bookingDao.saveBooking(booking);
         } catch (RuntimeException e) {

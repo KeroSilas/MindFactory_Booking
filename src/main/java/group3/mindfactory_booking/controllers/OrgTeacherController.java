@@ -5,7 +5,7 @@ import group3.mindfactory_booking.dao.ActivityDaoImpl;
 import group3.mindfactory_booking.dao.EquipmentDao;
 import group3.mindfactory_booking.dao.EquipmentDaoImpl;
 import group3.mindfactory_booking.model.Activity;
-import group3.mindfactory_booking.model.Booking;
+import group3.mindfactory_booking.model.singleton.Booking;
 import group3.mindfactory_booking.model.Equipment;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXListView;
