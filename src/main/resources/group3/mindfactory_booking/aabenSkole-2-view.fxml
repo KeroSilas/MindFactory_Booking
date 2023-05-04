@@ -32,7 +32,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <MFXComboBox fx:id="forløbCB" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="175.0" style="-fx-border-color: lightgrey;">
+                        <MFXComboBox fx:id="forløbCB" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: lightgrey;">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -58,7 +58,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <MFXComboBox fx:id="transportCB" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="175.0" style="-fx-border-color: lightgrey;">
+                        <MFXComboBox fx:id="transportCB" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: lightgrey;">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -72,7 +72,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <MFXTextField fx:id="ankomstTF" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="175.0" style="-fx-border-color: lightgrey;">
+                        <MFXTextField fx:id="ankomstTF" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: lightgrey;">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -86,7 +86,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <MFXTextField fx:id="afgangTF" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="175.0" style="-fx-border-color: lightgrey;">
+                        <MFXTextField fx:id="afgangTF" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: lightgrey;">
                            <font>
                               <Font size="14.0" />
                            </font>

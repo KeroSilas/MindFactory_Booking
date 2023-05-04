@@ -12,12 +12,12 @@
    <center>
       <VBox alignment="CENTER" spacing="8.0">
          <children>
-            <ImageView fitHeight="250.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/MF_POSITVE_COLOR_KANT.jpg" />
+                  <Image url="@images/MF_POSITVE_COLOR.png" />
                </image>
                <VBox.margin>
-                  <Insets bottom="12.0" />
+                  <Insets bottom="48.0" />
                </VBox.margin>
             </ImageView>
             <MFXButton buttonType="RAISED" minHeight="50.0" minWidth="160.0" onAction="#handleBookNu" prefHeight="60.0" prefWidth="160.0" rippleColor="WHITE" style="-fx-background-color: #94c83d;" text="Book nu" textFill="WHITE">
@@ -30,6 +30,9 @@
                   <Font size="14.0" />
                </font></MFXButton>
          </children>
+         <padding>
+            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+         </padding>
       </VBox>
    </center>
 </BorderPane>

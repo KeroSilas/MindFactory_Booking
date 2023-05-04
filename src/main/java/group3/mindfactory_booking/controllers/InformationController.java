@@ -1,6 +1,7 @@
 package group3.mindfactory_booking.controllers;
 
 import group3.mindfactory_booking.BookingApplication;
+import group3.mindfactory_booking.model.Forløb;
 import group3.mindfactory_booking.model.singleton.Booking;
 import group3.mindfactory_booking.model.Catering;
 import group3.mindfactory_booking.model.Organization;
@@ -110,6 +111,16 @@ public class InformationController {
             forplejningCB.getItems().addAll(fetchCateringTask.getValue());
         });
         new Thread(fetchCateringTask).start();
+
+        for (int i = 7; i < 17; i++) {
+            fraCB.getItems().add(LocalTime.of(i, 0));
+            tilCB.getItems().add(LocalTime.of(i, 0));
+        }
+        for (int i = 0; i < 365; i++) {
+            datoCB.getItems().add(LocalDate.now().plusDays((1+ i)));
+        }
+
+        forplejningCB.resize(200, 50);
     }
 
     private void importToBooking() {
@@ -140,7 +151,7 @@ public class InformationController {
 
         if (datoCB.getSelectionModel().getSelectedItem() == null) {
             datoCB.setStyle("-fx-border-color: red");
-            //success = false;
+            success = false;
         } else {
             datoCB.setStyle("-fx-border-color: lightgrey");
         }
@@ -187,7 +198,7 @@ public class InformationController {
 
         if (fraCB.getSelectionModel().getSelectedItem() == null) {
             fraCB.setStyle("-fx-border-color: red");
-            //success = false;
+            success = false;
         } else {
             fraCB.setStyle("-fx-border-color: lightgrey");
         }
@@ -215,7 +226,7 @@ public class InformationController {
 
         if (tilCB.getSelectionModel().getSelectedItem() == null) {
             tilCB.setStyle("-fx-border-color: red");
-            //success = false;
+            success = false;
         } else {
             tilCB.setStyle("-fx-border-color: lightgrey");
         }

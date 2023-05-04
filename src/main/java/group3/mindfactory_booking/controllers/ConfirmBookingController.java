@@ -155,16 +155,12 @@ public class ConfirmBookingController {
                 .map(Equipment::getEquipmentName)
                 .collect(Collectors.joining(", ")));
 
-        //datoLabel.setText(String.format("%s/%s/%s",
-        //        booking.getDate().getDayOfMonth(),
-        //        booking.getDate().getMonthValue(),
-        //        booking.getDate().getYear()));
-        //fraLabel.setText(String.format("%s:%s",
-        //        booking.getStartTime().getHour(),
-        //        booking.getStartTime().getMinute()));
-        //tilLabel.setText(String.format("%s:%s",
-        //        booking.getEndTime().getHour(),
-        //        booking.getEndTime().getMinute()));
+        datoLabel.setText(String.format("%s/%s/%s",
+                booking.getDate().getDayOfMonth(),
+                booking.getDate().getMonthValue(),
+                booking.getDate().getYear()));
+        fraLabel.setText(String.format("%s:00", booking.getStartTime().getHour()));
+        tilLabel.setText(String.format("%s:00", booking.getEndTime().getHour()));
     }
 
 }

@@ -39,7 +39,8 @@ public class Booking {
     private static Booking instance = null;
 
     private Booking() {
-
+        this.activity = new Activity(4, ""); // Make sure that the ID matches the ID of "Ingen" in the database
+        this.åbenSkoleForløb = new Forløb(7, ""); // Make sure that the ID matches the ID of "Ikke valgt" in the database
     }
 
     public static Booking getInstance() {

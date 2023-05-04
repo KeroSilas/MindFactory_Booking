@@ -157,17 +157,17 @@
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label text="Speciel udstyr:">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
                               <Label text="Aktivitet:">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
                               <Label text="Åben-Skole forløb:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Speciel udstyr:">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -211,17 +211,17 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="udstyrLabel" text="Ikke valgt">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Label>
                               <Label fx:id="aktivitetLabel" text="Ikke valgt">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
                               <Label fx:id="forløbLabel" text="Ikke valgt">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="udstyrLabel" maxWidth="150.0" text="Ikke valgt" wrapText="true">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
