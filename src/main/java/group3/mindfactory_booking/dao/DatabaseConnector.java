@@ -17,7 +17,7 @@ public class DatabaseConnector {
     public DatabaseConnector() {
         dataSource = new SQLServerDataSource();
         dataSource.setServerName("localhost");
-        dataSource.setDatabaseName("MindFactory");
+        dataSource.setDatabaseName("Mindfactory");
         dataSource.setUser("sa");
         dataSource.setPassword("123456");
         dataSource.setTrustServerCertificate(true);
