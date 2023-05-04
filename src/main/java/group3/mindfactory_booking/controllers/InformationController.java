@@ -119,8 +119,6 @@ public class InformationController {
         for (int i = 0; i < 365; i++) {
             datoCB.getItems().add(LocalDate.now().plusDays((1+ i)));
         }
-
-        forplejningCB.resize(200, 50);
     }
 
     private void importToBooking() {
