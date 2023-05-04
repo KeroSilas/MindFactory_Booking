@@ -3,7 +3,7 @@ package group3.mindfactory_booking.controllers;
 import group3.mindfactory_booking.BookingApplication;
 import group3.mindfactory_booking.dao.BookingDao;
 import group3.mindfactory_booking.dao.BookingDaoImpl;
-import group3.mindfactory_booking.model.Booking;
+import group3.mindfactory_booking.model.singleton.Booking;
 import group3.mindfactory_booking.model.tasks.SaveBookingTask;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
@@ -45,7 +45,7 @@ public class NavigationController {
             stackPane.getChildren().add(views.get(currentViewIndex));
         } else {
             // If the current view is the first view, go back to the opening view
-            FXMLLoader fxmlLoader = new FXMLLoader(BookingApplication.class.getResource("OpeningGUI.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(BookingApplication.class.getResource("homepage-view.fxml"));
             try {
                 stackPane.getScene().setRoot(fxmlLoader.load());
             } catch (IOException e) {
@@ -144,7 +144,7 @@ public class NavigationController {
                     if (saveBookingTask.getValue()) {
                         System.out.println("Booking saved successfully");
 
-                        FXMLLoader fxmlLoader = new FXMLLoader(BookingApplication.class.getResource("OpeningGUI.fxml"));
+                        FXMLLoader fxmlLoader = new FXMLLoader(BookingApplication.class.getResource("homepage-view.fxml"));
                         try {
                             stackPane.getScene().setRoot(fxmlLoader.load());
                         } catch (IOException e) {

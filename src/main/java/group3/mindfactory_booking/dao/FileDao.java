@@ -1,7 +1,7 @@
 package group3.mindfactory_booking.dao;
 
 import group3.mindfactory_booking.model.File;
-import group3.mindfactory_booking.model.Booking;
+
 import java.util.List;
 
 public interface FileDao

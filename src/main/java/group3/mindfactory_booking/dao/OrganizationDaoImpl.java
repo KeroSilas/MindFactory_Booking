@@ -1,6 +1,5 @@
 package group3.mindfactory_booking.dao;
 
-import group3.mindfactory_booking.model.Booking;
 import group3.mindfactory_booking.model.Organization;
 
 import java.sql.Connection;
