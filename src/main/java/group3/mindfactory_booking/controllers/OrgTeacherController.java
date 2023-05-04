@@ -63,6 +63,7 @@ public class OrgTeacherController {
 
         udstyrLV.getItems().addListener((ListChangeListener<Equipment>) c -> {
             booking.setEquipmentList(udstyrLV.getItems());
+
         });
 
         udstyrCB.getItems().addAll(equipmentDao.getAllEquipment());

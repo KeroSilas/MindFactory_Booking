@@ -12,6 +12,10 @@ public interface BookingDao {
 
 
         public void deleteBooking(int bookingID);
-    }
+
+        public boolean checkBookingID(int randomNum);
+
+
+}
 
 

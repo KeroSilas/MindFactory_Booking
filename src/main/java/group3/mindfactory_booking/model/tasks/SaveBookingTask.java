@@ -5,8 +5,6 @@ import group3.mindfactory_booking.dao.BookingDaoImpl;
 import group3.mindfactory_booking.model.Booking;
 import javafx.concurrent.Task;
 
-import java.time.LocalDateTime;
-
 public class SaveBookingTask extends Task<Boolean> {
 
     private final Booking booking;
@@ -23,12 +21,14 @@ public class SaveBookingTask extends Task<Boolean> {
         boolean success = true;
 
         try {
-            booking.setBookingDate(LocalDateTime.now());
-            bookingDao.saveBooking(booking);
+            int randomNum = (int)(Math.random() * (9 - 1 + 1)) + 1;  // 1 digit number
+            if(bookingDao.checkBookingID(randomNum)){
+                booking.setBookingID(randomNum);
+            }
+                bookingDao.saveBooking(booking);
         } catch (RuntimeException e) {
             success = false;
         }
-
         return success;
     }
 }
