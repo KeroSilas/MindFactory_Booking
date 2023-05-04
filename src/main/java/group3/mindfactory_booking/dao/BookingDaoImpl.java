@@ -75,10 +75,15 @@ public class BookingDaoImpl implements BookingDao {
 
     @Override
     public void deleteBooking(int bookingID) throws RuntimeException {
+        int rowsAffected;
         try (Connection con = databaseConnector.getConnection()) {
             PreparedStatement ps = con.prepareStatement("DELETE FROM Booking WHERE BookingID = ?");
             ps.setInt(1, bookingID);
-            ps.executeUpdate();
+            rowsAffected = ps.executeUpdate(); // https://stackoverflow.com/questions/2571915/return-number-of-rows-affected-by-sql-update-statement-in-java
+
+            if (rowsAffected == 0) {
+                throw new RuntimeException("Booking with ID " + bookingID + " does not exist");
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

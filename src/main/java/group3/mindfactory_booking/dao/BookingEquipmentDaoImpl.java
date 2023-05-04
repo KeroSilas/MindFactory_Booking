@@ -40,7 +40,7 @@ public class BookingEquipmentDaoImpl implements BookingEquipmentDao{
         ps.executeUpdate();
 
         } catch (SQLException e) {
-        System.err.println("Cannot delete equipment (BookingEquipment) " + e.getMessage());
+            System.err.println("Cannot delete equipment (BookingEquipment) " + e.getMessage());
         }
     }
 

@@ -107,7 +107,16 @@ public class OrgTeacherController {
     }
 
     private boolean isInputValid() {
-        return true; // Redundant method since the contents of this page are all optional
+        boolean success = true;
+
+        if (aktivitetCB.getSelectionModel().getSelectedItem()  == null) {
+            aktivitetCB.setStyle("-fx-border-color: red");
+            success = false;
+        } else {
+            aktivitetCB.setStyle("-fx-border-color: lightgrey");
+        }
+
+        return success;
     }
 
     private void previousPage() {
