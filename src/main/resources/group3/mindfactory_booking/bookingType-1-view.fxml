@@ -45,7 +45,7 @@
    <top>
       <VBox alignment="CENTER" prefHeight="60.0" style="-fx-background-color: #111c24;" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Type af booking" textFill="WHITE">
+            <Label text="Type af booking  (1/4)" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>

@@ -115,7 +115,7 @@
    <top>
       <VBox alignment="CENTER" prefHeight="60.0" style="-fx-background-color: #111c24;" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Speciel udstyr, assistance &amp; aktivitet" textFill="WHITE">
+            <Label text="Speciel udstyr, assistance &amp; aktivitet  (2/4)" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>

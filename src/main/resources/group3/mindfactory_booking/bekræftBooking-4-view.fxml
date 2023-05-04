@@ -257,7 +257,7 @@
    <top>
       <VBox alignment="CENTER" prefHeight="60.0" style="-fx-background-color: #111c24;" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Bekræft din booking" textFill="WHITE">
+            <Label text="Bekræft din booking  (4/4)" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
