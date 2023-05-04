@@ -36,7 +36,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <MFXTextField fx:id="fornavnTF" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="175.0" style="-fx-border-color: lightgrey;">
+                        <MFXTextField fx:id="fornavnTF" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: lightgrey;">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -50,7 +50,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <MFXTextField fx:id="efternavnTF" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="175.0" style="-fx-border-color: lightgrey;">
+                        <MFXTextField fx:id="efternavnTF" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: lightgrey;">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -64,7 +64,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <MFXTextField fx:id="telefonTF" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="175.0" style="-fx-border-color: lightgrey;">
+                        <MFXTextField fx:id="telefonTF" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: lightgrey;">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -78,7 +78,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <MFXTextField fx:id="emailTF" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="175.0" style="-fx-border-color: lightgrey;">
+                        <MFXTextField fx:id="emailTF" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: lightgrey;">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -93,7 +93,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <MFXComboBox fx:id="organisationCB" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="175.0" style="-fx-border-color: lightgrey;">
+                        <MFXComboBox fx:id="organisationCB" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: lightgrey;">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -107,7 +107,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <MFXTextField fx:id="afdelingTF" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="175.0" style="-fx-border-color: lightgrey;">
+                        <MFXTextField fx:id="afdelingTF" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: lightgrey;">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -121,7 +121,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <MFXTextField fx:id="stillingTF" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="175.0" style="-fx-border-color: lightgrey;">
+                        <MFXTextField fx:id="stillingTF" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: lightgrey;">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -148,7 +148,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <MFXTextField fx:id="deltagereTF" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="175.0" style="-fx-border-color: lightgrey;">
+                        <MFXTextField fx:id="deltagereTF" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: lightgrey;">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -162,7 +162,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <MFXComboBox fx:id="forplejningCB" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="175.0" style="-fx-border-color: lightgrey;">
+                        <MFXComboBox fx:id="forplejningCB" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: lightgrey;">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -191,7 +191,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <MFXComboBox fx:id="datoCB" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="175.0" style="-fx-border-color: lightgrey;">
+                        <MFXComboBox fx:id="datoCB" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: lightgrey;">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -205,7 +205,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <MFXComboBox fx:id="fraCB" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="175.0" style="-fx-border-color: lightgrey;">
+                        <MFXComboBox fx:id="fraCB" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: lightgrey;">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -219,7 +219,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <MFXComboBox fx:id="tilCB" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="175.0" style="-fx-border-color: lightgrey;">
+                        <MFXComboBox fx:id="tilCB" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: lightgrey;">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -231,14 +231,17 @@
                      <children>
                         <HBox>
                            <children>
-                              <Label text="         Besked til Mind Factory:">
+                              <Label text="Besked til Mind Factory:">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
+                                 <padding>
+                                    <Insets bottom="-4.0" />
+                                 </padding>
                               </Label>
                            </children>
                         </HBox>
-                        <TextArea fx:id="beskedTA" maxWidth="225.0" prefHeight="100.0" prefWidth="200.0" wrapText="true">
+                        <TextArea fx:id="beskedTA" maxWidth="250.0" prefHeight="100.0" prefWidth="250.0" wrapText="true">
                            <font>
                               <Font size="14.0" />
                            </font>

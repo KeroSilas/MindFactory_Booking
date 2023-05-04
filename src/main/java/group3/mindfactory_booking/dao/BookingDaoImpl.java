@@ -31,19 +31,20 @@ public class BookingDaoImpl implements BookingDao {
             ps.setString(9, booking.getAfdeling());
             ps.setString(10, booking.getPhone());
             ps.setString(11, booking.getEmail());
-            ps.setString(12, booking.getTransportType());
-            ps.setString(13, booking.getTransportArrival());
-            ps.setString(14, booking.getTransportDeparture());
-            ps.setInt(15, booking.getParticipants());
-            ps.setDate(16, Date.valueOf(booking.getDate()));
-            ps.setTime(17, Time.valueOf(booking.getStartTime()));
-            ps.setTime(18, Time.valueOf(booking.getEndTime()));
-            ps.setTimestamp(19, Timestamp.valueOf(booking.getBookingDateTime()));
-            ps.setBoolean(20, booking.isWholeDay());
-            ps.setBoolean(21, booking.isNoShow());
-            ps.setString(22, booking.getMessageToAS());
-            ps.setString(23, booking.getPersonalNote());
-            ps.setString(24, booking.getAssistance());
+            ps.setString(12, booking.getAssistance());
+            ps.setString(13, booking.getTransportType());
+            ps.setString(14, booking.getTransportArrival());
+            ps.setString(15, booking.getTransportDeparture());
+            ps.setInt(16, booking.getParticipants());
+            ps.setDate(17, Date.valueOf(booking.getDate()));
+            ps.setTime(18, Time.valueOf(booking.getStartTime()));
+            ps.setTime(19, Time.valueOf(booking.getEndTime()));
+            ps.setTimestamp(20, Timestamp.valueOf(booking.getBookingDateTime()));
+            ps.setBoolean(21, booking.isWholeDay());
+            ps.setBoolean(22, booking.isNoShow());
+            ps.setString(23, booking.getMessageToAS());
+            ps.setString(24, booking.getPersonalNote());
+            ps.setString(25, booking.getBookingType());
             ps.executeUpdate();
 
         } catch (SQLException e) {

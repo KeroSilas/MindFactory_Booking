@@ -29,7 +29,7 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" spacing="5.0">
                      <children>
-                        <MFXComboBox fx:id="udstyrCB" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="175.0" style="-fx-border-color: lightgrey;">
+                        <MFXComboBox fx:id="udstyrCB" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: lightgrey;">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -72,11 +72,7 @@
                   </HBox>
                   <HBox>
                      <children>
-                        <MFXRadioButton fx:id="nejRB" text="Nej tak">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="assistanceType1" />
-                           </toggleGroup>
-                        </MFXRadioButton>
+                        <MFXRadioButton fx:id="nejRB" text="Nej tak" toggleGroup="$assistanceType" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT">
@@ -101,7 +97,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <MFXComboBox fx:id="aktivitetCB" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="175.0" style="-fx-border-color: lightgrey;">
+                        <MFXComboBox fx:id="aktivitetCB" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: lightgrey;">
                            <font>
                               <Font size="14.0" />
                            </font>
