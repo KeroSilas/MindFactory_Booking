@@ -23,7 +23,6 @@ public class SaveBookingTask extends Task<Boolean> {
         boolean success = true;
 
         try {
-            booking.setBookingID(25); // TEST
             booking.setBookingDateTime(LocalDateTime.now());
             bookingDao.saveBooking(booking);
         } catch (RuntimeException e) {

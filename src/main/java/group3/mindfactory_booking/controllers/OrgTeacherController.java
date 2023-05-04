@@ -22,6 +22,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 public class OrgTeacherController {
@@ -73,11 +74,6 @@ public class OrgTeacherController {
     }
 
     @FXML
-    void handleSlet(ActionEvent event) {
-
-    }
-
-    @FXML
     void handleTilbage(ActionEvent event) {
         Stage stage;
         Parent root;
@@ -96,12 +92,16 @@ public class OrgTeacherController {
     }
 
     @FXML
-    void handleTilføj(ActionEvent event) {
+    void handleTilføj() {
+        udstyrLV.getItems().add(udstyrCB.getSelectionModel().getSelectedItem());
     }
 
     @FXML
-    void handleTilføj() {
-        udstyrLV.getItems().add(udstyrCB.getSelectionModel().getSelectedItem());
+    void handleSlet(ActionEvent event) {
+        List<Equipment> equipmentList = udstyrLV.getSelectionModel().getSelectedValues();
+        for (Equipment equipment : equipmentList) {
+            udstyrLV.getItems().remove(equipment);
+        }
     }
 
     public void initialize() {
@@ -109,26 +109,9 @@ public class OrgTeacherController {
         //activityDao = new ActivityDaoImpl();
         //equipmentDao = new EquipmentDaoImpl();
 
-        annesofieRB.setUserData("Anne-Sofie");
-        læringsRB.setUserData("Lærings konsulent");
-
-        assistanceType.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
-            if(!oldValue.equals(newValue))
-                booking.setAssistance(newValue.getUserData().toString());
-        });
-
-        aktivitetCB.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if(!oldValue.equals(newValue))
-                booking.getActivity().setActivityID(newValue.getActivityID());
-        });
-
-        udstyrLV.getItems().addListener((ListChangeListener<Equipment>) c -> {
-            booking.setEquipmentList(udstyrLV.getItems());
-        });
-
         //udstyrCB.getItems().addAll(equipmentDao.getAllEquipment());
-
         //aktivitetCB.getItems().addAll(activityDao.getAllActivity());
+
     }
 
 }
