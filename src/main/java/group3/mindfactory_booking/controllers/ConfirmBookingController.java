@@ -1,10 +1,11 @@
 package group3.mindfactory_booking.controllers;
 
 import group3.mindfactory_booking.BookingApplication;
+import group3.mindfactory_booking.model.Equipment;
 import group3.mindfactory_booking.model.singleton.Booking;
 import group3.mindfactory_booking.model.tasks.SaveBookingTask;
 import io.github.palexdev.materialfx.controls.MFXButton;
-import javafx.event.ActionEvent;
+import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,10 +15,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class ConfirmBookingController {
 
-    private Booking booking;
+    @FXML
+    private MFXProgressSpinner progressSpinner;
 
     @FXML
     private Label afdelingLabel;
@@ -84,6 +87,9 @@ public class ConfirmBookingController {
 
     @FXML
     void handleBekræft() {
+        progressSpinner.setVisible(true);
+        bekræftBtn.setDisable(true);
+
         SaveBookingTask saveBookingTask = new SaveBookingTask();
         saveBookingTask.setOnSucceeded(e -> {
             if (saveBookingTask.getValue()) {
@@ -91,6 +97,8 @@ public class ConfirmBookingController {
             } else {
                 System.out.println("Booking failed to save");
             }
+            progressSpinner.setVisible(false);
+            bekræftBtn.setDisable(false);
         });
         Thread thread = new Thread(saveBookingTask);
         thread.setDaemon(true);
@@ -98,7 +106,7 @@ public class ConfirmBookingController {
     }
 
     @FXML
-    void handleTilbage(ActionEvent event) {
+    void handleTilbage() {
         Stage stage;
         Parent root;
 
@@ -116,7 +124,7 @@ public class ConfirmBookingController {
     }
 
     public void initialize() {
-        booking = Booking.getInstance();
+        Booking booking = Booking.getInstance();
 
         afgangLabel.setText(booking.getTransportDeparture());
         ankomstLabel.setText(booking.getTransportArrival());
@@ -127,23 +135,36 @@ public class ConfirmBookingController {
         fornavnLabel.setText(booking.getFirstName());
         telefonLabel.setText(booking.getPhone());
         transportLabel.setText(booking.getTransportType());
-        forplejningLabel.setText(booking.getCatering().getPackageName());
-        organisationLabel.setText(booking.getOrganization().getOrganizationName());
-        //afdelingLabel.setText(booking.getDepartment());
-        forløbLabel.setText(booking.getÅbenSkoleForløb().getForløbName());
-        aktivitetLabel.setText(booking.getActivity().getActivityName());
-        udstyrLabel.setText("?");
+        afdelingLabel.setText(booking.getAfdeling());
         stillingLabel.setText(booking.getPosition());
-        datoLabel.setText(String.format("%s/%s/%s",
-                booking.getDate().getDayOfMonth(),
-                booking.getDate().getMonthValue(),
-                booking.getDate().getYear()));
-        fraLabel.setText(String.format("%s:%s",
-                booking.getStartTime().getHour(),
-                booking.getStartTime().getMinute()));
-        tilLabel.setText(String.format("%s:%s",
-                booking.getEndTime().getHour(),
-                booking.getEndTime().getMinute()));
+
+        if (booking.getCatering() != null)
+            forplejningLabel.setText(booking.getCatering().getPackageName());
+
+        if (booking.getOrganization() != null)
+            organisationLabel.setText(booking.getOrganization().getOrganizationName());
+
+        if (booking.getÅbenSkoleForløb() != null)
+            forløbLabel.setText(booking.getÅbenSkoleForløb().getForløbName());
+
+        if (booking.getActivity() != null)
+            aktivitetLabel.setText(booking.getActivity().getActivityName());
+
+        // https://www.baeldung.com/java-list-to-string
+        udstyrLabel.setText(booking.getEquipmentList().stream()
+                .map(Equipment::getEquipmentName)
+                .collect(Collectors.joining(", ")));
+
+        //datoLabel.setText(String.format("%s/%s/%s",
+        //        booking.getDate().getDayOfMonth(),
+        //        booking.getDate().getMonthValue(),
+        //        booking.getDate().getYear()));
+        //fraLabel.setText(String.format("%s:%s",
+        //        booking.getStartTime().getHour(),
+        //        booking.getStartTime().getMinute()));
+        //tilLabel.setText(String.format("%s:%s",
+        //        booking.getEndTime().getHour(),
+        //        booking.getEndTime().getMinute()));
     }
 
 }

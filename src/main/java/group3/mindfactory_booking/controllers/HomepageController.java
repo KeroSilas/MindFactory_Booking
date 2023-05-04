@@ -24,17 +24,14 @@ public class HomepageController {
         FXMLLoader fxmlLoader = new FXMLLoader(BookingApplication.class.getResource("afbrydbooking-view.fxml"));
         try {
             Parent root = fxmlLoader.load();
-            // Create a new stage and scene
+
             Stage stage = new Stage();
             Scene scene = new Scene(root);
 
-            // Set the title and scene of the new window
             stage.setTitle("Afbryd booking");
             stage.setResizable(false);
             stage.setScene(scene);
             stage.initModality(APPLICATION_MODAL);
-
-            // Show the new window
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();

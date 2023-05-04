@@ -70,6 +70,15 @@
                         <MFXRadioButton fx:id="annesofieRB" text="Anne-Sofie Dideriksen" toggleGroup="$assistanceType" />
                      </children>
                   </HBox>
+                  <HBox>
+                     <children>
+                        <MFXRadioButton fx:id="nejRB" text="Nej tak">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="assistanceType1" />
+                           </toggleGroup>
+                        </MFXRadioButton>
+                     </children>
+                  </HBox>
                   <HBox alignment="CENTER_LEFT">
                      <children>
                         <Label text="Aktivitet">
