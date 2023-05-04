@@ -45,7 +45,7 @@ public class NavigationController {
             stackPane.getChildren().add(views.get(currentViewIndex));
         } else {
             // If the current view is the first view, go back to the opening view
-            FXMLLoader fxmlLoader = new FXMLLoader(BookingApplication.class.getResource("homepage-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(BookingApplication.class.getResource("OpeningGUI.fxml"));
             try {
                 stackPane.getScene().setRoot(fxmlLoader.load());
             } catch (IOException e) {
@@ -144,7 +144,7 @@ public class NavigationController {
                     if (saveBookingTask.getValue()) {
                         System.out.println("Booking saved successfully");
 
-                        FXMLLoader fxmlLoader = new FXMLLoader(BookingApplication.class.getResource("homepage-view.fxml"));
+                        FXMLLoader fxmlLoader = new FXMLLoader(BookingApplication.class.getResource("OpeningGUI.fxml"));
                         try {
                             stackPane.getScene().setRoot(fxmlLoader.load());
                         } catch (IOException e) {
