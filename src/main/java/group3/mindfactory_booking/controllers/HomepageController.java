@@ -15,8 +15,7 @@ import static javafx.stage.Modality.APPLICATION_MODAL;
 
 public class HomepageController {
 
-    @FXML
-    private BorderPane openingBP;
+    @FXML private BorderPane openingBP;
 
     @FXML
     void handleAfbrydBooking() {

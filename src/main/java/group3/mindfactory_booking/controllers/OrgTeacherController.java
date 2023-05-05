@@ -11,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,32 +21,11 @@ public class OrgTeacherController {
 
     private Booking booking;
 
-    @FXML
-    private MFXComboBox<Activity> aktivitetCB;
-
-    @FXML
-    private MFXRadioButton annesofieRB;
-
-    @FXML
-    private ToggleGroup assistanceType;
-
-    @FXML
-    private MFXRadioButton læringsRB;
-
-    @FXML
-    private MFXRadioButton nejRB;
-
-    @FXML
-    private MFXButton næsteBtn;
-
-    @FXML
-    private MFXButton tilbageBtn;
-
-    @FXML
-    private MFXComboBox<Equipment> udstyrCB;
-
-    @FXML
-    private MFXListView<Equipment> udstyrLV;
+    @FXML private MFXComboBox<Activity> aktivitetCB;
+    @FXML private MFXComboBox<Equipment> udstyrCB;
+    @FXML private MFXRadioButton annesofieRB, læringsRB;
+    @FXML private MFXButton næsteBtn, tilbageBtn;
+    @FXML private MFXListView<Equipment> udstyrLV;
 
     @FXML
     void handleNæste() {

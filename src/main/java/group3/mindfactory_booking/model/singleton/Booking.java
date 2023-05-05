@@ -5,6 +5,7 @@ import group3.mindfactory_booking.model.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Booking {
@@ -41,6 +42,7 @@ public class Booking {
     private Booking() {
         this.activity = new Activity(4, ""); // Make sure that the ID matches the ID of "Ingen" in the database
         this.åbenSkoleForløb = new Forløb(7, ""); // Make sure that the ID matches the ID of "Ikke valgt" in the database
+        this.equipmentList = new ArrayList<>();
     }
 
     public static Booking getInstance() {
@@ -256,5 +258,33 @@ public class Booking {
 
     public void setEquipmentList(List<Equipment> equipmentList) {
         this.equipmentList = equipmentList;
+    }
+
+    public void clearBooking() {
+        this.catering = null;
+        this.activity = new Activity(4, ""); // Make sure that the ID matches the ID of "Ingen" in the database
+        this.organization = null;
+        this.åbenSkoleForløb = new Forløb(7, ""); // Make sure that the ID matches the ID of "Ikke valgt" in the database
+        this.firstName = "";
+        this.lastName = "";
+        this.position = "";
+        this.department = "";
+        this.phone = "";
+        this.email = "";
+        this.assistance = "";
+        this.transportType = "";
+        this.transportArrival = "";
+        this.transportDeparture = "";
+        this.participants = 0;
+        this.date = null;
+        this.startTime = null;
+        this.endTime = null;
+        this.bookingDateTime = null;
+        this.isWholeDay = false;
+        this.noShow = false;
+        this.messageToAS = "";
+        this.personalNote = "";
+        this.bookingType = null;
+        this.equipmentList = new ArrayList<>();
     }
 }

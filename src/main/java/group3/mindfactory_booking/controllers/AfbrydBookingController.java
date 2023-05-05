@@ -10,17 +10,10 @@ import javafx.stage.Stage;
 
 public class AfbrydBookingController {
 
-    @FXML
-    private Label statusLabel;
-
-    @FXML
-    private MFXProgressSpinner progressSpinner;
-
-    @FXML
-    private MFXTextField bookingNummerTF;
-
-    @FXML
-    private MFXButton afbrydBtn;
+    @FXML private Label statusLabel;
+    @FXML private MFXProgressSpinner progressSpinner;
+    @FXML private MFXTextField bookingNummerTF;
+    @FXML private MFXButton afbrydBtn;
 
     @FXML
     void handleAnnuller() {

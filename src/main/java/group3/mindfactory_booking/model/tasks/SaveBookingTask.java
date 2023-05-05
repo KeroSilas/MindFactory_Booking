@@ -32,6 +32,7 @@ public class SaveBookingTask extends Task<Boolean> {
             booking.setBookingID(randomNum);
             booking.setBookingDateTime(LocalDateTime.now());
             bookingDao.saveBooking(booking);
+            booking.clearBooking(); // Clear the booking after it has been saved to ensure that no information is carried over to the next booking
         } catch (RuntimeException e) {
             success = false;
         }

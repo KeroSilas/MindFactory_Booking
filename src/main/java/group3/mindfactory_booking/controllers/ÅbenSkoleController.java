@@ -20,23 +20,10 @@ public class ÅbenSkoleController {
 
     private Booking booking;
 
-    @FXML
-    private MFXTextField afgangTF;
-
-    @FXML
-    private MFXTextField ankomstTF;
-
-    @FXML
-    private MFXComboBox<Forløb> forløbCB;
-
-    @FXML
-    private MFXButton næsteBtn;
-
-    @FXML
-    private MFXButton tilbageBtn;
-
-    @FXML
-    private MFXComboBox<String> transportCB;
+    @FXML private MFXTextField afgangTF, ankomstTF;
+    @FXML private MFXComboBox<Forløb> forløbCB;
+    @FXML private MFXComboBox<String> transportCB;
+    @FXML private MFXButton næsteBtn, tilbageBtn;
 
     @FXML
     void handleNæste() {

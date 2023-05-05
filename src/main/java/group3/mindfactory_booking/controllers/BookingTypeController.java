@@ -16,8 +16,7 @@ public class BookingTypeController {
 
     private Booking booking;
 
-    @FXML
-    private MFXButton åbenSkoleBtn, organisationBtn, lærerBtn, næsteBtn, tilbageBtn;
+    @FXML private MFXButton åbenSkoleBtn, organisationBtn, lærerBtn, næsteBtn, tilbageBtn;
 
     @FXML
     public void handleNæste() {

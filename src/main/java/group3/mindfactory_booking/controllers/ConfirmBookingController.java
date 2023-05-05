@@ -19,71 +19,12 @@ import java.util.stream.Collectors;
 
 public class ConfirmBookingController {
 
-    @FXML
-    private MFXProgressSpinner progressSpinner;
+    @FXML private MFXProgressSpinner progressSpinner;
+    @FXML private MFXButton bekræftBtn, tilbageBtn;
+    @FXML private Label afdelingLabel, afgangLabel, ankomstLabel, assistanceLabel, deltagereLabel, efternavnLabel, emailLabel,
+            fornavnLabel, telefonLabel, transportLabel, stillingLabel, organisationLabel, forløbLabel, datoLabel,
+            fraLabel, tilLabel, aktivitetLabel, udstyrLabel, forplejningLabel;
 
-    @FXML
-    private Label afdelingLabel;
-
-    @FXML
-    private Label afgangLabel;
-
-    @FXML
-    private Label aktivitetLabel;
-
-    @FXML
-    private Label ankomstLabel;
-
-    @FXML
-    private Label assistanceLabel;
-
-    @FXML
-    private MFXButton bekræftBtn;
-
-    @FXML
-    private Label datoLabel;
-
-    @FXML
-    private Label deltagereLabel;
-
-    @FXML
-    private Label efternavnLabel;
-
-    @FXML
-    private Label emailLabel;
-
-    @FXML
-    private Label forløbLabel;
-
-    @FXML
-    private Label fornavnLabel;
-
-    @FXML
-    private Label forplejningLabel;
-
-    @FXML
-    private Label fraLabel;
-
-    @FXML
-    private Label organisationLabel;
-
-    @FXML
-    private Label stillingLabel;
-
-    @FXML
-    private Label telefonLabel;
-
-    @FXML
-    private Label tilLabel;
-
-    @FXML
-    private MFXButton tilbageBtn;
-
-    @FXML
-    private Label transportLabel;
-
-    @FXML
-    private Label udstyrLabel;
 
     @FXML
     void handleBekræft() {
@@ -93,6 +34,7 @@ public class ConfirmBookingController {
         SaveBookingTask saveBookingTask = new SaveBookingTask();
         saveBookingTask.setOnSucceeded(e -> {
             if (saveBookingTask.getValue()) {
+                goToHome();
                 System.out.println("Booking saved successfully");
             } else {
                 System.out.println("Booking failed to save");
@@ -107,20 +49,7 @@ public class ConfirmBookingController {
 
     @FXML
     void handleTilbage() {
-        Stage stage;
-        Parent root;
-
-        stage = (Stage) tilbageBtn.getScene().getWindow();
-        try {
-            root = FXMLLoader.load(Objects.requireNonNull(BookingApplication.class.getResource("informationOgDato-3-view.fxml")));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
-
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        previousPage();
     }
 
     public void initialize() {
@@ -161,6 +90,40 @@ public class ConfirmBookingController {
                 booking.getDate().getYear()));
         fraLabel.setText(String.format("%s:00", booking.getStartTime().getHour()));
         tilLabel.setText(String.format("%s:00", booking.getEndTime().getHour()));
+    }
+
+    private void goToHome() {
+        Stage stage;
+        Parent root;
+
+        stage = (Stage) tilbageBtn.getScene().getWindow();
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(BookingApplication.class.getResource("homepage-view.fxml")));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private void previousPage() {
+        Stage stage;
+        Parent root;
+
+        stage = (Stage) tilbageBtn.getScene().getWindow();
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(BookingApplication.class.getResource("informationOgDato-3-view.fxml")));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

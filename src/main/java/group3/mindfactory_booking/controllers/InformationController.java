@@ -1,7 +1,6 @@
 package group3.mindfactory_booking.controllers;
 
 import group3.mindfactory_booking.BookingApplication;
-import group3.mindfactory_booking.model.Forløb;
 import group3.mindfactory_booking.model.singleton.Booking;
 import group3.mindfactory_booking.model.Catering;
 import group3.mindfactory_booking.model.Organization;
@@ -28,56 +27,15 @@ public class InformationController {
 
     private Booking booking;
 
-    @FXML
-    private MFXProgressSpinner progressSpinner;
-
-    @FXML
-    private MFXTextField afdelingTF;
-
-    @FXML
-    private Label alertLabel;
-
-    @FXML
-    private TextArea beskedTA;
-
-    @FXML
-    private MFXComboBox<LocalDate> datoCB;
-
-    @FXML
-    private MFXTextField deltagereTF;
-
-    @FXML
-    private MFXTextField efternavnTF;
-
-    @FXML
-    private MFXTextField emailTF;
-
-    @FXML
-    private MFXTextField fornavnTF;
-
-    @FXML
-    private MFXComboBox<Catering> forplejningCB;
-
-    @FXML
-    private MFXComboBox<LocalTime> fraCB;
-
-    @FXML
-    private MFXButton næsteBtn;
-
-    @FXML
-    private MFXComboBox<Organization> organisationCB;
-
-    @FXML
-    private MFXTextField stillingTF;
-
-    @FXML
-    private MFXTextField telefonTF;
-
-    @FXML
-    private MFXComboBox<LocalTime> tilCB;
-
-    @FXML
-    private MFXButton tilbageBtn;
+    @FXML private MFXProgressSpinner progressSpinner;
+    @FXML private MFXTextField afdelingTF, deltagereTF, efternavnTF, emailTF, fornavnTF, stillingTF, telefonTF;
+    @FXML private Label alertLabel;
+    @FXML private TextArea beskedTA;
+    @FXML private MFXComboBox<LocalDate> datoCB;
+    @FXML private MFXComboBox<Catering> forplejningCB;
+    @FXML private MFXComboBox<LocalTime> fraCB, tilCB;
+    @FXML private MFXButton næsteBtn, tilbageBtn;
+    @FXML private MFXComboBox<Organization> organisationCB;
 
     @FXML
     void handleNæste() {
