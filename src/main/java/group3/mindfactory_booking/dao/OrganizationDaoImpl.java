@@ -13,7 +13,7 @@ public class OrganizationDaoImpl implements OrganizationDao{
     private final DatabaseConnector databaseConnector;
 
     public OrganizationDaoImpl() {
-        databaseConnector = new DatabaseConnector();
+        databaseConnector = DatabaseConnector.getInstance();
     }
 
     @Override

@@ -12,7 +12,7 @@ public class FileDaoImpl implements FileDao{
     private final DatabaseConnector databaseConnector;
 
     public FileDaoImpl() {
-        databaseConnector = new DatabaseConnector();
+        databaseConnector = DatabaseConnector.getInstance();
     }
 
 

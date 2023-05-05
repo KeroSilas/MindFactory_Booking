@@ -13,7 +13,7 @@ public class CateringDaoImpl implements CateringDao {
     private final DatabaseConnector databaseConnector;
 
     public CateringDaoImpl() {
-        databaseConnector = new DatabaseConnector();
+        databaseConnector = DatabaseConnector.getInstance();
     }
     @Override
     public void saveCatering(Catering catering) {

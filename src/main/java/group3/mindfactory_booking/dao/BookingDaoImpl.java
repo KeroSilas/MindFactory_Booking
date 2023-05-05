@@ -12,7 +12,7 @@ public class BookingDaoImpl implements BookingDao {
     private final DatabaseConnector databaseConnector;
 
     public BookingDaoImpl() {
-        databaseConnector = new DatabaseConnector();
+        databaseConnector = DatabaseConnector.getInstance();
     }
 
     @Override

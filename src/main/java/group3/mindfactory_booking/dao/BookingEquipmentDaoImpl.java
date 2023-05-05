@@ -13,7 +13,7 @@ public class BookingEquipmentDaoImpl implements BookingEquipmentDao{
     private final DatabaseConnector databaseConnector;
 
     public BookingEquipmentDaoImpl() {
-        databaseConnector = new DatabaseConnector();
+        databaseConnector = DatabaseConnector.getInstance();
     }
 
     @Override

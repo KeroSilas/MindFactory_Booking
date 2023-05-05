@@ -14,7 +14,7 @@ public class BookingFilesDaoImpl implements BookingFilesDao{
     private final DatabaseConnector databaseConnector;
 
     public BookingFilesDaoImpl() {
-        databaseConnector = new DatabaseConnector();
+        databaseConnector = DatabaseConnector.getInstance();
     }
     @Override
     public void addBookingFiles(int bookingID, int fileID) {
