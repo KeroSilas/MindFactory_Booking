@@ -117,7 +117,7 @@ public class ÅbenSkoleController {
 
         stage = (Stage) næsteBtn.getScene().getWindow();
         try {
-            root = FXMLLoader.load(Objects.requireNonNull(BookingApplication.class.getResource("informationOgDato-3-view.fxml")));
+            root = FXMLLoader.load(Objects.requireNonNull(BookingApplication.class.getResource("information-3-view.fxml")));
         } catch (IOException e) {
             e.printStackTrace();
             return;

@@ -1,11 +1,10 @@
 package group3.mindfactory_booking.controllers;
 
 import group3.mindfactory_booking.BookingApplication;
+import group3.mindfactory_booking.model.BookingTime;
 import group3.mindfactory_booking.model.Equipment;
 import group3.mindfactory_booking.model.singleton.Booking;
-import group3.mindfactory_booking.model.tasks.SaveBookingTask;
 import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,41 +18,22 @@ import java.util.stream.Collectors;
 
 public class ConfirmBookingController {
 
-    @FXML private MFXProgressSpinner progressSpinner;
-    @FXML private MFXButton bekræftBtn, tilbageBtn;
+    private Booking booking;
+
+    @FXML private MFXButton afslutBtn;
     @FXML private Label afdelingLabel, afgangLabel, ankomstLabel, assistanceLabel, deltagereLabel, efternavnLabel, emailLabel,
-            fornavnLabel, telefonLabel, transportLabel, stillingLabel, organisationLabel, forløbLabel, datoLabel,
-            fraLabel, tilLabel, aktivitetLabel, udstyrLabel, forplejningLabel;
+            fornavnLabel, telefonLabel, transportLabel, stillingLabel, organisationLabel, forløbLabel, tidLabel,
+            aktivitetLabel, udstyrLabel, forplejningLabel;
 
 
     @FXML
-    void handleBekræft() {
-        progressSpinner.setVisible(true);
-        bekræftBtn.setDisable(true);
-
-        SaveBookingTask saveBookingTask = new SaveBookingTask();
-        saveBookingTask.setOnSucceeded(e -> {
-            if (saveBookingTask.getValue()) {
-                goToHome();
-                System.out.println("Booking saved successfully");
-            } else {
-                System.out.println("Booking failed to save");
-            }
-            progressSpinner.setVisible(false);
-            bekræftBtn.setDisable(false);
-        });
-        Thread thread = new Thread(saveBookingTask);
-        thread.setDaemon(true);
-        thread.start();
-    }
-
-    @FXML
-    void handleTilbage() {
-        previousPage();
+    void handleAfslut() {
+        booking.clearBooking(); // Clear the booking after it has been saved to ensure that no information is carried over to the next booking
+        goToHome();
     }
 
     public void initialize() {
-        Booking booking = Booking.getInstance();
+        booking = Booking.getInstance();
 
         afgangLabel.setText(booking.getTransportDeparture());
         ankomstLabel.setText(booking.getTransportArrival());
@@ -84,38 +64,18 @@ public class ConfirmBookingController {
                 .map(Equipment::getEquipmentName)
                 .collect(Collectors.joining(", ")));
 
-        datoLabel.setText(String.format("%s/%s/%s",
-                booking.getDate().getDayOfMonth(),
-                booking.getDate().getMonthValue(),
-                booking.getDate().getYear()));
-        fraLabel.setText(String.format("%s:00", booking.getStartTime().getHour()));
-        tilLabel.setText(String.format("%s:00", booking.getEndTime().getHour()));
+        tidLabel.setText(booking.getBookingTimesList().stream()
+                .map(BookingTime::toString)
+                .collect(Collectors.joining(", ")));
     }
 
     private void goToHome() {
         Stage stage;
         Parent root;
 
-        stage = (Stage) tilbageBtn.getScene().getWindow();
+        stage = (Stage) afslutBtn.getScene().getWindow();
         try {
             root = FXMLLoader.load(Objects.requireNonNull(BookingApplication.class.getResource("homepage-view.fxml")));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
-
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    private void previousPage() {
-        Stage stage;
-        Parent root;
-
-        stage = (Stage) tilbageBtn.getScene().getWindow();
-        try {
-            root = FXMLLoader.load(Objects.requireNonNull(BookingApplication.class.getResource("informationOgDato-3-view.fxml")));
         } catch (IOException e) {
             e.printStackTrace();
             return;

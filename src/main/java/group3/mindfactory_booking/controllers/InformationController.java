@@ -14,13 +14,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Objects;
 
 public class InformationController {
@@ -29,11 +26,8 @@ public class InformationController {
 
     @FXML private MFXProgressSpinner progressSpinner;
     @FXML private MFXTextField afdelingTF, deltagereTF, efternavnTF, emailTF, fornavnTF, stillingTF, telefonTF;
-    @FXML private Label alertLabel;
     @FXML private TextArea beskedTA;
-    @FXML private MFXComboBox<LocalDate> datoCB;
     @FXML private MFXComboBox<Catering> forplejningCB;
-    @FXML private MFXComboBox<LocalTime> fraCB, tilCB;
     @FXML private MFXButton næsteBtn, tilbageBtn;
     @FXML private MFXComboBox<Organization> organisationCB;
 
@@ -69,30 +63,19 @@ public class InformationController {
             forplejningCB.getItems().addAll(fetchCateringTask.getValue());
         });
         new Thread(fetchCateringTask).start();
-
-        for (int i = 7; i < 17; i++) {
-            fraCB.getItems().add(LocalTime.of(i, 0));
-            tilCB.getItems().add(LocalTime.of(i, 0));
-        }
-        for (int i = 0; i < 365; i++) {
-            datoCB.getItems().add(LocalDate.now().plusDays((1+ i)));
-        }
     }
 
     private void importToBooking() {
         booking.setAfdeling(afdelingTF.getText());
         booking.setMessageToAS(beskedTA.getText());
-        booking.setDate(datoCB.getValue());
         booking.setParticipants(Integer.parseInt(deltagereTF.getText()));
         booking.setLastName(efternavnTF.getText());
         booking.setEmail(emailTF.getText());
         booking.setFirstName(fornavnTF.getText());
         booking.setCatering(forplejningCB.getValue());
-        booking.setStartTime(fraCB.getValue());
         booking.setOrganization(organisationCB.getValue());
         booking.setPosition(stillingTF.getText());
         booking.setPhone(telefonTF.getText());
-        booking.setEndTime(tilCB.getValue());
     }
 
     private boolean isInputValid() {
@@ -103,13 +86,6 @@ public class InformationController {
             success = false;
         } else {
             afdelingTF.setStyle("-fx-border-color: lightgrey");
-        }
-
-        if (datoCB.getSelectionModel().getSelectedItem() == null) {
-            datoCB.setStyle("-fx-border-color: red");
-            success = false;
-        } else {
-            datoCB.setStyle("-fx-border-color: lightgrey");
         }
 
         // https://stackoverflow.com/questions/273141/regex-for-numbers-only
@@ -152,13 +128,6 @@ public class InformationController {
             forplejningCB.setStyle("-fx-border-color: lightgrey");
         }
 
-        if (fraCB.getSelectionModel().getSelectedItem() == null) {
-            fraCB.setStyle("-fx-border-color: red");
-            success = false;
-        } else {
-            fraCB.setStyle("-fx-border-color: lightgrey");
-        }
-
         if (organisationCB.getSelectionModel().getSelectedItem() == null) {
             organisationCB.setStyle("-fx-border-color: red");
             success = false;
@@ -180,13 +149,6 @@ public class InformationController {
             telefonTF.setStyle("-fx-border-color: lightgrey");
         }
 
-        if (tilCB.getSelectionModel().getSelectedItem() == null) {
-            tilCB.setStyle("-fx-border-color: red");
-            success = false;
-        } else {
-            tilCB.setStyle("-fx-border-color: lightgrey");
-        }
-
         return success;
     }
 
@@ -196,7 +158,7 @@ public class InformationController {
 
         stage = (Stage) næsteBtn.getScene().getWindow();
         try {
-            root = FXMLLoader.load(Objects.requireNonNull(BookingApplication.class.getResource("bekræftBooking-4-view.fxml")));
+            root = FXMLLoader.load(Objects.requireNonNull(BookingApplication.class.getResource("tidOgDato-4-view.fxml")));
         } catch (IOException e) {
             e.printStackTrace();
             return;

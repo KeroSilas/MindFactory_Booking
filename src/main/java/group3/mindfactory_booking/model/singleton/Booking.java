@@ -36,6 +36,7 @@ public class Booking {
     private String personalNote;
     private String bookingType;
     private List<Equipment> equipmentList;
+    private List<BookingTime> bookingTimeList;
 
     private static Booking instance = null;
 
@@ -260,6 +261,14 @@ public class Booking {
         this.equipmentList = equipmentList;
     }
 
+    public List<BookingTime> getBookingTimesList() {
+        return bookingTimeList;
+    }
+
+    public void setBookingTimesList(List<BookingTime> bookingTimeList) {
+        this.bookingTimeList = bookingTimeList;
+    }
+
     public void clearBooking() {
         this.catering = null;
         this.activity = new Activity(4, ""); // Make sure that the ID matches the ID of "Ingen" in the database
@@ -286,5 +295,6 @@ public class Booking {
         this.personalNote = "";
         this.bookingType = null;
         this.equipmentList = new ArrayList<>();
+        this.bookingTimeList = new ArrayList<>();
     }
 }

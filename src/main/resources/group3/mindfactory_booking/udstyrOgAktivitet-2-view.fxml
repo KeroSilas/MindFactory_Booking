@@ -29,18 +29,23 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" spacing="5.0">
                      <children>
-                        <MFXComboBox fx:id="udstyrCB" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: lightgrey;">
+                        <Label text="Udstyr">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <MFXComboBox fx:id="udstyrCB" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="221.0" style="-fx-border-color: lightgrey;">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </MFXComboBox>
-                        <MFXButton onAction="#handleTilføj" prefHeight="40.0" prefWidth="65.0" style="-fx-border-color: lightgrey; -fx-border-radius: 5;" text="Tilføj" />
                      </children>
                   </HBox>
                   <MFXListView fx:id="udstyrLV" depthLevel="LEVEL0" maxHeight="150.0" maxWidth="1.7976931348623157E308" style="-fx-border-color: lightgrey;" />
                   <HBox alignment="CENTER_RIGHT" spacing="5.0">
                      <children>
-                        <MFXButton onAction="#handleSlet" prefHeight="40.0" prefWidth="65.0" style="-fx-border-color: lightgrey; -fx-border-radius: 5;" text="Slet" />
+                        <MFXButton disable="true" onAction="#handleSlet" prefHeight="40.0" prefWidth="65.0" style="-fx-border-color: lightgrey; -fx-border-radius: 5;" text="Slet" />
+                        <MFXButton disable="true" onAction="#handleTilføj" prefHeight="40.0" prefWidth="65.0" style="-fx-border-color: lightgrey; -fx-border-radius: 5;" text="Tilføj" />
                      </children>
                   </HBox>
                </children>
@@ -97,7 +102,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <MFXComboBox fx:id="aktivitetCB" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: lightgrey;">
+                        <MFXComboBox fx:id="aktivitetCB" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="221.0" style="-fx-border-color: lightgrey;">
                            <font>
                               <Font size="14.0" />
                            </font>
