@@ -79,7 +79,7 @@ public class TidOgDatoController {
     public void initialize() {
         booking = Booking.getInstance();
 
-        for (int i = 7; i < 17; i++) {
+        for (int i = 7; i < 24; i++) {
             fraCB.getItems().add(LocalTime.of(i, 0));
             tilCB.getItems().add(LocalTime.of(i, 0));
         }
