@@ -23,7 +23,7 @@ public class SendReminderEmailTask extends Task<Void> {
     protected Void call() {
         while (!isCancelled()) { // Keep running until the task is cancelled
             try {
-                Thread.sleep(30000L); // Sleep for the specified delay
+                Thread.sleep(30000L);
             } catch (InterruptedException e) {
                 if (isCancelled()) {
                     break;
