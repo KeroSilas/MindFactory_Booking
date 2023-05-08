@@ -21,7 +21,7 @@ import javax.mail.internet.MimeMultipart;
 // For the error: https://stackoverflow.com/questions/55276768/how-to-prevent-java-mail-expected-resource-not-found-warnings-from-camel-smtp
 public class SendEmail {
 
-    public void sendEmail(String email, int bookingID) {
+    public void sendEmail(String email, String body, String title) {
 
         // Recipient's email ID needs to be mentioned.
         String to = email;
@@ -63,7 +63,7 @@ public class SendEmail {
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
             // Set Subject: header field
-            message.setSubject("Her er din bookingkode til Mindfactory by ECCO");
+            message.setSubject(title);
 
             Multipart multipart = new MimeMultipart();
 
@@ -76,7 +76,7 @@ public class SendEmail {
                 File f = new File("src/main/resources/group3/mindfactory_booking/images/MF_POSITVE_COLOR.jpg");
 
                 attachmentPart.attachFile(f);
-                textPart.setText(String.valueOf(bookingID));
+                textPart.setText(body);
                 multipart.addBodyPart(textPart);
                 multipart.addBodyPart(attachmentPart);
 

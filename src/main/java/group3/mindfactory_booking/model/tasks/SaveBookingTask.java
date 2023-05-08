@@ -36,7 +36,7 @@ public class SaveBookingTask extends Task<Boolean> {
             booking.setBookingDateTime(LocalDateTime.now());
             bookingDao.saveBooking(booking);
 
-            sendEmail.sendEmail(booking.getEmail(), randomNum);
+            sendEmail.sendEmail(booking.getEmail(), String.valueOf(randomNum), "Her er din bookingkode til Mindfactory by ECCO");
         } catch (RuntimeException e) {
             success = false;
         }
