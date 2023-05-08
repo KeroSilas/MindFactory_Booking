@@ -79,13 +79,52 @@ public class TidOgDatoController {
     public void initialize() {
         booking = Booking.getInstance();
 
-        for (int i = 7; i < 24; i++) {
-            fraCB.getItems().add(LocalTime.of(i, 0));
-            tilCB.getItems().add(LocalTime.of(i, 0));
-        }
         for (int i = 0; i < 365; i++) {
             datoCB.getItems().add(LocalDate.now().plusDays((1 + i)));
         }
+
+        datoCB.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != oldValue) {
+                fraCB.setDisable(false);
+
+                fraCB.getItems().clear();
+                for (int i = 7; i < 23; i++) {
+                    fraCB.getItems().add(LocalTime.of(i, 0));
+                }
+            } else {
+                fraCB.setDisable(true);
+            }
+        });
+
+        fraCB.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != oldValue) {
+                tilCB.setDisable(false);
+
+                tilCB.getItems().clear();
+                int hour = newValue.plusHours(1).getHour();
+                for (int i = hour; i < 24; i++) {
+                    tilCB.getItems().add(LocalTime.of(i, 0));
+                }
+            } else {
+                tilCB.setDisable(true);
+            }
+        });
+
+        tilCB.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != oldValue) {
+                tilføjBtn.setDisable(false);
+            } else {
+                tilføjBtn.setDisable(true);
+            }
+        });
+
+        tidOgDatoLV.getSelectionModel().selectionProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != oldValue) {
+                sletBtn.setDisable(false);
+            } else {
+                sletBtn.setDisable(true);
+            }
+        });
     }
 
     private void importToBooking() {

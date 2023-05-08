@@ -213,7 +213,7 @@
                   <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER" prefWidth="350.0">
+            <HBox alignment="CENTER" prefWidth="420.0">
                <children>
                   <Label text="Skulle du ønske at annullere denne booking, så bedes du bruge det booking nummer du netop nu burde have fået via e-mail, og ved hjælp af afbryd knappen på hovedsiden, indtaste nummeret." textAlignment="CENTER" wrapText="true" />
                </children>
