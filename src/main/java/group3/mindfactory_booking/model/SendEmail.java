@@ -17,7 +17,7 @@ import javax.mail.internet.MimeMultipart;
 
 // Code is from https://netcorecloud.com/tutorials/send-email-in-java-using-gmail-smtp/#:~:text=How%20To%20Send%20Email%20In%20Java%20Using%20Gmail,Step%204%20-%20Send%20Email%20with%20Attachment.%20
 // Password authentication approach from https://www.youtube.com/watch?v=ugIUObNHZdo (3:00~)
-public class Main {
+public class SendEmail {
 
     public static void main(String[] args) {
 
