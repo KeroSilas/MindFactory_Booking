@@ -76,6 +76,9 @@ public class BookingDaoImpl implements BookingDao {
         return bookingIDs;
     }
 
+    // https://stackoverflow.com/questions/36296140/subtract-two-dates-in-microsoft-sql-server
+    // https://stackoverflow.com/questions/37559741/convert-timestamp-to-date-in-oracle-sql
+    // https://www.sqlservercentral.com/articles/the-output-clause-for-update-statements
     @Override
     public List<BookingEmail> getOneWeekOutBookings() {
 
@@ -86,8 +89,7 @@ public class BookingDaoImpl implements BookingDao {
                     "OUTPUT INSERTED.firstName, INSERTED.email, INSERTED.startDate " +
                     "WHERE bookingID IN (" +
                     "  SELECT bookingID FROM Booking" +
-                    "  WHERE DATEDIFF(day,CAST(GETDATE() AS DATE),startDate) < 7 AND isEmailSent = 0" +
-                    ");");
+                    "  WHERE DATEDIFF(day,CAST(GETDATE() AS DATE),startDate) < 7 AND isEmailSent = 0);");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
 

@@ -5,8 +5,10 @@ import group3.mindfactory_booking.model.BookingTime;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 public class BookingTimesDaoImpl implements BookingTimesDao{
@@ -29,18 +31,25 @@ public class BookingTimesDaoImpl implements BookingTimesDao{
 
 
     @Override
-    public void bookingTimeList(List<BookingTime> bookingTimes, int bookingID, Date startDate, Time startTime, Time endTime) {
-        try (Connection con = databaseConnector.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO BookingTime VALUES(?,?,?,?);");
-            ps.setInt(1, bookingID);
-            ps.setDate(2, startDate);
-            ps.setTime(3, startTime);
-            ps.setTime(4, endTime);
+    public void saveBookingTimeList(List<BookingTime> bookingTimes, int bookingID) {
+        try (Connection con = databaseConnector.getConnection()){
+            con.setAutoCommit(false);
+            String sql = ("INSERT INTO BookingTimes VALUES(?,?,?,?);");
+            PreparedStatement ps = con.prepareStatement(sql);
 
-            ps.executeUpdate();
+            for (BookingTime bookingTime : bookingTimes) {
+                ps.setInt(1, bookingID);
+                ps.setDate(2, Date.valueOf(bookingTime.getDate()));
+                ps.setTime(3, Time.valueOf(bookingTime.getStartTime()));
+                ps.setTime(4, Time.valueOf(bookingTime.getEndTime()));
+                ps.addBatch();
+            }
+            ps.executeBatch();
+            con.commit();
+            con.setAutoCommit(true);
 
         } catch (SQLException e) {
-            System.err.println("cannot insert record (BookingTimes) " + e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 }

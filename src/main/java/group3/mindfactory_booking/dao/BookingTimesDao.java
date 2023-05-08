@@ -13,6 +13,6 @@ public interface BookingTimesDao {
     public void removeFromBookingTimes(int equipmentID);
 
 
-    public void bookingTimeList(List<BookingTime> bookingTimes, int bookingID, Date startDate, Time startTime, Time endTime);
+    public void saveBookingTimeList(List<BookingTime> bookingTimes, int bookingID);
 
 }
