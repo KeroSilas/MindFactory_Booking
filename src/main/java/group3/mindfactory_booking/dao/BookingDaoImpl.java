@@ -1,8 +1,10 @@
 package group3.mindfactory_booking.dao;
 
+import group3.mindfactory_booking.model.BookingEmail;
 import group3.mindfactory_booking.model.singleton.Booking;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,6 +76,32 @@ public class BookingDaoImpl implements BookingDao {
     }
 
     @Override
+    public List<BookingEmail> getOneWeekOutBookings() {
+
+        List<BookingEmail> oneWeekOutBookings = new ArrayList<>();
+        try (Connection con = databaseConnector.getConnection()){
+            PreparedStatement ps = con.prepareStatement("SELECT bookingID, email, startDate FROM Booking WHERE " +
+                    "startDate - GETDATE() = 7 AND isEmailSent = 0;");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                BookingEmail bookingEmail;
+                int bookingID = rs.getInt(1);
+                String email = rs.getString(9);
+                LocalDate startDate = rs.getDate(15).toLocalDate();
+
+                bookingEmail = new BookingEmail(bookingID, email, startDate);
+                oneWeekOutBookings.add(bookingEmail);
+            }
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+
+        return oneWeekOutBookings;
+    }
+
+    @Override
     public void deleteBooking(int bookingID) throws RuntimeException {
         int rowsAffected;
         try (Connection con = databaseConnector.getConnection()) {
@@ -88,5 +116,4 @@ public class BookingDaoImpl implements BookingDao {
             throw new RuntimeException(e);
         }
     }
-
 }

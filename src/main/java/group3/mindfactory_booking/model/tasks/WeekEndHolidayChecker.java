@@ -11,7 +11,8 @@ public class WeekEndHolidayChecker {
 
     }
 
-
+    //https://java2blog.com/check-if-date-is-weekend-or-weekday-java/#:~:text=We%20can%20use%20LocalDate's%20getDayOfWeek,day%20is%20weekend%20or%20not.
+    //Java2Blog (java2blog.com)
     public static boolean isWeekend(final LocalDate localDate)
     {
         DayOfWeek startDate = DayOfWeek.of(localDate.get(ChronoField.DAY_OF_WEEK));
