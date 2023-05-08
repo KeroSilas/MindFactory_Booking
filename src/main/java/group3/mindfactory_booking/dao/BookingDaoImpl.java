@@ -36,9 +36,9 @@ public class BookingDaoImpl implements BookingDao {
             ps.setString(14, booking.getTransportArrival());
             ps.setString(15, booking.getTransportDeparture());
             ps.setInt(16, booking.getParticipants());
-            ps.setDate(17, Date.valueOf(booking.getBookingTimesList().get(0).getDate())); // Needs to be removed
-            ps.setTime(18, Time.valueOf(booking.getBookingTimesList().get(0).getStartTime())); // Needs to be removed
-            ps.setTime(19, Time.valueOf(booking.getBookingTimesList().get(0).getEndTime())); // Needs to be removed
+            ps.setDate(17, Date.valueOf(booking.getDate())); // Needs to be removed
+            ps.setTime(18, Time.valueOf(booking.getStartTime())); // Needs to be removed
+            ps.setTime(19, Time.valueOf(booking.getEndTime())); // Needs to be removed
             ps.setTimestamp(20, Timestamp.valueOf(booking.getBookingDateTime()));
             ps.setBoolean(21, booking.isWholeDay());
             ps.setBoolean(22, booking.isNoShow());

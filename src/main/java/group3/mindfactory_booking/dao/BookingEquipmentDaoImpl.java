@@ -66,6 +66,28 @@ public class BookingEquipmentDaoImpl implements BookingEquipmentDao{
         }
         return equipments;
     }
+
+    @Override
+    public void saveEquipmentList(List<Equipment> equipmentList, int bookingID) {
+
+        try (Connection con = databaseConnector.getConnection()){
+            con.setAutoCommit(false);
+            String sql = "INSERT INTO BookingEquipment VALUES(?,?);";
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            for (Equipment equipment : equipmentList) {
+                ps.setInt(1, bookingID);
+                ps.setInt(2, equipment.getEquipmentID());
+                ps.addBatch();
+            }
+            ps.executeBatch();
+            con.commit();
+            con.setAutoCommit(true);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 

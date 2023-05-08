@@ -34,8 +34,8 @@ public class InformationController {
     @FXML
     void handleNæste() {
         if (isInputValid()) {
-            //progressSpinner.setVisible(true);
-            //næsteBtn.setDisable(true);
+            progressSpinner.setVisible(true);
+            næsteBtn.setDisable(true);
 
             importToBooking();
             nextPage();

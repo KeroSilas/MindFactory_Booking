@@ -12,6 +12,7 @@ public interface BookingEquipmentDao {
     public void removeFromBookingEquipment(int equipmentID);
 
     List<Equipment> getAllEquipmentOnBookingEquipment(Booking booking);
+    public void saveEquipmentList(List<Equipment> equipmentList, int bookingID);
 }
 
 
