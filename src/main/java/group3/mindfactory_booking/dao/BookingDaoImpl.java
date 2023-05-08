@@ -81,8 +81,8 @@ public class BookingDaoImpl implements BookingDao {
 
         List<BookingEmail> oneWeekOutBookings = new ArrayList<>();
         try (Connection con = databaseConnector.getConnection()){
-            PreparedStatement ps = con.prepareStatement("SELECT bookingID, email, startDate FROM Booking WHERE " +
-                    "startDate - GETDATE() = 7 AND isEmailSent = 0;");
+            PreparedStatement ps = con.prepareStatement("SELECT bookingID, email, startDate FROM Booking " +
+                    "WHERE startDate - GETDATE() < 7 AND isEmailSent = 0;");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
 
