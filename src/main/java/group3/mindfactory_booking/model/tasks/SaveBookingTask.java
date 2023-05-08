@@ -2,6 +2,7 @@ package group3.mindfactory_booking.model.tasks;
 
 import group3.mindfactory_booking.dao.BookingDao;
 import group3.mindfactory_booking.dao.BookingDaoImpl;
+import group3.mindfactory_booking.model.SendEmail;
 import group3.mindfactory_booking.model.singleton.Booking;
 import javafx.concurrent.Task;
 
@@ -13,10 +14,12 @@ public class SaveBookingTask extends Task<Boolean> {
     private final Booking booking;
 
     private final BookingDao bookingDao;
+    private final SendEmail sendEmail;
 
     public SaveBookingTask() {
         booking = Booking.getInstance();
         bookingDao = new BookingDaoImpl();
+        sendEmail = new SendEmail();
     }
 
     @Override
@@ -32,6 +35,8 @@ public class SaveBookingTask extends Task<Boolean> {
             booking.setBookingID(randomNum);
             booking.setBookingDateTime(LocalDateTime.now());
             bookingDao.saveBooking(booking);
+
+            sendEmail.sendEmail(booking.getEmail(), randomNum);
         } catch (RuntimeException e) {
             success = false;
         }

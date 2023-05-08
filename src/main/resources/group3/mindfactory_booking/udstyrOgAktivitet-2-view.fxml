@@ -44,8 +44,8 @@
                   <MFXListView fx:id="udstyrLV" depthLevel="LEVEL0" maxHeight="150.0" maxWidth="1.7976931348623157E308" style="-fx-border-color: lightgrey;" />
                   <HBox alignment="CENTER_RIGHT" spacing="5.0">
                      <children>
-                        <MFXButton disable="true" onAction="#handleSlet" prefHeight="40.0" prefWidth="65.0" style="-fx-border-color: lightgrey; -fx-border-radius: 5;" text="Slet" />
-                        <MFXButton disable="true" onAction="#handleTilføj" prefHeight="40.0" prefWidth="65.0" style="-fx-border-color: lightgrey; -fx-border-radius: 5;" text="Tilføj" />
+                        <MFXButton onAction="#handleSlet" prefHeight="40.0" prefWidth="65.0" style="-fx-border-color: lightgrey; -fx-border-radius: 5;" text="Slet" />
+                        <MFXButton onAction="#handleTilføj" prefHeight="40.0" prefWidth="65.0" style="-fx-border-color: lightgrey; -fx-border-radius: 5;" text="Tilføj" />
                      </children>
                   </HBox>
                </children>
