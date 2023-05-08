@@ -1,11 +1,7 @@
 package group3.mindfactory_booking.controllers;
 
 import group3.mindfactory_booking.BookingApplication;
-import group3.mindfactory_booking.model.Activity;
 import group3.mindfactory_booking.model.singleton.Booking;
-import group3.mindfactory_booking.model.Equipment;
-import group3.mindfactory_booking.model.tasks.FetchActivitiesTask;
-import group3.mindfactory_booking.model.tasks.FetchEquipmentTask;
 import io.github.palexdev.materialfx.controls.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,11 +17,11 @@ public class OrgTeacherController {
 
     private Booking booking;
 
-    @FXML private MFXComboBox<Activity> aktivitetCB;
-    @FXML private MFXComboBox<Equipment> udstyrCB;
+    @FXML private MFXComboBox<String> aktivitetCB;
+    @FXML private MFXComboBox<String> udstyrCB;
     @FXML private MFXRadioButton annesofieRB, læringsRB;
     @FXML private MFXButton næsteBtn, tilbageBtn;
-    @FXML private MFXListView<Equipment> udstyrLV;
+    @FXML private MFXListView<String> udstyrLV;
 
     @FXML
     void handleNæste() {
@@ -50,8 +46,8 @@ public class OrgTeacherController {
 
     @FXML
     void handleSlet() {
-        List<Equipment> equipmentList = udstyrLV.getSelectionModel().getSelectedValues();
-        for (Equipment equipment : equipmentList) {
+        List<String> equipmentList = udstyrLV.getSelectionModel().getSelectedValues();
+        for (String equipment : equipmentList) {
             udstyrLV.getItems().remove(equipment);
         }
     }
@@ -59,17 +55,8 @@ public class OrgTeacherController {
     public void initialize() {
         booking = Booking.getInstance();
 
-        FetchEquipmentTask fetchEquipmentTask = new FetchEquipmentTask();
-        fetchEquipmentTask.setOnSucceeded(e -> {
-            udstyrCB.getItems().addAll(fetchEquipmentTask.getValue());
-        });
-        new Thread(fetchEquipmentTask).start();
-
-        FetchActivitiesTask fetchActivitiesTask = new FetchActivitiesTask();
-        fetchActivitiesTask.setOnSucceeded(e -> {
-            aktivitetCB.getItems().addAll(fetchActivitiesTask.getValue());
-        });
-        new Thread(fetchActivitiesTask).start();
+        udstyrCB.getItems().addAll("Robotter", "Sakse");
+        aktivitetCB.getItems().addAll("Ingen", "Kreativt Spark", "IdéGeneratoren", "Team-event: Kreativ Tech");
     }
 
     private void importToBooking() {

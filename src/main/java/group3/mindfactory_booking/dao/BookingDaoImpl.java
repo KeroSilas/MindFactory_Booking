@@ -20,13 +20,13 @@ public class BookingDaoImpl implements BookingDao {
     @Override
     public void saveBooking(Booking booking) throws RuntimeException {
         try (Connection con = databaseConnector.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO Booking VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Booking VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
 
             ps.setInt(1, booking.getBookingID());
-            ps.setInt(2, booking.getCatering().getPackageID());
-            ps.setInt(3, booking.getActivity().getActivityID());
-            ps.setInt(4, booking.getOrganization().getOrganizationID());
-            ps.setInt(5, booking.getÅbenSkoleForløb().getForløbID());
+            ps.setString(2, booking.getCatering());
+            ps.setString(3, booking.getActivity());
+            ps.setString(4, booking.getOrganization());
+            ps.setString(5, booking.getÅbenSkoleForløb());
             ps.setString(6, booking.getFirstName());
             ps.setString(7, booking.getLastName());
             ps.setString(8, booking.getPosition());
@@ -38,15 +38,16 @@ public class BookingDaoImpl implements BookingDao {
             ps.setString(14, booking.getTransportArrival());
             ps.setString(15, booking.getTransportDeparture());
             ps.setInt(16, booking.getParticipants());
-            ps.setDate(17, Date.valueOf(booking.getDate())); // Needs to be removed
-            ps.setTime(18, Time.valueOf(booking.getStartTime())); // Needs to be removed
-            ps.setTime(19, Time.valueOf(booking.getEndTime())); // Needs to be removed
+            ps.setDate(17, Date.valueOf(booking.getBookingTimesList().get(0).getDate())); // Needs to be removed
+            ps.setTime(18, Time.valueOf(booking.getBookingTimesList().get(0).getStartTime())); // Needs to be removed
+            ps.setTime(19, Time.valueOf(booking.getBookingTimesList().get(0).getEndTime())); // Needs to be removed
             ps.setTimestamp(20, Timestamp.valueOf(booking.getBookingDateTime()));
             ps.setBoolean(21, booking.isWholeDay());
-            ps.setBoolean(22, booking.isNoShow());
-            ps.setString(23, booking.getMessageToAS());
-            ps.setString(24, booking.getPersonalNote());
-            ps.setString(25, booking.getBookingType());
+            ps.setBoolean(22, booking.isEmailSent());
+            ps.setBoolean(23, booking.isNoShow());
+            ps.setString(24, booking.getMessageToAS());
+            ps.setString(25, booking.getPersonalNote());
+            ps.setString(26, booking.getBookingType());
             ps.executeUpdate();
 
         } catch (SQLException e) {

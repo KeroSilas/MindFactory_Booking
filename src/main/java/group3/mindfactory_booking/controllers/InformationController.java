@@ -2,10 +2,6 @@ package group3.mindfactory_booking.controllers;
 
 import group3.mindfactory_booking.BookingApplication;
 import group3.mindfactory_booking.model.singleton.Booking;
-import group3.mindfactory_booking.model.Catering;
-import group3.mindfactory_booking.model.Organization;
-import group3.mindfactory_booking.model.tasks.FetchCateringTask;
-import group3.mindfactory_booking.model.tasks.FetchOrganizationsTask;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
@@ -27,9 +23,9 @@ public class InformationController {
     @FXML private MFXProgressSpinner progressSpinner;
     @FXML private MFXTextField afdelingTF, deltagereTF, efternavnTF, emailTF, fornavnTF, stillingTF, telefonTF;
     @FXML private TextArea beskedTA;
-    @FXML private MFXComboBox<Catering> forplejningCB;
+    @FXML private MFXComboBox<String> forplejningCB;
     @FXML private MFXButton næsteBtn, tilbageBtn;
-    @FXML private MFXComboBox<Organization> organisationCB;
+    @FXML private MFXComboBox<String> organisationCB;
 
     @FXML
     void handleNæste() {
@@ -52,7 +48,7 @@ public class InformationController {
     public void initialize() {
         booking = Booking.getInstance();
 
-        FetchOrganizationsTask fetchOrganizationsTask = new FetchOrganizationsTask();
+        /*FetchOrganizationsTask fetchOrganizationsTask = new FetchOrganizationsTask();
         fetchOrganizationsTask.setOnSucceeded(e -> {
             organisationCB.getItems().addAll(fetchOrganizationsTask.getValue());
         });
@@ -62,7 +58,12 @@ public class InformationController {
         fetchCateringTask.setOnSucceeded(e -> {
             forplejningCB.getItems().addAll(fetchCateringTask.getValue());
         });
-        new Thread(fetchCateringTask).start();
+        new Thread(fetchCateringTask).start();*/
+
+        organisationCB.getItems().addAll("Egne aktiviteter", "Udleje", "ECCO", "Tønder Kommune - skole",
+                "Tønder Kommune - organisation", "Tønder Gymnasium", "Det Blå Gymnasium", "EUC Syd");
+
+        forplejningCB.getItems().addAll("Ingen", "Halvdags kaffemøde", "Halvdagsmødepakke", "Heldagsmødepakke");
     }
 
     private void importToBooking() {

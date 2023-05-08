@@ -1,6 +1,5 @@
 package group3.mindfactory_booking.dao;
 import group3.mindfactory_booking.model.singleton.Booking;
-import group3.mindfactory_booking.model.Equipment;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -44,40 +43,17 @@ public class BookingEquipmentDaoImpl implements BookingEquipmentDao{
         }
     }
 
-
-    public List<Equipment> getAllEquipmentOnBookingEquipment(Booking booking){
-        List<Equipment> equipments = new ArrayList<>();
-        try(Connection con = databaseConnector.getConnection()){
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM Booking, BookingEquipment, Equipment WHERE Booking.bookingID = " +
-                    "BookingEquipment.bookingID AND BookingEquipment.equipmentID = Equipment.equipmentID;");
-            ResultSet rs = ps.executeQuery();
-
-            Equipment equipment;
-            while (rs.next()) {
-                int equipmentID = rs.getInt(1);
-                String equipmentName = rs.getString(2);
-
-                equipment = new Equipment(equipmentID, equipmentName);
-                equipments.add(equipment);
-            }
-
-        } catch (SQLException e) {
-            System.err.println("cannot access AllEquipment (BookingEquipmentDaoImpl) " + e.getMessage());
-        }
-        return equipments;
-    }
-
     @Override
-    public void saveEquipmentList(List<Equipment> equipmentList, int bookingID) {
+    public void saveEquipmentList(List<String> equipmentList, int bookingID) {
 
         try (Connection con = databaseConnector.getConnection()){
             con.setAutoCommit(false);
             String sql = "INSERT INTO BookingEquipment VALUES(?,?);";
             PreparedStatement ps = con.prepareStatement(sql);
 
-            for (Equipment equipment : equipmentList) {
+            for (String equipment : equipmentList) {
                 ps.setInt(1, bookingID);
-                ps.setInt(2, equipment.getEquipmentID());
+                ps.setString(2, equipment);
                 ps.addBatch();
             }
             ps.executeBatch();
