@@ -2,7 +2,6 @@ package group3.mindfactory_booking.controllers;
 
 import group3.mindfactory_booking.BookingApplication;
 import group3.mindfactory_booking.model.BookingTime;
-import group3.mindfactory_booking.model.Equipment;
 import group3.mindfactory_booking.model.singleton.Booking;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
@@ -46,24 +45,14 @@ public class ConfirmBookingController {
         transportLabel.setText(booking.getTransportType());
         afdelingLabel.setText(booking.getAfdeling());
         stillingLabel.setText(booking.getPosition());
-
-        if (booking.getCatering() != null)
-            forplejningLabel.setText(booking.getCatering().getPackageName());
-
-        if (booking.getOrganization() != null)
-            organisationLabel.setText(booking.getOrganization().getOrganizationName());
-
-        if (booking.getÅbenSkoleForløb() != null)
-            forløbLabel.setText(booking.getÅbenSkoleForløb().getForløbName());
-
-        if (booking.getActivity() != null)
-            aktivitetLabel.setText(booking.getActivity().getActivityName());
+        forplejningLabel.setText(booking.getCatering());
+        organisationLabel.setText(booking.getOrganization());
+        forløbLabel.setText(booking.getÅbenSkoleForløb());
+        aktivitetLabel.setText(booking.getActivity());
+        // Github Copilot suggested this:
+        udstyrLabel.setText(String.join(", ", booking.getEquipmentList()));
 
         // https://www.baeldung.com/java-list-to-string
-        udstyrLabel.setText(booking.getEquipmentList().stream()
-                .map(Equipment::getEquipmentName)
-                .collect(Collectors.joining(", ")));
-
         tidLabel.setText(booking.getBookingTimesList().stream()
                 .map(BookingTime::toString)
                 .collect(Collectors.joining(", ")));

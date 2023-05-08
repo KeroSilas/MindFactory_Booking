@@ -11,10 +11,10 @@ import java.util.List;
 public class Booking {
 
     private int bookingID;
-    private Catering catering;
-    private Activity activity;
-    private Organization organization;
-    private Forløb åbenSkoleForløb;
+    private String catering;
+    private String activity;
+    private String organization;
+    private String åbenSkoleForløb;
     private String firstName;
     private String lastName;
     private String position;
@@ -26,23 +26,21 @@ public class Booking {
     private String transportArrival;
     private String transportDeparture;
     private int participants;
-    private LocalDate date;
-    private LocalTime startTime;
-    private LocalTime endTime;
     private LocalDateTime bookingDateTime;
     private boolean isWholeDay;
+    private boolean isEmailSent;
     private boolean noShow;
     private String messageToAS;
     private String personalNote;
     private String bookingType;
-    private List<Equipment> equipmentList;
+    private List<String> equipmentList;
     private List<BookingTime> bookingTimeList;
 
     private static Booking instance = null;
 
     private Booking() {
-        this.activity = new Activity(4, ""); // Make sure that the ID matches the ID of "Ingen" in the database
-        this.åbenSkoleForløb = new Forløb(7, ""); // Make sure that the ID matches the ID of "Ikke valgt" in the database
+        //this.activity = new Activity(4, ""); // Make sure that the ID matches the ID of "Ingen" in the database
+        //this.åbenSkoleForløb = new Forløb(7, ""); // Make sure that the ID matches the ID of "Ikke valgt" in the database
         this.equipmentList = new ArrayList<>();
     }
 
@@ -61,27 +59,27 @@ public class Booking {
         this.bookingID = bookingID;
     }
 
-    public Catering getCatering() {
+    public String getCatering() {
         return catering;
     }
 
-    public void setCatering(Catering catering) {
+    public void setCatering(String catering) {
         this.catering = catering;
     }
 
-    public Activity getActivity() {
+    public String getActivity() {
         return activity;
     }
 
-    public void setActivity(Activity activity) {
+    public void setActivity(String activity) {
         this.activity = activity;
     }
 
-    public Organization getOrganization() {
+    public String getOrganization() {
         return organization;
     }
 
-    public void setOrganization(Organization organization) {
+    public void setOrganization(String organization) {
         this.organization = organization;
     }
 
@@ -125,11 +123,11 @@ public class Booking {
         this.email = email;
     }
 
-    public Forløb getÅbenSkoleForløb() {
+    public String getÅbenSkoleForløb() {
         return åbenSkoleForløb;
     }
 
-    public void setÅbenSkoleForløb(Forløb åbenSkoleForløb) {
+    public void setÅbenSkoleForløb(String åbenSkoleForløb) {
         this.åbenSkoleForløb = åbenSkoleForløb;
     }
 
@@ -181,30 +179,6 @@ public class Booking {
         this.department = afdeling;
     }
 
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public LocalTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalTime endTime) {
-        this.endTime = endTime;
-    }
-
     public LocalDateTime getBookingDateTime() {
         return bookingDateTime;
     }
@@ -227,6 +201,14 @@ public class Booking {
 
     public void setNoShow(boolean noShow) {
         this.noShow = noShow;
+    }
+
+    public boolean isEmailSent() {
+        return isEmailSent;
+    }
+
+    public void setEmailSent(boolean isEmailSent) {
+        this.isEmailSent = isEmailSent;
     }
 
     public String getMessageToAS() {
@@ -253,11 +235,11 @@ public class Booking {
         this.bookingType = bookingType;
     }
 
-    public List<Equipment> getEquipmentList() {
+    public List<String> getEquipmentList() {
         return equipmentList;
     }
 
-    public void setEquipmentList(List<Equipment> equipmentList) {
+    public void setEquipmentList(List<String> equipmentList) {
         this.equipmentList = equipmentList;
     }
 
@@ -270,10 +252,10 @@ public class Booking {
     }
 
     public void clearBooking() {
-        this.catering = null;
-        this.activity = new Activity(4, ""); // Make sure that the ID matches the ID of "Ingen" in the database
-        this.organization = null;
-        this.åbenSkoleForløb = new Forløb(7, ""); // Make sure that the ID matches the ID of "Ikke valgt" in the database
+        this.catering = "";
+        this.activity = "";
+        this.organization = "";
+        this.åbenSkoleForløb = "";
         this.firstName = "";
         this.lastName = "";
         this.position = "";
@@ -285,11 +267,9 @@ public class Booking {
         this.transportArrival = "";
         this.transportDeparture = "";
         this.participants = 0;
-        this.date = null;
-        this.startTime = null;
-        this.endTime = null;
         this.bookingDateTime = null;
         this.isWholeDay = false;
+        this.isEmailSent = false;
         this.noShow = false;
         this.messageToAS = "";
         this.personalNote = "";
@@ -297,4 +277,5 @@ public class Booking {
         this.equipmentList = new ArrayList<>();
         this.bookingTimeList = new ArrayList<>();
     }
+
 }

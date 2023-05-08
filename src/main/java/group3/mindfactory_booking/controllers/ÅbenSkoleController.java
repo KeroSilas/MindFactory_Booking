@@ -2,8 +2,6 @@ package group3.mindfactory_booking.controllers;
 
 import group3.mindfactory_booking.BookingApplication;
 import group3.mindfactory_booking.model.singleton.Booking;
-import group3.mindfactory_booking.model.Forløb;
-import group3.mindfactory_booking.model.tasks.FetchForløbTask;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -21,7 +19,7 @@ public class ÅbenSkoleController {
     private Booking booking;
 
     @FXML private MFXTextField afgangTF, ankomstTF;
-    @FXML private MFXComboBox<Forløb> forløbCB;
+    @FXML private MFXComboBox<String> forløbCB;
     @FXML private MFXComboBox<String> transportCB;
     @FXML private MFXButton næsteBtn, tilbageBtn;
 
@@ -44,12 +42,7 @@ public class ÅbenSkoleController {
     public void initialize() {
         booking = Booking.getInstance();
 
-        FetchForløbTask fetchForløbTask = new FetchForløbTask();
-        fetchForløbTask.setOnSucceeded(e -> {
-            forløbCB.getItems().addAll(fetchForløbTask.getValue());
-        });
-        new Thread(fetchForløbTask).start();
-
+        forløbCB.getItems().addAll("Idéfabrikken", "Digital fabrikken med laserskærer", "Robot på job", "Robotten ryder op", "Naturisme ved Vadehavet", "Skab sikkerhed i Vadehavet");
         transportCB.getItems().addAll("Lejet bus", "Offentlig transport");
     }
 
