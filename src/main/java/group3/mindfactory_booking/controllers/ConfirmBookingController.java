@@ -24,7 +24,6 @@ public class ConfirmBookingController {
             fornavnLabel, telefonLabel, transportLabel, stillingLabel, organisationLabel, forløbLabel, tidLabel,
             aktivitetLabel, udstyrLabel, forplejningLabel;
 
-
     @FXML
     void handleAfslut() {
         booking.clearBooking(); // Clear the booking after it has been saved to ensure that no information is carried over to the next booking
