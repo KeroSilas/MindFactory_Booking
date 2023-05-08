@@ -13,7 +13,7 @@ public class BookingEquipmentDaoImpl implements BookingEquipmentDao{
     private final DatabaseConnector databaseConnector;
 
     public BookingEquipmentDaoImpl() {
-        databaseConnector = new DatabaseConnector();
+        databaseConnector = DatabaseConnector.getInstance();
     }
 
     @Override
@@ -40,7 +40,7 @@ public class BookingEquipmentDaoImpl implements BookingEquipmentDao{
         ps.executeUpdate();
 
         } catch (SQLException e) {
-        System.err.println("Cannot delete equipment (BookingEquipment) " + e.getMessage());
+            System.err.println("Cannot delete equipment (BookingEquipment) " + e.getMessage());
         }
     }
 

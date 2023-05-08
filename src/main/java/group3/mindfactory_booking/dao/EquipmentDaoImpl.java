@@ -13,7 +13,7 @@ public class EquipmentDaoImpl implements EquipmentDao{
     private final DatabaseConnector databaseConnector;
 
     public EquipmentDaoImpl() {
-        databaseConnector = new DatabaseConnector();
+        databaseConnector = DatabaseConnector.getInstance();
     }
 
     @Override

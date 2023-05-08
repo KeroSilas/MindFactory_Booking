@@ -13,7 +13,7 @@ import java.util.List;
 public class ForløbDaoImpl implements ForløbDao{
     private final DatabaseConnector databaseConnector;
     public ForløbDaoImpl() {
-        databaseConnector = new DatabaseConnector();
+        databaseConnector = DatabaseConnector.getInstance();
     }
 
     @Override

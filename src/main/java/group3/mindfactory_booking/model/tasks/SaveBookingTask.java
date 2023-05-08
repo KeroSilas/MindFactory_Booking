@@ -2,6 +2,7 @@ package group3.mindfactory_booking.model.tasks;
 
 import group3.mindfactory_booking.dao.BookingDao;
 import group3.mindfactory_booking.dao.BookingDaoImpl;
+import group3.mindfactory_booking.model.Equipment;
 import group3.mindfactory_booking.model.singleton.Booking;
 import javafx.concurrent.Task;
 
@@ -27,10 +28,10 @@ public class SaveBookingTask extends Task<Boolean> {
             List<Integer> bookingIDs = bookingDao.getAllBookingID();
             int randomNum;
             do {
-                randomNum = (int) (Math.random()*10);
+                randomNum = (int) (Math.random()*100_000_000);
             } while (bookingIDs.contains(randomNum));
             booking.setBookingID(randomNum);
-            booking.setBookingDate(LocalDateTime.now());
+            booking.setBookingDateTime(LocalDateTime.now());
             bookingDao.saveBooking(booking);
         } catch (RuntimeException e) {
             success = false;
@@ -39,3 +40,4 @@ public class SaveBookingTask extends Task<Boolean> {
         return success;
     }
 }
+

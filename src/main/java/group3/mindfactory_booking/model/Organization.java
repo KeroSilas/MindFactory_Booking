@@ -24,4 +24,9 @@ public class Organization {
     public void setOrganizationName(String organizationName) {
         this.organizationName = organizationName;
     }
+
+    @Override
+    public String toString() {
+        return organizationName;
+    }
 }

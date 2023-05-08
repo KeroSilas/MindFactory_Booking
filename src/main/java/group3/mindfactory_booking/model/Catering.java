@@ -24,4 +24,9 @@ public class Catering {
     public void setPackageName(String packageName) {
         this.packageName = packageName;
     }
+
+    @Override
+    public String toString() {
+        return packageName;
+    }
 }

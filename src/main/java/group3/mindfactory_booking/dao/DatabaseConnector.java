@@ -11,13 +11,15 @@ import java.sql.Connection;
 
 public class DatabaseConnector {
 
+    private static DatabaseConnector instance;
+
     private final SQLServerDataSource dataSource;
 
     //Constructor that defines the connection to the SQL server.
-    public DatabaseConnector() {
+    private DatabaseConnector() {
         dataSource = new SQLServerDataSource();
         dataSource.setServerName("localhost");
-        dataSource.setDatabaseName("Mindfactory");
+        dataSource.setDatabaseName("MindFactory");
         dataSource.setUser("sa");
         dataSource.setPassword("123456");
         dataSource.setTrustServerCertificate(true);
@@ -25,5 +27,12 @@ public class DatabaseConnector {
 
     public Connection getConnection() throws SQLServerException {
         return dataSource.getConnection();
+    }
+
+    public static DatabaseConnector getInstance() {
+        if (instance == null) {
+            instance = new DatabaseConnector();
+        }
+        return instance;
     }
 }

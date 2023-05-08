@@ -14,7 +14,7 @@ public class ActivityDaoImpl implements ActivityDao {
     private final DatabaseConnector databaseConnector;
 
     public ActivityDaoImpl() {
-        databaseConnector = new DatabaseConnector();
+        databaseConnector = DatabaseConnector.getInstance();
     }
 
     @Override
