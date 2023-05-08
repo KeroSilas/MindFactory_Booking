@@ -20,7 +20,7 @@ public class BookingDaoImpl implements BookingDao {
     @Override
     public void saveBooking(Booking booking) throws RuntimeException {
         try (Connection con = databaseConnector.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO Booking VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Booking VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
 
             ps.setInt(1, booking.getBookingID());
             ps.setString(2, booking.getCatering());
@@ -38,16 +38,13 @@ public class BookingDaoImpl implements BookingDao {
             ps.setString(14, booking.getTransportArrival());
             ps.setString(15, booking.getTransportDeparture());
             ps.setInt(16, booking.getParticipants());
-            ps.setDate(17, Date.valueOf(booking.getBookingTimesList().get(0).getDate())); // Needs to be removed
-            ps.setTime(18, Time.valueOf(booking.getBookingTimesList().get(0).getStartTime())); // Needs to be removed
-            ps.setTime(19, Time.valueOf(booking.getBookingTimesList().get(0).getEndTime())); // Needs to be removed
-            ps.setTimestamp(20, Timestamp.valueOf(booking.getBookingDateTime()));
-            ps.setBoolean(21, booking.isWholeDay());
-            ps.setBoolean(22, booking.isEmailSent());
-            ps.setBoolean(23, booking.isNoShow());
-            ps.setString(24, booking.getMessageToAS());
-            ps.setString(25, booking.getPersonalNote());
-            ps.setString(26, booking.getBookingType());
+            ps.setTimestamp(17, Timestamp.valueOf(booking.getBookingDateTime()));
+            ps.setBoolean(18, booking.isWholeDay());
+            ps.setBoolean(19, booking.isEmailSent());
+            ps.setBoolean(20, booking.isNoShow());
+            ps.setString(21, booking.getMessageToAS());
+            ps.setString(22, booking.getPersonalNote());
+            ps.setString(23, booking.getBookingType());
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -86,10 +83,10 @@ public class BookingDaoImpl implements BookingDao {
         try (Connection con = databaseConnector.getConnection()){
             PreparedStatement ps = con.prepareStatement("UPDATE Booking " +
                     "SET isEmailSent = 1 " +
-                    "OUTPUT INSERTED.firstName, INSERTED.email, INSERTED.startDate " +
-                    "WHERE bookingID IN (" +
-                    "  SELECT bookingID FROM Booking" +
-                    "  WHERE DATEDIFF(day,CAST(GETDATE() AS DATE),startDate) < 7 AND isEmailSent = 0);");
+                    "OUTPUT INSERTED.firstName, INSERTED.email, bt.startDate " +
+                    "FROM Booking b " +
+                    "INNER JOIN BookingTimes bt ON b.bookingID = bt.bookingID " +
+                    "WHERE DATEDIFF(day,CAST(GETDATE() AS DATE),bt.startDate) < 7 AND b.isEmailSent = 0;");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
 

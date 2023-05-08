@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface BookingTimesDao {
 
-    public void addToBookingTimes(int bookingID, int equipmentID);
+    void addToBookingTimes(int bookingID, int equipmentID);
 
-    public void removeFromBookingTimes(int equipmentID);
+    void removeFromBookingTimes(int equipmentID);
 
 
-    public void saveBookingTimeList(List<BookingTime> bookingTimes, int bookingID);
+    void saveBookingTimeList(List<BookingTime> bookingTimes, int bookingID);
 
 }
