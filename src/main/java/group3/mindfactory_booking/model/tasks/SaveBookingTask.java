@@ -1,30 +1,36 @@
 package group3.mindfactory_booking.model.tasks;
 
-import group3.mindfactory_booking.dao.BookingDao;
-import group3.mindfactory_booking.dao.BookingDaoImpl;
+import group3.mindfactory_booking.dao.*;
 import group3.mindfactory_booking.model.SendEmail;
 import group3.mindfactory_booking.model.singleton.Booking;
 import javafx.concurrent.Task;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class SaveBookingTask extends Task<Boolean> {
 
     private final Booking booking;
 
     private final BookingDao bookingDao;
+    private final BookingEquipmentDao bookingEquipmentDao;
+    private final BookingTimesDao bookingTimesDao;
     private final SendEmail sendEmail;
 
     public SaveBookingTask() {
         booking = Booking.getInstance();
         bookingDao = new BookingDaoImpl();
+        bookingEquipmentDao = new BookingEquipmentDaoImpl();
+        bookingTimesDao = new BookingTimesDaoImpl();
         sendEmail = new SendEmail();
     }
 
     @Override
     public Boolean call() {
         boolean success = true;
+        ExecutorService executorService = Executors.newCachedThreadPool();
 
         try {
             List<Integer> bookingIDs = bookingDao.getAllBookingID();
@@ -36,7 +42,12 @@ public class SaveBookingTask extends Task<Boolean> {
             booking.setBookingDateTime(LocalDateTime.now());
             bookingDao.saveBooking(booking);
 
-            sendEmail.sendEmail(booking.getEmail(), String.valueOf(randomNum), "Her er din bookingkode til Mindfactory by ECCO");
+            executorService.submit(() -> bookingTimesDao.saveBookingTimeList(booking.getBookingTimesList(), booking.getBookingID()));
+            executorService.submit(() -> bookingEquipmentDao.saveEquipmentList(booking.getEquipmentList(), booking.getBookingID()));
+            executorService.submit(() -> sendEmail.sendEmail(booking.getEmail(),
+                    String.valueOf(booking.getBookingID()),
+                    "Her er din bookingkode til Mindfactory by ECCO"));
+            executorService.shutdown();
         } catch (RuntimeException e) {
             success = false;
         }

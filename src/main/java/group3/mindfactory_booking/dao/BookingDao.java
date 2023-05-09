@@ -8,13 +8,13 @@ import java.util.List;
 
 public interface BookingDao {
 
-    public void saveBooking(Booking booking);
+    void saveBooking(Booking booking);
 
     List<Integer> getAllBookingID();
 
     List<BookingEmail> getOneWeekOutBookings();
 
-    public void deleteBooking(int bookingID);
+    void deleteBooking(int bookingID);
 
     }
 

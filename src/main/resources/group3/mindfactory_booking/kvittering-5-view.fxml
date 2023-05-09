@@ -53,12 +53,7 @@
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label text="Deltagere:">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label text="Forplejning:">
+                              <Label text="Tid:">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -102,12 +97,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="deltagereLabel" text="Ikke valgt">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="forplejningLabel" text="Ikke valgt">
+                              <Label fx:id="tidLabel" maxWidth="200.0" text="Ikke valgt" wrapText="true">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -120,7 +110,12 @@
                      <children>
                         <VBox alignment="TOP_RIGHT" spacing="12.0">
                            <children>
-                              <Label text="Tid:">
+                              <Label text="Deltagere:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Forplejning:">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -164,7 +159,12 @@
                         </VBox>
                         <VBox spacing="12.0">
                            <children>
-                              <Label fx:id="tidLabel" text="Ikke valgt">
+                              <Label fx:id="deltagereLabel" text="Ikke valgt">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="forplejningLabel" text="Ikke valgt">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -213,7 +213,7 @@
                   <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER" prefWidth="350.0">
+            <HBox alignment="CENTER" prefWidth="420.0">
                <children>
                   <Label text="Skulle du ønske at annullere denne booking, så bedes du bruge det booking nummer du netop nu burde have fået via e-mail, og ved hjælp af afbryd knappen på hovedsiden, indtaste nummeret." textAlignment="CENTER" wrapText="true" />
                </children>

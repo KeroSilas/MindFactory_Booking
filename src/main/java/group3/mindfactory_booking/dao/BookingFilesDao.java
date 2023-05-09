@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface BookingFilesDao {
 
-    public void addBookingFiles(int bookingID, int fileID);
+    void addBookingFiles(int bookingID, int fileID);
 
-    public void deleteBookingFiles(int fileID);
+    void deleteBookingFiles(int fileID);
 
     List<File> getAllFilesOnBookingFile(Booking booking);
 
