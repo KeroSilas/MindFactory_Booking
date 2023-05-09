@@ -176,7 +176,7 @@ public class InformationController {
 
         stage = (Stage) tilbageBtn.getScene().getWindow();
         try {
-            root = FXMLLoader.load(Objects.requireNonNull(BookingApplication.class.getResource(Objects.equals(booking.getBookingType(), "Åben-Skole") ? "aabenSkole-2-view.fxml" : "udstyrOgAktivitet-2-view.fxml")));
+            root = FXMLLoader.load(Objects.requireNonNull(BookingApplication.class.getResource(Objects.equals(booking.getBookingType(), "Folkeskole") ? "aabenSkole-2-view.fxml" : "udstyrOgAktivitet-2-view.fxml")));
         } catch (IOException e) {
             e.printStackTrace();
             return;

@@ -3,6 +3,7 @@ package group3.mindfactory_booking.controllers;
 import group3.mindfactory_booking.BookingApplication;
 import group3.mindfactory_booking.model.singleton.Booking;
 import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
@@ -22,6 +23,7 @@ public class ÅbenSkoleController {
     @FXML private MFXComboBox<String> forløbCB;
     @FXML private MFXComboBox<String> transportCB;
     @FXML private MFXButton næsteBtn, tilbageBtn;
+    @FXML private MFXCheckbox forløbCheckBox;
 
     @FXML
     void handleNæste() {
@@ -42,6 +44,14 @@ public class ÅbenSkoleController {
     public void initialize() {
         booking = Booking.getInstance();
 
+        forløbCheckBox.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                forløbCB.setDisable(true);
+            } else {
+                forløbCB.setDisable(false);
+            }
+        });
+
         forløbCB.getItems().addAll("Idéfabrikken", "Digital fabrikken med laserskærer", "Robot på job", "Robotten ryder op", "Naturisme ved Vadehavet", "Skab sikkerhed i Vadehavet");
         transportCB.getItems().addAll("Lejet bus", "Offentlig transport");
     }
@@ -50,7 +60,12 @@ public class ÅbenSkoleController {
         booking.setTransportDeparture(afgangTF.getText());
         booking.setTransportArrival(ankomstTF.getText());
         booking.setTransportType(transportCB.getSelectionModel().getSelectedItem());
-        booking.setÅbenSkoleForløb(forløbCB.getSelectionModel().getSelectedItem());
+
+        if (forløbCheckBox.isSelected()) {
+            booking.setÅbenSkoleForløb("Ingen forløb");
+        } else {
+            booking.setÅbenSkoleForløb(forløbCB.getSelectionModel().getSelectedItem());
+        }
     }
 
     private boolean isInputValid() {
@@ -77,7 +92,7 @@ public class ÅbenSkoleController {
             transportCB.setStyle("-fx-border-color: lightgrey");
         }
 
-        if (forløbCB.getSelectionModel().getSelectedItem() == null) {
+        if (!forløbCheckBox.isSelected() && forløbCB.getSelectionModel().getSelectedItem() == null) {
             forløbCB.setStyle("-fx-border-color: red");
             success = false;
         } else {

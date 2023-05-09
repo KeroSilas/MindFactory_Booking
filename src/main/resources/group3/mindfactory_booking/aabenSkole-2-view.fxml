@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXCheckbox?>
 <?import io.github.palexdev.materialfx.controls.MFXComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
@@ -23,6 +24,15 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <MFXCheckbox fx:id="forløbCheckBox" text="Nej tak, jeg vil gerne bruge huset selv">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </MFXCheckbox>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" spacing="5.0">
@@ -104,7 +114,7 @@
    <top>
       <VBox alignment="CENTER" prefHeight="60.0" style="-fx-background-color: #111c24;" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Åben-Skole information  (2/4)" textFill="WHITE">
+            <Label text="Folkeskole information  (2/4)" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>

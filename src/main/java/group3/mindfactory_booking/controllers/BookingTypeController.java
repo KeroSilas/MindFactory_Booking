@@ -34,7 +34,7 @@ public class BookingTypeController {
 
     @FXML
     private void handleÅbenSkole() {
-        booking.setBookingType("Åben-Skole");
+        booking.setBookingType("Folkeskole");
         åbenSkoleBtn.setStyle("-fx-background-color:  #94c83d; -fx-text-fill: #ffffff");
         organisationBtn.setStyle("-fx-background-color:  #ffffff; -fx-text-fill: #000000");
         lærerBtn.setStyle("-fx-background-color:  #ffffff; -fx-text-fill: #000000");
@@ -70,7 +70,7 @@ public class BookingTypeController {
 
         stage = (Stage) næsteBtn.getScene().getWindow();
         try {
-            root = FXMLLoader.load(Objects.requireNonNull(BookingApplication.class.getResource(Objects.equals(booking.getBookingType(), "Åben-Skole") ? "aabenSkole-2-view.fxml" : "udstyrOgAktivitet-2-view.fxml")));
+            root = FXMLLoader.load(Objects.requireNonNull(BookingApplication.class.getResource(Objects.equals(booking.getBookingType(), "Folkeskole") ? "aabenSkole-2-view.fxml" : "udstyrOgAktivitet-2-view.fxml")));
         } catch (IOException e) {
             e.printStackTrace();
             return;

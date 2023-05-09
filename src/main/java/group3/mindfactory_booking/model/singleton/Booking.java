@@ -35,6 +35,8 @@ public class Booking {
     private static Booking instance = null;
 
     private Booking() {
+        equipmentList = new ArrayList<>();
+        bookingTimeList = new ArrayList<>();
     }
 
     public static Booking getInstance() {
