@@ -53,7 +53,7 @@ public class SaveBookingTask extends Task<Boolean> {
                     isSpecial = true;
             }
             if (isSpecial) {
-                sendEmail.sendEmail(booking.getEmail(), "test", "test");
+                sendEmail.sendEmail(booking.getEmail(), "test", "test", false);
             }
 
             booking.setBookingID(randomNum);
@@ -62,9 +62,12 @@ public class SaveBookingTask extends Task<Boolean> {
 
             executorService.submit(() -> bookingTimesDao.saveBookingTimeList(booking.getBookingTimesList(), booking.getBookingID()));
             executorService.submit(() -> bookingEquipmentDao.saveEquipmentList(booking.getEquipmentList(), booking.getBookingID()));
-            executorService.submit(() -> sendEmail.sendEmail(booking.getEmail(),
+            executorService.submit(() -> sendEmail.sendEmail(
+                    booking.getEmail(),
                     String.valueOf(booking.getBookingID()),
-                    "Her er din bookingkode til Mindfactory by ECCO"));
+                    "Her er din bookingkode til Mindfactory by ECCO",
+                    false)
+            );
 
             executorService.shutdown();
 

@@ -4,12 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
@@ -21,59 +16,45 @@ import javax.mail.internet.MimeMultipart;
 // For the error: https://stackoverflow.com/questions/55276768/how-to-prevent-java-mail-expected-resource-not-found-warnings-from-camel-smtp
 public class SendEmail {
 
-    public void sendEmail(String email, String body, String title) {
-
-        // Recipient's email ID needs to be mentioned.
-        String to = email;
-
-        // Sender's email ID needs to be mentioned
-        String from = "noreplyMindfactory@gmail.com";
-
-        // Assuming you are sending email from through gmail's smtp
-        String host = "smtp.gmail.com";
-
+    public void sendEmail(String email, String body, String title, boolean isSpecial) {
         // Get system properties
         Properties properties = System.getProperties();
 
         // Setup mail server
-        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "465");
         properties.put("mail.smtp.ssl.enable", "true");
         properties.put("mail.smtp.auth", "true");
 
         // Get the Session object and pass
-        Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
-
+        Session session = Session.getInstance(properties, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-
                 return new PasswordAuthentication("noreplyMindfactory@gmail.com", "uclynhanraxuzump");
-
             }
-
         });
-        //session.setDebug(true);
+
         try {
             // Create a default MimeMessage object.
             MimeMessage message = new MimeMessage(session);
 
             // Set From: header field of the header.
-            message.setFrom(new InternetAddress(from));
+            message.setFrom(new InternetAddress("noreplyMindfactory@gmail.com"));
 
             // Set To: header field of the header.
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            message.addRecipient(Message.RecipientType.CC, new InternetAddress("sillun01@easv365.dk"));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+
+            if (isSpecial) {
+                message.addRecipient(Message.RecipientType.CC, new InternetAddress("sillun01@easv365.dk"));
+            }
 
             // Set Subject: header field
             message.setSubject(title);
 
-            Multipart multipart = new MimeMultipart();
-
+            MimeMultipart multipart = new MimeMultipart();
             MimeBodyPart attachmentPart = new MimeBodyPart();
-
             MimeBodyPart textPart = new MimeBodyPart();
 
             try {
-
                 File f = new File("src/main/resources/group3/mindfactory_booking/images/MF_POSITVE_COLOR.jpg");
 
                 attachmentPart.attachFile(f);
@@ -82,9 +63,7 @@ public class SendEmail {
                 multipart.addBodyPart(attachmentPart);
 
             } catch (IOException e) {
-
                 e.printStackTrace();
-
             }
 
             message.setContent(multipart);
@@ -96,7 +75,5 @@ public class SendEmail {
         } catch (MessagingException mex) {
             mex.printStackTrace();
         }
-
     }
-
 }

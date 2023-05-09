@@ -32,12 +32,15 @@ public class SendReminderEmailTask extends Task<Void> {
             List<BookingEmail> bookingEmailList = bookingDao.getOneWeekOutBookings();
             for (BookingEmail bookingEmail : bookingEmailList) {
                 System.out.println(bookingEmail);
-                sendEmail.sendEmail(bookingEmail.getEmail(),
+                sendEmail.sendEmail(
+                        bookingEmail.getEmail(),
                         "Hej " + bookingEmail.getName() + "\n" +
-                                "Du har en booking snart hos os her på denne dato: " + bookingEmail.getStartDate(), "Din kommende booking.");
+                                "Du har en booking snart hos os her på denne dato: " + bookingEmail.getStartDate(),
+                        "Din kommende booking.",
+                        true
+                );
             }
         }
-
         return null;
     }
 }
