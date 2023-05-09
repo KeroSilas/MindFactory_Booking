@@ -79,12 +79,14 @@ public class BookingDaoImpl implements BookingDao {
 
         List<BookingEmail> oneWeekOutBookings = new ArrayList<>();
         try (Connection con = databaseConnector.getConnection()){
-            PreparedStatement ps = con.prepareStatement("UPDATE Booking " +
+            PreparedStatement ps = con.prepareStatement(
+                    "UPDATE Booking " +
                     "SET isEmailSent = 1 " +
                     "OUTPUT INSERTED.firstName, INSERTED.email, BookingTimes.startDate " +
                     "FROM Booking " +
                     "INNER JOIN BookingTimes ON Booking.bookingID = BookingTimes.bookingID " +
-                    "WHERE DATEDIFF(day, CAST(GETDATE() AS DATE),BookingTimes.startDate) < 7 AND Booking.isEmailSent = 0;");
+                    "WHERE DATEDIFF(day, CAST(GETDATE() AS DATE),BookingTimes.startDate) < 7 AND Booking.isEmailSent = 0;"
+            );
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
 

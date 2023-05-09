@@ -30,7 +30,10 @@ public class TidOgDatoController {
     @FXML
     void handleTilføj() {
         if (isInputValid()) {
-            BookingTime bookingTime = new BookingTime(datoCB.getValue(), fraCB.getValue(), tilCB.getValue(), false, false);
+            boolean isWholeDay = false;
+            if (fraCB.getValue().isBefore(LocalTime.of(12, 0)) && tilCB.getValue().isAfter(LocalTime.of(12, 0)))
+                isWholeDay = true;
+            BookingTime bookingTime = new BookingTime(datoCB.getValue(), fraCB.getValue(), tilCB.getValue(), isWholeDay, false);
             tidOgDatoLV.getItems().add(bookingTime);
         } else {
             System.out.println("Input is not valid");
