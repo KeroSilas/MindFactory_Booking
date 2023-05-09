@@ -1,14 +1,13 @@
 package group3.mindfactory_booking.dao;
 
 import group3.mindfactory_booking.model.BookingTime;
+import group3.mindfactory_booking.model.singleton.Booking;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Date;
 import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 
 public class BookingTimesDaoImpl implements BookingTimesDao{
@@ -34,7 +33,7 @@ public class BookingTimesDaoImpl implements BookingTimesDao{
     public void saveBookingTimeList(List<BookingTime> bookingTimes, int bookingID) {
         try (Connection con = databaseConnector.getConnection()){
             con.setAutoCommit(false);
-            String sql = ("INSERT INTO BookingTimes VALUES(?,?,?,?);");
+            String sql = ("INSERT INTO BookingTimes VALUES(?,?,?,?,?,?);");
             PreparedStatement ps = con.prepareStatement(sql);
 
             for (BookingTime bookingTime : bookingTimes) {
@@ -42,6 +41,9 @@ public class BookingTimesDaoImpl implements BookingTimesDao{
                 ps.setDate(2, Date.valueOf(bookingTime.getDate()));
                 ps.setTime(3, Time.valueOf(bookingTime.getStartTime()));
                 ps.setTime(4, Time.valueOf(bookingTime.getEndTime()));
+                ps.setBoolean(5, bookingTime.isWholeDay());
+                ps.setBoolean(6, bookingTime.isNoShow());
+
                 ps.addBatch();
             }
             ps.executeBatch();

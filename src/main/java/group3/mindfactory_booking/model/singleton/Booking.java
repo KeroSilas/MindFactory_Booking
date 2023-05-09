@@ -27,9 +27,7 @@ public class Booking {
     private String transportDeparture;
     private int participants;
     private LocalDateTime bookingDateTime;
-    private boolean isWholeDay;
     private boolean isEmailSent;
-    private boolean noShow;
     private String messageToAS;
     private String personalNote;
     private String bookingType;
@@ -160,14 +158,6 @@ public class Booking {
         this.participants = participants;
     }
 
-    public boolean isWholeDay() {
-        return isWholeDay;
-    }
-
-    public void setWholeDay(boolean wholeDay) {
-        isWholeDay = wholeDay;
-    }
-
     public String getAfdeling() {
         return department;
     }
@@ -190,14 +180,6 @@ public class Booking {
 
     public void setAssistance(String assistance) {
         this.assistance = assistance;
-    }
-
-    public boolean isNoShow() {
-        return noShow;
-    }
-
-    public void setNoShow(boolean noShow) {
-        this.noShow = noShow;
     }
 
     public boolean isEmailSent() {
@@ -265,9 +247,7 @@ public class Booking {
         this.transportDeparture = "";
         this.participants = 0;
         this.bookingDateTime = null;
-        this.isWholeDay = false;
         this.isEmailSent = false;
-        this.noShow = false;
         this.messageToAS = "";
         this.personalNote = "";
         this.bookingType = null;
