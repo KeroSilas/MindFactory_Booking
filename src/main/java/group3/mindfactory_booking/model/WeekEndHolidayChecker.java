@@ -49,7 +49,7 @@ public class WeekEndHolidayChecker {
             return true;
         }
         else {
-            return holidays.contains(startDate);
+            return holidays.contains(localDate);
         }
     }
 }
