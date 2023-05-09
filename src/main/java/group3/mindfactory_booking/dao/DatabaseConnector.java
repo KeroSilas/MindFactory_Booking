@@ -18,10 +18,10 @@ public class DatabaseConnector {
     //Constructor that defines the connection to the SQL server.
     private DatabaseConnector() {
         dataSource = new SQLServerDataSource();
-        dataSource.setServerName("localhost");
-        dataSource.setDatabaseName("MindFactory");
-        dataSource.setUser("sa");
-        dataSource.setPassword("12344321");
+        dataSource.setServerName("10.176.111.34");
+        dataSource.setDatabaseName("MindFactory_");
+        dataSource.setUser("CSe2022t_t_3");
+        dataSource.setPassword("CSe2022tT3#");
         dataSource.setTrustServerCertificate(true);
     }
 

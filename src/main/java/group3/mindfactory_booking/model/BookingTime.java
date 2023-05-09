@@ -9,11 +9,15 @@ public class BookingTime {
     private LocalDate date;
     private LocalTime startTime;
     private LocalTime endTime;
+    private boolean isWholeDay;
+    private boolean isNoShow;
 
-    public BookingTime(LocalDate date, LocalTime startTime, LocalTime endTime) {
+    public BookingTime(LocalDate date, LocalTime startTime, LocalTime endTime, boolean isWholeDay, boolean isNoShow) {
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.isWholeDay = isWholeDay;
+        this.isNoShow = isNoShow;
     }
 
     public LocalDate getDate() {
@@ -26,6 +30,14 @@ public class BookingTime {
 
     public LocalTime getEndTime() {
         return endTime;
+    }
+
+    public boolean isWholeDay() {
+        return isWholeDay;
+    }
+
+    public boolean isNoShow() {
+        return isNoShow;
     }
 
     @Override

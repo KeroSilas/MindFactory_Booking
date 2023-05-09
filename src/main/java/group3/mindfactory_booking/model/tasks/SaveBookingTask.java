@@ -63,6 +63,7 @@ public class SaveBookingTask extends Task<Boolean> {
             executorService.submit(() -> sendEmail.sendEmail(booking.getEmail(),
                     String.valueOf(booking.getBookingID()),
                     "Her er din bookingkode til Mindfactory by ECCO"));
+
             executorService.shutdown();
 
         }
