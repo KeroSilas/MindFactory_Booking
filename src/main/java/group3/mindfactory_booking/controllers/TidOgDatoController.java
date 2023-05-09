@@ -91,8 +91,6 @@ public class TidOgDatoController {
                 for (int i = 7; i < 23; i++) {
                     fraCB.getItems().add(LocalTime.of(i, 0));
                 }
-            } else {
-                fraCB.setDisable(true);
             }
         });
 
@@ -105,24 +103,18 @@ public class TidOgDatoController {
                 for (int i = hour; i < 24; i++) {
                     tilCB.getItems().add(LocalTime.of(i, 0));
                 }
-            } else {
-                tilCB.setDisable(true);
             }
         });
 
         tilCB.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != oldValue) {
                 tilføjBtn.setDisable(false);
-            } else {
-                tilføjBtn.setDisable(true);
             }
         });
 
         tidOgDatoLV.getSelectionModel().selectionProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != oldValue) {
                 sletBtn.setDisable(false);
-            } else {
-                sletBtn.setDisable(true);
             }
         });
     }
