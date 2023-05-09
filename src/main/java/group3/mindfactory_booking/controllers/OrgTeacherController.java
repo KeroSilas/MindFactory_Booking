@@ -67,7 +67,7 @@ public class OrgTeacherController {
         } else if (annesofieRB.isSelected()) {
             booking.setAssistance("Anne-Sofie Dideriksen");
         } else {
-            booking.setAssistance("Ingen assistance");
+            booking.setAssistance("Ingen");
         }
     }
 

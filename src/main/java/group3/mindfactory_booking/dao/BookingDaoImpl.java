@@ -82,7 +82,7 @@ public class BookingDaoImpl implements BookingDao {
             PreparedStatement ps = con.prepareStatement(
                     "UPDATE Booking " +
                     "SET isEmailSent = 1 " +
-                    "OUTPUT INSERTED.firstName, INSERTED.email, BookingTimes.startDate " +
+                    "OUTPUT INSERTED.bookingID, INSERTED.firstName, INSERTED.email, BookingTimes.startDate " +
                     "FROM Booking " +
                     "INNER JOIN BookingTimes ON Booking.bookingID = BookingTimes.bookingID " +
                     "WHERE DATEDIFF(day, CAST(GETDATE() AS DATE),BookingTimes.startDate) < 7 AND Booking.isEmailSent = 0;"
@@ -91,11 +91,12 @@ public class BookingDaoImpl implements BookingDao {
             while (rs.next()) {
 
                 BookingEmail bookingEmail;
-                String name = rs.getString(1);
-                String email = rs.getString(2);
-                LocalDate startDate = rs.getDate(3).toLocalDate();
+                int bookingID = rs.getInt(1);
+                String name = rs.getString(2);
+                String email = rs.getString(3);
+                LocalDate startDate = rs.getDate(4).toLocalDate();
 
-                bookingEmail = new BookingEmail(name, email, startDate);
+                bookingEmail = new BookingEmail(bookingID, name, email, startDate);
                 oneWeekOutBookings.add(bookingEmail);
             }
 

@@ -1,4 +1,4 @@
-package group3.mindfactory_booking.model;
+package group3.mindfactory_booking.services;
 
 import java.io.File;
 import java.io.IOException;

@@ -3,8 +3,10 @@ package group3.mindfactory_booking.controllers;
 import group3.mindfactory_booking.BookingApplication;
 import group3.mindfactory_booking.model.BookingTime;
 import group3.mindfactory_booking.model.singleton.Booking;
-import group3.mindfactory_booking.model.tasks.SaveBookingTask;
+import group3.mindfactory_booking.model.tasks.*;
 import io.github.palexdev.materialfx.controls.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,12 +16,20 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class TidOgDatoController {
 
     private Booking booking;
+    private List<BookingTime> bookedTimes;
+    private final ObservableList<LocalDate> dateList = FXCollections.observableArrayList();
+    private final ObservableList<LocalTime> startTimeList = FXCollections.observableArrayList();
+    private final ObservableList<LocalTime> endTimeList = FXCollections.observableArrayList();
+    private boolean isHalfDayEarly;
 
     @FXML private MFXProgressSpinner progressSpinner;
     @FXML private MFXComboBox<LocalDate> datoCB;
@@ -30,10 +40,7 @@ public class TidOgDatoController {
     @FXML
     void handleTilføj() {
         if (isInputValid()) {
-            boolean isWholeDay = false;
-            if (fraCB.getValue().isBefore(LocalTime.of(12, 0)) && tilCB.getValue().isAfter(LocalTime.of(12, 0)))
-                isWholeDay = true;
-            BookingTime bookingTime = new BookingTime(datoCB.getValue(), fraCB.getValue(), tilCB.getValue(), isWholeDay, false);
+            BookingTime bookingTime = new BookingTime(datoCB.getValue(), fraCB.getValue(), tilCB.getValue());
             tidOgDatoLV.getItems().add(bookingTime);
         } else {
             System.out.println("Input is not valid");
@@ -58,8 +65,20 @@ public class TidOgDatoController {
             SaveBookingTask saveBookingTask = new SaveBookingTask();
             saveBookingTask.setOnSucceeded(e -> {
                 if (saveBookingTask.getValue()) {
+                    System.out.println("Booking successfully saved");
+
+                    // Send email, save booking times and save booking equipment in parallel
+                    // This needs to be reworked at some point, right now it will send a query to the Booking table, even if the query to the BookingTimes fails, which is not ideal
+                    ExecutorService executorService = Executors.newCachedThreadPool();
+                    SendEmailTask sendEmailTask = new SendEmailTask();
+                    SaveBookingTimesTask saveBookingTimesTask = new SaveBookingTimesTask();
+                    SaveBookingEquipmentTask saveBookingEquipmentTask = new SaveBookingEquipmentTask();
+                    executorService.submit(sendEmailTask);
+                    executorService.submit(saveBookingTimesTask);
+                    executorService.submit(saveBookingEquipmentTask);
+                    executorService.shutdown();
+
                     nextPage();
-                    System.out.println("Booking saved successfully");
                 } else {
                     System.out.println("Booking failed to save");
                 }
@@ -82,29 +101,103 @@ public class TidOgDatoController {
     public void initialize() {
         booking = Booking.getInstance();
 
+        // Add the ObservableLists to the ComboBoxes
+        datoCB.setItems(dateList);
+        fraCB.setItems(startTimeList);
+        tilCB.setItems(endTimeList);
+
         for (int i = 0; i < 365; i++) {
-            datoCB.getItems().add(LocalDate.now().plusDays((1 + i)));
+            dateList.add(LocalDate.now().plusDays((1 + i)));
         }
 
+        // Gets the already booked times from the database every 10 seconds
+        ReceiveTimesTask receiveTimesTask = new ReceiveTimesTask();
+        receiveTimesTask.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                bookedTimes = newValue;
+
+                // Remove the dates that are already booked if the booking is a wholeday booking
+                // Binged hard on this one. I'm sorry.
+                Iterator<LocalDate> dateIterator = dateList.iterator();
+                while (dateIterator.hasNext()) {
+                    LocalDate ld = dateIterator.next();
+                    for (BookingTime bt : bookedTimes) {
+                        if (bt.isWholeDay() && bt.getDate().equals(ld)) {
+                            dateIterator.remove();
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+        Thread thread = new Thread(receiveTimesTask);
+        thread.setDaemon(true);
+        thread.start();
+
+        // Spaghetti code incoming
         datoCB.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != oldValue) {
-                fraCB.setDisable(false);
+                fraCB.getSelectionModel().clearSelection();
+                tilCB.getSelectionModel().clearSelection();
+                startTimeList.clear();
+                endTimeList.clear();
 
-                fraCB.getItems().clear();
-                for (int i = 7; i < 23; i++) {
-                    fraCB.getItems().add(LocalTime.of(i, 0));
+                fraCB.setDisable(false);
+                tilCB.setDisable(true);
+
+                // If there already is a booking on the selected date and it is a halfday booking before 12, then don't add the hours for the first half of the day
+                // If there already is a booking on the selected date and it is a halfday booking after 12, then don't add the hours for the second half of the day
+                // Otherwise show all the hours
+                for (BookingTime bt : bookedTimes) {
+                    if (bt.getDate().equals(newValue) && !bt.isHalfDayEarly()) {
+
+                        startTimeList.clear();
+                        for (int i = 7; i < 12; i++) {
+                            startTimeList.add(LocalTime.of(i, 0));
+                            isHalfDayEarly = true;
+                        }
+                        break;
+
+                    } else if (bt.getDate().equals(newValue) && bt.isHalfDayEarly()) {
+
+                        startTimeList.clear();
+                        for (int i = 12; i < 23; i++) {
+                            startTimeList.add(LocalTime.of(i, 0));
+                            isHalfDayEarly = false;
+                        }
+                        break;
+
+                    } else {
+
+                        for (int i = 7; i < 23; i++) {
+                            startTimeList.add(LocalTime.of(i, 0));
+                        }
+                    }
                 }
             }
         });
 
+        // If the selected time is a halfday booking before 12, then don't add the hours for the first half of the day
         fraCB.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != oldValue) {
                 tilCB.setDisable(false);
 
-                tilCB.getItems().clear();
-                int hour = newValue.plusHours(1).getHour();
-                for (int i = hour; i < 24; i++) {
-                    tilCB.getItems().add(LocalTime.of(i, 0));
+                endTimeList.clear();
+
+                // Since we already declared the boolean isHalfDayEarly in the listener for the date ComboBox, we can use it here, instead of having to loop through the bookedTimes again
+                try {
+                    int hour = newValue.plusHours(1).getHour();
+                    if (isHalfDayEarly) {
+                        for (int i = hour; i <= 12; i++) {
+                            endTimeList.add(LocalTime.of(i, 0));
+                        }
+                    } else {
+                        for (int i = hour; i < 24; i++) {
+                            endTimeList.add(LocalTime.of(i, 0));
+                        }
+                    }
+                } catch (NullPointerException e) {
+                    System.out.println("No value selected");
                 }
             }
         });
@@ -123,6 +216,25 @@ public class TidOgDatoController {
     }
 
     private void importToBooking() {
+        // If the booking is a wholeday booking, then set the wholeDay boolean to true
+        boolean isWholeDay = false;
+        if (fraCB.getValue().isBefore(LocalTime.of(12, 0)) && tilCB.getValue().isAfter(LocalTime.of(12, 0))) {
+            isWholeDay = true;
+        }
+
+        // If the booking is a halfday booking before 12, then set the halfDayEarly boolean to true
+        boolean isHalfDayEarly = false;
+        if (tilCB.getValue().isBefore(LocalTime.of(12, 0))) {
+            isHalfDayEarly = true;
+        }
+
+        // Set the wholeDay and halfDayEarly booleans for all the BookingTimes in the ListView
+        for (BookingTime bookingTime : tidOgDatoLV.getItems()) {
+            bookingTime.setWholeDay(isWholeDay);
+            bookingTime.setHalfDayEarly(isHalfDayEarly);
+        }
+
+        // Get the BookingTimes from the ListView and add them to the Booking singleton
         booking.setBookingTimesList(tidOgDatoLV.getItems());
     }
 

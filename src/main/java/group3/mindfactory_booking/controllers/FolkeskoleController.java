@@ -10,12 +10,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
 
-public class ÅbenSkoleController {
+public class FolkeskoleController {
 
     private Booking booking;
 
@@ -24,6 +25,7 @@ public class ÅbenSkoleController {
     @FXML private MFXComboBox<String> transportCB;
     @FXML private MFXButton næsteBtn, tilbageBtn;
     @FXML private MFXCheckbox forløbCheckBox;
+    @FXML private Label forløbLabel;
 
     @FXML
     void handleNæste() {
@@ -47,8 +49,10 @@ public class ÅbenSkoleController {
         forløbCheckBox.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 forløbCB.setDisable(true);
+                forløbLabel.setDisable(true);
             } else {
                 forløbCB.setDisable(false);
+                forløbLabel.setDisable(false);
             }
         });
 
@@ -62,7 +66,7 @@ public class ÅbenSkoleController {
         booking.setTransportType(transportCB.getSelectionModel().getSelectedItem());
 
         if (forløbCheckBox.isSelected()) {
-            booking.setÅbenSkoleForløb("Ingen forløb");
+            booking.setÅbenSkoleForløb("Ingen");
         } else {
             booking.setÅbenSkoleForløb(forløbCB.getSelectionModel().getSelectedItem());
         }

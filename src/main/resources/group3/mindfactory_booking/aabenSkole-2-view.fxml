@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group3.mindfactory_booking.controllers.ÅbenSkoleController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group3.mindfactory_booking.controllers.FolkeskoleController">
    <center>
       <HBox alignment="TOP_CENTER" spacing="64.0">
          <children>
@@ -37,7 +37,7 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" spacing="5.0">
                      <children>
-                        <Label text="Forløb">
+                        <Label fx:id="forløbLabel" text="Forløb">
                            <font>
                               <Font size="14.0" />
                            </font>

@@ -35,8 +35,7 @@ public class Booking {
     private static Booking instance = null;
 
     private Booking() {
-        equipmentList = new ArrayList<>();
-        bookingTimeList = new ArrayList<>();
+        clearBooking();
     }
 
     public static Booking getInstance() {
@@ -232,19 +231,19 @@ public class Booking {
 
     public void clearBooking() {
         this.catering = "";
-        this.activity = "";
+        this.activity = "Ingen";
         this.organization = "";
-        this.åbenSkoleForløb = "";
+        this.åbenSkoleForløb = "Ingen";
         this.firstName = "";
         this.lastName = "";
         this.position = "";
         this.department = "";
         this.phone = "";
         this.email = "";
-        this.assistance = "";
-        this.transportType = "";
-        this.transportArrival = "";
-        this.transportDeparture = "";
+        this.assistance = "Ingen";
+        this.transportType = "Ikke valgt";
+        this.transportArrival = "Ikke valgt";
+        this.transportDeparture = "Ikke valgt";
         this.participants = 0;
         this.bookingDateTime = null;
         this.isEmailSent = false;

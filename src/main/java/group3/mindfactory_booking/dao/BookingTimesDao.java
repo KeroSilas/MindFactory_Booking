@@ -12,7 +12,8 @@ public interface BookingTimesDao {
 
     void removeFromBookingTimes(int equipmentID);
 
-
     void saveBookingTimeList(List<BookingTime> bookingTimes, int bookingID);
+
+    List<BookingTime> getBookingTimeList();
 
 }

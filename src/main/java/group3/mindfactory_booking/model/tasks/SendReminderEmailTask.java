@@ -3,8 +3,7 @@ package group3.mindfactory_booking.model.tasks;
 import group3.mindfactory_booking.dao.BookingDao;
 import group3.mindfactory_booking.dao.BookingDaoImpl;
 import group3.mindfactory_booking.model.BookingEmail;
-import group3.mindfactory_booking.model.SendEmail;
-import group3.mindfactory_booking.model.singleton.Booking;
+import group3.mindfactory_booking.services.SendEmail;
 import javafx.concurrent.Task;
 
 import java.util.List;
@@ -31,11 +30,11 @@ public class SendReminderEmailTask extends Task<Void> {
             }
             List<BookingEmail> bookingEmailList = bookingDao.getOneWeekOutBookings();
             for (BookingEmail bookingEmail : bookingEmailList) {
-                System.out.println(bookingEmail);
                 sendEmail.sendEmail(
                         bookingEmail.getEmail(),
-                        "Hej " + bookingEmail.getName() + "\n" +
-                                "Du har en booking snart hos os her på denne dato: " + bookingEmail.getStartDate(),
+                        "Hej " + bookingEmail.getName() + ".\n" +
+                                "Du har en booking snart her hos os på denne dato: " + bookingEmail.getStartDate() + ".\n" +
+                                "Ønsker du at aflyse din booking, kan du bruge dette booking-nummer i booking applikationen: " + bookingEmail.getBookingID(),
                         "Din kommende booking.",
                         true
                 );
