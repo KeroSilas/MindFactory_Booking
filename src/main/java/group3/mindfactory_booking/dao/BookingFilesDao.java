@@ -12,5 +12,4 @@ public interface BookingFilesDao {
 
     List<File> getAllFilesOnBookingFile(Booking booking);
 
-
 }

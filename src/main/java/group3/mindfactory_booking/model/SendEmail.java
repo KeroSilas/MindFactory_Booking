@@ -61,6 +61,7 @@ public class SendEmail {
 
             // Set To: header field of the header.
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.addRecipient(Message.RecipientType.CC, new InternetAddress("sillun01@easv365.dk"));
 
             // Set Subject: header field
             message.setSubject(title);

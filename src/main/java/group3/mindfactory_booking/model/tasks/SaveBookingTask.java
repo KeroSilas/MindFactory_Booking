@@ -9,6 +9,7 @@ import javafx.concurrent.Task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -48,7 +49,8 @@ public class SaveBookingTask extends Task<Boolean> {
             List<BookingTime> bookingTimeList = booking.getBookingTimesList();
             boolean isSpecial = false;
             for (BookingTime bookingTime : bookingTimeList) {
-                isSpecial = checker.isWeekendOrHoliday(bookingTime.getDate());
+                if (checker.isWeekendOrHoliday(bookingTime.getDate()) || bookingTime.getEndTime().isAfter(LocalTime.of(18,0)))
+                    isSpecial = true;
             }
             if (isSpecial) {
                 sendEmail.sendEmail(booking.getEmail(), "test", "test");
