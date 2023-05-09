@@ -1,21 +1,16 @@
 package group3.mindfactory_booking.model;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 public class BookingEmail {
-    private int bookingID;
+    private String name;
     private String email;
     private LocalDate startDate;
 
-    public BookingEmail(int bookingID, String email, LocalDate startDate) {
-        this.bookingID = bookingID;
+    public BookingEmail(String name, String email, LocalDate startDate) {
+        this.name = name;
         this.email = email;
         this.startDate = startDate;
-    }
-
-    public int getBookingID() {
-        return bookingID;
     }
 
 
@@ -26,6 +21,10 @@ public class BookingEmail {
 
     public LocalDate getStartDate() {
         return startDate;
+    }
+
+    public String getName() {
+        return name;
     }
 
 }

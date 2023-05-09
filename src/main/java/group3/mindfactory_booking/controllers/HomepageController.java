@@ -1,6 +1,7 @@
 package group3.mindfactory_booking.controllers;
 
 import group3.mindfactory_booking.BookingApplication;
+import group3.mindfactory_booking.model.tasks.SendReminderEmailTask;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -56,6 +57,10 @@ public class HomepageController {
     }
 
     public void initialize() {
+        SendReminderEmailTask sendReminderEmailTask = new SendReminderEmailTask();
+        Thread thread = new Thread(sendReminderEmailTask);
+        thread.setDaemon(true);
+        thread.start();
     }
 
 }

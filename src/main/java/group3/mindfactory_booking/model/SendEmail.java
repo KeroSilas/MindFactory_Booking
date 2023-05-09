@@ -17,15 +17,17 @@ import javax.mail.internet.MimeMultipart;
 
 // Code is from https://netcorecloud.com/tutorials/send-email-in-java-using-gmail-smtp/#:~:text=How%20To%20Send%20Email%20In%20Java%20Using%20Gmail,Step%204%20-%20Send%20Email%20with%20Attachment.%20
 // Password authentication approach from https://www.youtube.com/watch?v=ugIUObNHZdo (3:00~)
+
+// For the error: https://stackoverflow.com/questions/55276768/how-to-prevent-java-mail-expected-resource-not-found-warnings-from-camel-smtp
 public class SendEmail {
 
-    public static void main(String[] args) {
+    public void sendEmail(String email, String body, String title) {
 
         // Recipient's email ID needs to be mentioned.
-        String to = "perkvi01@easv365.dk";
+        String to = email;
 
         // Sender's email ID needs to be mentioned
-        String from = "testemaileasv@gmail.com";
+        String from = "noreplyMindfactory@gmail.com";
 
         // Assuming you are sending email from through gmail's smtp
         String host = "smtp.gmail.com";
@@ -61,7 +63,7 @@ public class SendEmail {
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
             // Set Subject: header field
-            message.setSubject("Her er din bookingkode til Mindfactory by ECCO");
+            message.setSubject(title);
 
             Multipart multipart = new MimeMultipart();
 
@@ -71,10 +73,10 @@ public class SendEmail {
 
             try {
 
-                File f = new File("src/LogoMF.jpg");
+                File f = new File("src/main/resources/group3/mindfactory_booking/images/MF_POSITVE_COLOR.jpg");
 
                 attachmentPart.attachFile(f);
-                textPart.setText("");
+                textPart.setText(body);
                 multipart.addBodyPart(textPart);
                 multipart.addBodyPart(attachmentPart);
 
