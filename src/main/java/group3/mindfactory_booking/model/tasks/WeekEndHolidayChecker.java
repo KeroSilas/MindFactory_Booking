@@ -1,4 +1,4 @@
-package group3.mindfactory_booking.model;
+package group3.mindfactory_booking.model.tasks;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -7,6 +7,14 @@ import java.util.Set;
 // Adapted from https://simplesolution.dev/java-check-if-date-is-week-day-or-weekend-day/
 // https://www.tabnine.com/code/java/methods/de.jollyday.Holiday/%3Cinit%3E
 public class WeekEndHolidayChecker {
+
+   /* private final BookingDao bookingDao;
+    private final WeekEndHolidayChecker weekEndHolidayChecker;
+
+    public WeekEndHolidayCheckerTask() {
+        bookingDao = new BookingDaoImpl();
+        weekEndHolidayChecker = new WeekEndHolidayChecker();
+    }*/
     final Set<LocalDate> holidays = Set.of(
             LocalDate.of(2023, 5, 18),
             LocalDate.of(2023, 5, 28),
