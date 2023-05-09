@@ -1,4 +1,4 @@
-package group3.mindfactory_booking.model.tasks;
+package group3.mindfactory_booking.model;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -8,13 +8,7 @@ import java.util.Set;
 // https://www.tabnine.com/code/java/methods/de.jollyday.Holiday/%3Cinit%3E
 public class WeekEndHolidayChecker {
 
-   /* private final BookingDao bookingDao;
-    private final WeekEndHolidayChecker weekEndHolidayChecker;
 
-    public WeekEndHolidayCheckerTask() {
-        bookingDao = new BookingDaoImpl();
-        weekEndHolidayChecker = new WeekEndHolidayChecker();
-    }*/
     final Set<LocalDate> holidays = Set.of(
             LocalDate.of(2023, 5, 18),
             LocalDate.of(2023, 5, 28),

@@ -3,6 +3,7 @@ package group3.mindfactory_booking.model.tasks;
 import group3.mindfactory_booking.dao.*;
 import group3.mindfactory_booking.model.BookingTime;
 import group3.mindfactory_booking.model.SendEmail;
+import group3.mindfactory_booking.model.WeekEndHolidayChecker;
 import group3.mindfactory_booking.model.singleton.Booking;
 import javafx.concurrent.Task;
 
