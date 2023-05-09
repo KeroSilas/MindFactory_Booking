@@ -4,27 +4,17 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
 import java.util.Set;
-
+// Adapted from https://simplesolution.dev/java-check-if-date-is-week-day-or-weekend-day/
+// https://www.tabnine.com/code/java/methods/de.jollyday.Holiday/%3Cinit%3E
 public class WeekEndHolidayChecker {
 
-    public WeekEndHolidayChecker(LocalDate localDate) {
+   /* private final BookingDao bookingDao;
+    private final WeekEndHolidayChecker weekEndHolidayChecker;
 
-    }
-
-    //https://java2blog.com/check-if-date-is-weekend-or-weekday-java/#:~:text=We%20can%20use%20LocalDate's%20getDayOfWeek,day%20is%20weekend%20or%20not.
-    //Java2Blog (java2blog.com)
-    public static boolean isWeekend(final LocalDate localDate)
-    {
-        DayOfWeek startDate = DayOfWeek.of(localDate.get(ChronoField.DAY_OF_WEEK));
-        if(startDate != DayOfWeek.SATURDAY || startDate != DayOfWeek.SUNDAY)
-        {
-            return false;
-        }
-        return true;
-    }
-
-
-    // Hardcoded holidays as LocalDates put in a Set:
+    public WeekEndHolidayCheckerTask() {
+        bookingDao = new BookingDaoImpl();
+        weekEndHolidayChecker = new WeekEndHolidayChecker();
+    }*/
     final Set<LocalDate> holidays = Set.of(
             LocalDate.of(2023, 5, 18),
             LocalDate.of(2023, 5, 28),
@@ -57,19 +47,16 @@ public class WeekEndHolidayChecker {
             LocalDate.of(2025, 12, 25),
             LocalDate.of(2025, 12, 26));
 
-    // Gives a date to check against holiday Set:
-    LocalDate startDate = LocalDate.of(2023, 5, 18);
-    //boolean isHoliday = containsDate(holidays, startDate);
 
+    public boolean isWeekendOrHoliday(LocalDate localDate) {
 
-    public static boolean isHoliday(Set<LocalDate> holidays, LocalDate startDate) {
-
-
-
-
-
-        holidays.contains(startDate);
-        return true;
+        DayOfWeek startDate = DayOfWeek.of(localDate.get(ChronoField.DAY_OF_WEEK));
+        if(DayOfWeek.SUNDAY == startDate || DayOfWeek.SATURDAY == startDate){
+            return true;
+        }
+        else {
+            return holidays.contains(startDate);
+        }
     }
-
 }
+

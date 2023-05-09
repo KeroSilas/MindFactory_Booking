@@ -1,10 +1,12 @@
 package group3.mindfactory_booking.model.tasks;
 
 import group3.mindfactory_booking.dao.*;
+import group3.mindfactory_booking.model.BookingTime;
 import group3.mindfactory_booking.model.SendEmail;
 import group3.mindfactory_booking.model.singleton.Booking;
 import javafx.concurrent.Task;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -18,6 +20,7 @@ public class SaveBookingTask extends Task<Boolean> {
     private final BookingEquipmentDao bookingEquipmentDao;
     private final BookingTimesDao bookingTimesDao;
     private final SendEmail sendEmail;
+    private final WeekEndHolidayChecker checker;
 
     public SaveBookingTask() {
         booking = Booking.getInstance();
@@ -25,6 +28,7 @@ public class SaveBookingTask extends Task<Boolean> {
         bookingEquipmentDao = new BookingEquipmentDaoImpl();
         bookingTimesDao = new BookingTimesDaoImpl();
         sendEmail = new SendEmail();
+        checker = new WeekEndHolidayChecker();
     }
 
     @Override
@@ -38,6 +42,17 @@ public class SaveBookingTask extends Task<Boolean> {
             do {
                 randomNum = (int)(Math.random() * (99999999 - 10000000 + 1)) + 10000000;
             } while (bookingIDs.contains(randomNum));
+
+
+            List<BookingTime> bookingTimeList = booking.getBookingTimesList();
+            boolean isSpecial = false;
+            for (BookingTime bookingTime : bookingTimeList) {
+                isSpecial = checker.isWeekendOrHoliday(bookingTime.getDate());
+            }
+            if (isSpecial) {
+                sendEmail.sendEmail(booking.getEmail(), "test", "test");
+            }
+
             booking.setBookingID(randomNum);
             booking.setBookingDateTime(LocalDateTime.now());
             bookingDao.saveBooking(booking);
@@ -49,7 +64,9 @@ public class SaveBookingTask extends Task<Boolean> {
                     "Her er din bookingkode til Mindfactory by ECCO"));
 
             executorService.shutdown();
-        } catch (RuntimeException e) {
+
+        }
+        catch (RuntimeException e) {
             success = false;
         }
 
