@@ -120,6 +120,7 @@ public class TidOgDatoController {
                 // Remove the dates that are already booked if the booking is a wholeday booking
                 // Binged hard on this one. I'm sorry.
                 Iterator<LocalDate> dateIterator = dateList.iterator();
+                int sameDayCounter = 0;
                 while (dateIterator.hasNext()) {
                     LocalDate ld = dateIterator.next();
                     for (BookingTime bt : bookedTimes) {
@@ -128,10 +129,11 @@ public class TidOgDatoController {
                             break;
                         }
                         if (bt.getDate().equals(ld)) {
-                            List<BookingTime> bookingTimes = new ArrayList<>();
-                            bookingTimes.add(bt);
-                            if (bookingTimes.size() == 2)
+                            sameDayCounter++;
+                            if (sameDayCounter == 2) {
                                 dateIterator.remove();
+                                break;
+                            }
                         }
                     }
                 }
