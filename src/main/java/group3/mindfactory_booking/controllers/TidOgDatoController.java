@@ -68,14 +68,12 @@ public class TidOgDatoController {
                 if (saveBookingTask.getValue()) {
                     System.out.println("Booking successfully saved");
 
-                    // Send email, save booking times and save booking equipment in parallel
-                    // This needs to be reworked at some point, right now it will send a query to the Booking table, even if the query to the BookingTimes fails, which is not ideal
+                    // Send email and save booking equipment in a new thread
+                    // This only happens when the booking is saved successfully
                     ExecutorService executorService = Executors.newCachedThreadPool();
                     SendEmailTask sendEmailTask = new SendEmailTask();
-                    //SaveBookingTimesTask saveBookingTimesTask = new SaveBookingTimesTask();
                     SaveBookingEquipmentTask saveBookingEquipmentTask = new SaveBookingEquipmentTask();
                     executorService.submit(sendEmailTask);
-                    //executorService.submit(saveBookingTimesTask);
                     executorService.submit(saveBookingEquipmentTask);
                     executorService.shutdown();
 
