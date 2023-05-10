@@ -72,10 +72,10 @@ public class TidOgDatoController {
                     // This needs to be reworked at some point, right now it will send a query to the Booking table, even if the query to the BookingTimes fails, which is not ideal
                     ExecutorService executorService = Executors.newCachedThreadPool();
                     SendEmailTask sendEmailTask = new SendEmailTask();
-                    SaveBookingTimesTask saveBookingTimesTask = new SaveBookingTimesTask();
+                    //SaveBookingTimesTask saveBookingTimesTask = new SaveBookingTimesTask();
                     SaveBookingEquipmentTask saveBookingEquipmentTask = new SaveBookingEquipmentTask();
                     executorService.submit(sendEmailTask);
-                    executorService.submit(saveBookingTimesTask);
+                    //executorService.submit(saveBookingTimesTask);
                     executorService.submit(saveBookingEquipmentTask);
                     executorService.shutdown();
 

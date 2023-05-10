@@ -1,6 +1,7 @@
 package group3.mindfactory_booking.dao;
 
 import group3.mindfactory_booking.model.BookingEmail;
+import group3.mindfactory_booking.model.BookingTime;
 import group3.mindfactory_booking.model.singleton.Booking;
 
 import java.sql.*;
@@ -17,9 +18,12 @@ public class BookingDaoImpl implements BookingDao {
         databaseConnector = DatabaseConnector.getInstance();
     }
 
+    // https://stackoverflow.com/questions/7877747/closing-a-database-connection-in-java
     @Override
-    public void saveBooking(Booking booking) throws RuntimeException {
-        try (Connection con = databaseConnector.getConnection()) {
+    public void saveBooking(Booking booking, List<BookingTime> bookingTimes) throws RuntimeException, SQLException {
+        Connection con = databaseConnector.getConnection();
+        try {
+            con.setAutoCommit(false);
             PreparedStatement ps = con.prepareStatement("INSERT INTO Booking VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
 
             ps.setInt(1, booking.getBookingID());
@@ -45,9 +49,28 @@ public class BookingDaoImpl implements BookingDao {
             ps.setString(21, booking.getBookingType());
             ps.executeUpdate();
 
+            String sql = ("INSERT INTO BookingTimes VALUES(?,?,?,?,?,?,?);");
+            PreparedStatement ps2 = con.prepareStatement(sql);
+
+            for (BookingTime bookingTime : bookingTimes) {
+                ps2.setInt(1, booking.getBookingID());
+                ps2.setDate(2, Date.valueOf(bookingTime.getDate()));
+                ps2.setTime(3, Time.valueOf(bookingTime.getStartTime()));
+                ps2.setTime(4, Time.valueOf(bookingTime.getEndTime()));
+                ps2.setBoolean(5, bookingTime.isWholeDay());
+                ps2.setBoolean(6, bookingTime.isHalfDayEarly());
+                ps2.setBoolean(7, bookingTime.isNoShow());
+                ps2.addBatch();
+            }
+            ps2.executeBatch();
+
+            con.commit();
+            con.setAutoCommit(true);
+
         } catch (SQLException e) {
+            con.rollback();
             e.printStackTrace();
-            throw new RuntimeException(e);
+            throw new SQLException(e);
         }
     }
 

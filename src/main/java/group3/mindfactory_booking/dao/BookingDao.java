@@ -1,14 +1,16 @@
 package group3.mindfactory_booking.dao;
 
 import group3.mindfactory_booking.model.BookingEmail;
+import group3.mindfactory_booking.model.BookingTime;
 import group3.mindfactory_booking.model.singleton.Booking;
 
+import java.sql.SQLException;
 import java.util.List;
 
 
 public interface BookingDao {
 
-    void saveBooking(Booking booking);
+    void saveBooking(Booking booking, List<BookingTime> bookingTimes) throws SQLException;
 
     List<Integer> getAllBookingID();
 

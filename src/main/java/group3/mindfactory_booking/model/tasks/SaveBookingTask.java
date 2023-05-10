@@ -4,6 +4,7 @@ import group3.mindfactory_booking.dao.*;
 import group3.mindfactory_booking.model.singleton.Booking;
 import javafx.concurrent.Task;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -33,9 +34,9 @@ public class SaveBookingTask extends Task<Boolean> {
 
             booking.setBookingID(randomNum);
             booking.setBookingDateTime(LocalDateTime.now());
-            bookingDao.saveBooking(booking);
+            bookingDao.saveBooking(booking, booking.getBookingTimesList());
         }
-        catch (RuntimeException e) {
+        catch (SQLException e) {
             success = false;
         }
 
