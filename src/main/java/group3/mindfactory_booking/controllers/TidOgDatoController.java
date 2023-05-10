@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -126,6 +127,12 @@ public class TidOgDatoController {
                             dateIterator.remove();
                             break;
                         }
+                        if (bt.getDate().equals(ld)) {
+                            List<BookingTime> bookingTimes = new ArrayList<>();
+                            bookingTimes.add(bt);
+                            if (bookingTimes.size() == 2)
+                                dateIterator.remove();
+                        }
                     }
                 }
             }
@@ -172,6 +179,12 @@ public class TidOgDatoController {
                         for (int i = 7; i < 23; i++) {
                             startTimeList.add(LocalTime.of(i, 0));
                         }
+                    }
+                }
+
+                if (bookedTimes.isEmpty()) {
+                    for (int i = 7; i < 23; i++) {
+                        startTimeList.add(LocalTime.of(i, 0));
                     }
                 }
             }
