@@ -69,7 +69,6 @@ public class BookingDaoImpl implements BookingDao {
 
         } catch (SQLException e) {
             con.rollback();
-            e.printStackTrace();
             throw new SQLException(e);
         }
     }

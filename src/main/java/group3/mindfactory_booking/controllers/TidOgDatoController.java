@@ -11,12 +11,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -37,6 +37,7 @@ public class TidOgDatoController {
     @FXML private MFXComboBox<LocalTime> fraCB, tilCB;
     @FXML private MFXListView<BookingTime> tidOgDatoLV;
     @FXML private MFXButton bekræftBtn, tilbageBtn, tilføjBtn, sletBtn;
+    @FXML private Label alertLabel;
 
     @FXML
     void handleTilføj() {
@@ -61,6 +62,7 @@ public class TidOgDatoController {
         if (isInputValid() && isListViewValid()) {
             progressSpinner.setVisible(true);
             bekræftBtn.setDisable(true);
+            alertLabel.setVisible(false);
             importToBooking();
 
             SaveBookingTask saveBookingTask = new SaveBookingTask();
@@ -80,6 +82,18 @@ public class TidOgDatoController {
                     nextPage();
                 } else {
                     System.out.println("Booking failed to save");
+
+                    alertLabel.setVisible(true);
+
+                    datoCB.getSelectionModel().clearSelection();
+                    fraCB.getSelectionModel().clearSelection();
+                    tilCB.getSelectionModel().clearSelection();
+                    tidOgDatoLV.getItems().clear();
+                    startTimeList.clear();
+                    endTimeList.clear();
+
+                    tilføjBtn.setDisable(true);
+                    sletBtn.setDisable(true);
                 }
                 progressSpinner.setVisible(false);
                 bekræftBtn.setDisable(false);
@@ -105,15 +119,18 @@ public class TidOgDatoController {
         fraCB.setItems(startTimeList);
         tilCB.setItems(endTimeList);
 
-        for (int i = 0; i < 365; i++) {
-            dateList.add(LocalDate.now().plusDays((1 + i)));
-        }
-
-        // Gets the already booked times from the database every 10 seconds
+        // Gets the already booked times from the database every 5 seconds
         ReceiveTimesTask receiveTimesTask = new ReceiveTimesTask();
         receiveTimesTask.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 bookedTimes = newValue;
+
+                // Clear the dateList and add all the dates from today to 365 days from now
+                // This is added inside the listener because a booking time can be deleted, and that needs to be added back to the dateList
+                dateList.clear();
+                for (int i = 0; i < 365; i++) {
+                    dateList.add(LocalDate.now().plusDays((1 + i)));
+                }
 
                 // Remove the dates that are already booked if the booking is a wholeday booking
                 // Binged hard on this one. I'm sorry.

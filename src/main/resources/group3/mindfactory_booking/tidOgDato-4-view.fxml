@@ -14,77 +14,82 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group3.mindfactory_booking.controllers.TidOgDatoController">
    <center>
-      <HBox alignment="TOP_CENTER" spacing="64.0">
+      <VBox alignment="TOP_CENTER" spacing="16.0" BorderPane.alignment="TOP_CENTER">
          <children>
-            <VBox alignment="TOP_RIGHT" spacing="12.0">
+            <HBox alignment="TOP_CENTER">
                <children>
-                  <HBox alignment="CENTER_LEFT">
+                  <VBox alignment="TOP_RIGHT" spacing="12.0">
                      <children>
-                        <Label text="Vælg tid og dato">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <Label text="Vælg tid og dato">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" spacing="5.0">
+                           <children>
+                              <Label text="Dato">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <MFXComboBox fx:id="datoCB" floatMode="DISABLED" maxHeight="40.0" maxWidth="1.7976931348623157E308" minHeight="40.0" prefHeight="40.0" style="-fx-border-color: lightgrey;" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </MFXComboBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" spacing="5.0">
+                           <children>
+                              <Label text="Fra">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="11.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <MFXComboBox fx:id="fraCB" disable="true" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" minWidth="95.0" prefHeight="40.0" prefWidth="95.0" style="-fx-border-color: lightgrey;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets right="6.0" />
+                                 </HBox.margin>
+                              </MFXComboBox>
+                              <Label text="Til">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <MFXComboBox fx:id="tilCB" disable="true" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" minWidth="95.0" prefHeight="40.0" prefWidth="95.0" style="-fx-border-color: lightgrey;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </MFXComboBox>
+                           </children>
+                        </HBox>
+                        <MFXListView fx:id="tidOgDatoLV" depthLevel="LEVEL0" maxHeight="150.0" maxWidth="1.7976931348623157E308" style="-fx-border-color: lightgrey;" />
+                        <HBox alignment="CENTER_RIGHT" spacing="5.0">
+                           <children>
+                              <MFXButton fx:id="sletBtn" disable="true" onAction="#handleSlet" prefHeight="40.0" prefWidth="65.0" style="-fx-border-color: lightgrey; -fx-border-radius: 5;" text="Slet" />
+                              <MFXButton fx:id="tilføjBtn" disable="true" onAction="#handleTilføj" prefHeight="40.0" prefWidth="65.0" style="-fx-border-color: lightgrey; -fx-border-radius: 5;" text="Tilføj" />
+                           </children>
+                        </HBox>
                      </children>
-                  </HBox>
-                  <HBox alignment="CENTER_RIGHT" spacing="5.0">
-                     <children>
-                        <Label text="Dato">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <MFXComboBox fx:id="datoCB" floatMode="DISABLED" maxHeight="40.0" maxWidth="1.7976931348623157E308" minHeight="40.0" prefHeight="40.0" style="-fx-border-color: lightgrey;" HBox.hgrow="ALWAYS">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </MFXComboBox>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_RIGHT" spacing="5.0">
-                     <children>
-                        <Label text="Fra">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="11.0" />
-                           </HBox.margin>
-                        </Label>
-                        <MFXComboBox fx:id="fraCB" disable="true" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" minWidth="95.0" prefHeight="40.0" prefWidth="95.0" style="-fx-border-color: lightgrey;">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets right="6.0" />
-                           </HBox.margin>
-                        </MFXComboBox>
-                        <Label text="Til">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <MFXComboBox fx:id="tilCB" disable="true" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" minWidth="95.0" prefHeight="40.0" prefWidth="95.0" style="-fx-border-color: lightgrey;">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </MFXComboBox>
-                     </children>
-                  </HBox>
-                  <MFXListView fx:id="tidOgDatoLV" depthLevel="LEVEL0" maxHeight="150.0" maxWidth="1.7976931348623157E308" style="-fx-border-color: lightgrey;" />
-                  <HBox alignment="CENTER_RIGHT" spacing="5.0">
-                     <children>
-                        <MFXButton fx:id="sletBtn" disable="true" onAction="#handleSlet" prefHeight="40.0" prefWidth="65.0" style="-fx-border-color: lightgrey; -fx-border-radius: 5;" text="Slet" />
-                        <MFXButton fx:id="tilføjBtn" disable="true" onAction="#handleTilføj" prefHeight="40.0" prefWidth="65.0" style="-fx-border-color: lightgrey; -fx-border-radius: 5;" text="Tilføj" />
-                     </children>
-                  </HBox>
+                  </VBox>
                </children>
-            </VBox>
+            </HBox>
+            <Label fx:id="alertLabel" prefWidth="200.0" text="En tid og dato er lige blevet optaget. Prøv venligst igen." textAlignment="CENTER" textFill="RED" wrapText="true" />
          </children>
          <padding>
             <Insets bottom="16.0" top="16.0" />
          </padding>
-      </HBox>
+      </VBox>
    </center>
    <top>
       <VBox alignment="CENTER" prefHeight="60.0" style="-fx-background-color: #111c24;" BorderPane.alignment="CENTER">
