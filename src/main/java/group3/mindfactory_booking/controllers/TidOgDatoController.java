@@ -130,9 +130,11 @@ public class TidOgDatoController {
 
                 // Clear the dateList and add all the dates from today to 365 days from now
                 // This is added inside the listener because a booking time can be deleted, and that needs to be added back to the dateList
-                dateList.clear();
-                for (int i = 0; i < 365; i++) {
-                    dateList.add(LocalDate.now().plusDays((1 + i)));
+                if (oldValue == null || newValue.size() != oldValue.size()) { // This is to prevent the dateList from being cleared every 5 seconds, if nothing has changed. But it still needs to be populated the first time
+                    dateList.clear();
+                    for (int i = 0; i < 365; i++) {
+                        dateList.add(LocalDate.now().plusDays((1 + i)));
+                    }
                 }
 
                 // Remove the dates that are already booked if the booking is a wholeday booking
