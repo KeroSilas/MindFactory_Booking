@@ -83,8 +83,10 @@ public class TidOgDatoController {
                 } else {
                     System.out.println("Booking failed to save");
 
+                    // If the booking fails to save, the user is notified
                     alertLabel.setVisible(true);
 
+                    // Clear the ListView and ComboBoxes
                     datoCB.getSelectionModel().clearSelection();
                     fraCB.getSelectionModel().clearSelection();
                     tilCB.getSelectionModel().clearSelection();
@@ -92,6 +94,7 @@ public class TidOgDatoController {
                     startTimeList.clear();
                     endTimeList.clear();
 
+                    // Disable the buttons again
                     tilføjBtn.setDisable(true);
                     sletBtn.setDisable(true);
                 }
