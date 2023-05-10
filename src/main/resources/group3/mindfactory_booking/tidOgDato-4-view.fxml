@@ -84,7 +84,7 @@
                   </VBox>
                </children>
             </HBox>
-            <Label fx:id="alertLabel" prefWidth="200.0" text="En tid og dato er lige blevet optaget. Prøv venligst igen." textAlignment="CENTER" textFill="RED" wrapText="true" />
+            <Label fx:id="alertLabel" prefWidth="200.0" text="En tid og dato er lige blevet optaget. Prøv venligst igen." textAlignment="CENTER" textFill="RED" visible="false" wrapText="true" />
          </children>
          <padding>
             <Insets bottom="16.0" top="16.0" />
