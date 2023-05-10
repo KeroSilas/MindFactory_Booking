@@ -178,6 +178,7 @@ public class TidOgDatoController {
 
                     } else {
 
+                        startTimeList.clear();
                         for (int i = 7; i < 23; i++) {
                             startTimeList.add(LocalTime.of(i, 0));
                         }
@@ -185,6 +186,7 @@ public class TidOgDatoController {
                 }
 
                 if (bookedTimes.isEmpty()) {
+                    startTimeList.clear();
                     for (int i = 7; i < 23; i++) {
                         startTimeList.add(LocalTime.of(i, 0));
                     }
