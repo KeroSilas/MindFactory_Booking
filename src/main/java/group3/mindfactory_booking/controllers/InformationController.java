@@ -90,7 +90,7 @@ public class InformationController {
         }
 
         // https://stackoverflow.com/questions/273141/regex-for-numbers-only
-        if (deltagereTF.getText().isEmpty() || !deltagereTF.getText().matches("^[0-9]+$")) {
+        if (deltagereTF.getText().isEmpty() || !deltagereTF.getText().matches("^[0-9]+$") || Integer.parseInt(deltagereTF.getText()) > 35) {
             deltagereTF.setStyle("-fx-border-color: red");
             success = false;
         } else {
@@ -143,7 +143,7 @@ public class InformationController {
             stillingTF.setStyle("-fx-border-color: lightgrey");
         }
 
-        if (telefonTF.getText().isEmpty()) {
+        if (telefonTF.getText().isEmpty() || !telefonTF.getText().matches("^[0-9]+$")) {
             telefonTF.setStyle("-fx-border-color: red");
             success = false;
         } else {

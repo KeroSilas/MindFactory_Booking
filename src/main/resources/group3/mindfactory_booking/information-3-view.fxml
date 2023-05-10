@@ -64,7 +64,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <MFXTextField fx:id="telefonTF" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="221.0" style="-fx-border-color: lightgrey;">
+                        <MFXTextField fx:id="telefonTF" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="221.0" style="-fx-border-color: lightgrey;" textLimit="8">
                            <font>
                               <Font size="14.0" />
                            </font>

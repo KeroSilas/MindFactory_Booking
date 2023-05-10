@@ -49,8 +49,7 @@ public class BookingDaoImpl implements BookingDao {
             ps.setString(21, booking.getBookingType());
             ps.executeUpdate();
 
-            String sql = ("INSERT INTO BookingTimes VALUES(?,?,?,?,?,?,?);");
-            PreparedStatement ps2 = con.prepareStatement(sql);
+            PreparedStatement ps2 = con.prepareStatement("INSERT INTO BookingTimes VALUES(?,?,?,?,?,?,?);");
 
             for (BookingTime bookingTime : bookingTimes) {
                 ps2.setInt(1, booking.getBookingID());
@@ -64,6 +63,7 @@ public class BookingDaoImpl implements BookingDao {
             }
             ps2.executeBatch();
 
+            con.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
             con.commit();
             con.setAutoCommit(true);
 
