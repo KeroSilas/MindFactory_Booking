@@ -136,6 +136,7 @@ public class TidOgDatoController {
                             }
                         }
                     }
+                    sameDayCounter = 0;
                 }
             }
         });
