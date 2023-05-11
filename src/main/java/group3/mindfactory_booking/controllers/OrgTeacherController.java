@@ -17,10 +17,10 @@ public class OrgTeacherController {
 
     private Booking booking;
 
-    @FXML private MFXComboBox<String> aktivitetCB;
-    @FXML private MFXComboBox<String> udstyrCB;
+    @FXML private MFXComboBox<String> aktivitetCB, udstyrCB, virksomhedCB, forplejningCB;
+    @FXML private MFXTextField afdelingTF, stillingTF, deltagereTF;
     @FXML private MFXRadioButton annesofieRB, læringsRB;
-    @FXML private MFXButton næsteBtn, tilbageBtn;
+    @FXML private MFXButton næsteBtn, tilbageBtn, tilføjBtn, sletBtn;
     @FXML private MFXListView<String> udstyrLV;
 
     @FXML
@@ -55,11 +55,16 @@ public class OrgTeacherController {
     public void initialize() {
         booking = Booking.getInstance();
 
+        virksomhedCB.getItems().addAll("ECCO", "Tønder Kommune - organisation", "Andet udleje", "Mind Factory's egne aktiviteter");
         udstyrCB.getItems().addAll("Robotter", "Sakse");
         aktivitetCB.getItems().addAll("Ingen", "Kreativt Spark", "IdéGeneratoren", "Team-event: Kreativ Tech");
+        forplejningCB.getItems().addAll("Ingen", "Halvdags kaffemøde", "Halvdagsmødepakke", "Heldagsmødepakke");
     }
 
     private void importToBooking() {
+        booking.setAfdeling(afdelingTF.getText());
+        booking.setPosition(stillingTF.getText());
+        booking.setOrganization(virksomhedCB.getSelectionModel().getSelectedItem());
         booking.setActivity(aktivitetCB.getSelectionModel().getSelectedItem());
         booking.setEquipmentList(udstyrLV.getItems());
         if (læringsRB.isSelected()) {
@@ -74,11 +79,47 @@ public class OrgTeacherController {
     private boolean isInputValid() {
         boolean success = true;
 
+        if (virksomhedCB.getSelectionModel().getSelectedItem() == null) {
+            virksomhedCB.setStyle("-fx-border-color: red");
+            success = false;
+        } else {
+            virksomhedCB.setStyle("-fx-border-color: lightgrey");
+        }
+
+        if (afdelingTF.getText().isEmpty()) {
+            afdelingTF.setStyle("-fx-border-color: red");
+            success = false;
+        } else {
+            afdelingTF.setStyle("-fx-border-color: lightgrey");
+        }
+
+        if (stillingTF.getText().isEmpty()) {
+            stillingTF.setStyle("-fx-border-color: red");
+            success = false;
+        } else {
+            stillingTF.setStyle("-fx-border-color: lightgrey");
+        }
+
         if (aktivitetCB.getSelectionModel().getSelectedItem()  == null) {
             aktivitetCB.setStyle("-fx-border-color: red");
             success = false;
         } else {
             aktivitetCB.setStyle("-fx-border-color: lightgrey");
+        }
+
+        // https://stackoverflow.com/questions/273141/regex-for-numbers-only
+        if (deltagereTF.getText().isEmpty() || !deltagereTF.getText().matches("^[0-9]+$") || Integer.parseInt(deltagereTF.getText()) > 35) {
+            deltagereTF.setStyle("-fx-border-color: red");
+            success = false;
+        } else {
+            deltagereTF.setStyle("-fx-border-color: lightgrey");
+        }
+
+        if (forplejningCB.getSelectionModel().getSelectedItem() == null) {
+            forplejningCB.setStyle("-fx-border-color: red");
+            success = false;
+        } else {
+            forplejningCB.setStyle("-fx-border-color: lightgrey");
         }
 
         return success;

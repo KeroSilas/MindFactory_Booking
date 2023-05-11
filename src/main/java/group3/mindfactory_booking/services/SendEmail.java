@@ -16,7 +16,7 @@ import javax.mail.internet.MimeMultipart;
 // For the error: https://stackoverflow.com/questions/55276768/how-to-prevent-java-mail-expected-resource-not-found-warnings-from-camel-smtp
 public class SendEmail {
 
-    public void sendEmail(String email, String body, String title, boolean isSpecial) {
+    public void sendEmail(String email, String body, String title, boolean ccAdmin) {
         // Get system properties
         Properties properties = System.getProperties();
 
@@ -43,7 +43,7 @@ public class SendEmail {
             // Set To: header field of the header.
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
 
-            if (isSpecial) {
+            if (ccAdmin) {
                 message.addRecipient(Message.RecipientType.CC, new InternetAddress("sillun01@easv365.dk"));
             }
 

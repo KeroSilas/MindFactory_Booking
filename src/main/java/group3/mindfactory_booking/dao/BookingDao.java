@@ -10,9 +10,11 @@ import java.util.List;
 
 public interface BookingDao {
 
-    void saveBooking(Booking booking, List<BookingTime> bookingTimes) throws SQLException;
+    void saveBooking(Booking booking) throws SQLException;
 
     List<Integer> getAllBookingID();
+
+    List<BookingTime> getBookingTimeList();
 
     List<BookingEmail> getOneWeekOutBookings();
 

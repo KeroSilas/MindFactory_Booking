@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXListView?>
+<?import io.github.palexdev.materialfx.controls.MFXRadioButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group3.mindfactory_booking.controllers.OrgTeacherController">
+   <center>
+      <HBox alignment="TOP_CENTER" spacing="32.0">
+         <children>
+            <VBox alignment="TOP_RIGHT" spacing="12.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label text="Information om din virksomhed">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" spacing="8.0">
+                     <children>
+                        <Label text="Virksomhed">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <MFXComboBox fx:id="virksomhedCB" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="250.0" style="-fx-border-color: lightgrey;">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </MFXComboBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" spacing="5.0">
+                     <children>
+                        <Label text="Afdeling">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <MFXTextField fx:id="afdelingTF" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="250.0" style="-fx-border-color: lightgrey;">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </MFXTextField>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" spacing="5.0">
+                     <children>
+                        <Label text="Stilling">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <MFXTextField fx:id="stillingTF" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="250.0" style="-fx-border-color: lightgrey;">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </MFXTextField>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label text="Aktivitet">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets top="14.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" spacing="8.0">
+                     <children>
+                        <Label text="Aktivitet">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <MFXComboBox fx:id="aktivitetCB" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="250.0" style="-fx-border-color: lightgrey;">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </MFXComboBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label text="Deltagere og forplejning">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets top="14.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" spacing="8.0">
+                     <children>
+                        <Label text="Deltagere">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <MFXTextField fx:id="deltagereTF" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="250.0" style="-fx-border-color: lightgrey;">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </MFXTextField>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" spacing="8.0">
+                     <children>
+                        <Label text="Forplejning">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <MFXComboBox fx:id="forplejningCB" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="250.0" style="-fx-border-color: lightgrey;">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </MFXComboBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="TOP_RIGHT" spacing="12.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label text="Speciel udstyr/materiale">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" spacing="5.0">
+                     <children>
+                        <MFXComboBox fx:id="udstyrCB" floatMode="DISABLED" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="250.0" style="-fx-border-color: lightgrey;">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </MFXComboBox>
+                        <MFXButton fx:id="tilføjBtn" onAction="#handleTilføj" prefHeight="40.0" prefWidth="65.0" style="-fx-border-color: lightgrey; -fx-border-radius: 5;" text="Tilføj" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="TOP_RIGHT" spacing="5.0">
+                     <children>
+                        <MFXListView fx:id="udstyrLV" depthLevel="LEVEL0" maxHeight="175.0" maxWidth="1.7976931348623157E308" prefWidth="250.0" style="-fx-border-color: lightgrey;" />
+                        <MFXButton fx:id="sletBtn" onAction="#handleSlet" prefHeight="40.0" prefWidth="65.0" style="-fx-border-color: lightgrey; -fx-border-radius: 5;" text="Slet" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label text="Brug for assistance?">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets top="14.0" />
+                     </padding>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <MFXRadioButton fx:id="læringsRB" text="Lærings konsulent">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="assistanceType" />
+                           </toggleGroup>
+                        </MFXRadioButton>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <MFXRadioButton fx:id="annesofieRB" text="Anne-Sofie Dideriksen" toggleGroup="$assistanceType" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <MFXRadioButton text="Nej tak, jeg klarer mig selv" toggleGroup="$assistanceType" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="16.0" top="16.0" />
+         </padding>
+      </HBox>
+   </center>
+   <top>
+      <VBox alignment="CENTER" prefHeight="60.0" style="-fx-background-color: #111c24;" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Virksomhed information og aktivitet  (2/3)" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+   </top>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="60.0" spacing="12.0" style="-fx-background-color: #94c83d;" BorderPane.alignment="CENTER">
+         <children>
+            <MFXButton fx:id="tilbageBtn" onAction="#handleTilbage" prefHeight="35.0" prefWidth="100.0" text="Tilbage" />
+            <MFXButton fx:id="næsteBtn" onAction="#handleNæste" prefHeight="35.0" prefWidth="100.0" text="Næste" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>

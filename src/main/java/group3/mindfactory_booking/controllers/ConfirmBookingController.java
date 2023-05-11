@@ -1,7 +1,6 @@
 package group3.mindfactory_booking.controllers;
 
 import group3.mindfactory_booking.BookingApplication;
-import group3.mindfactory_booking.model.BookingTime;
 import group3.mindfactory_booking.model.singleton.Booking;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
@@ -13,7 +12,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class ConfirmBookingController {
 
@@ -48,13 +46,8 @@ public class ConfirmBookingController {
         organisationLabel.setText(booking.getOrganization());
         forløbLabel.setText(booking.getÅbenSkoleForløb());
         aktivitetLabel.setText(booking.getActivity());
-        // Github Copilot suggested this:
         udstyrLabel.setText(String.join(", ", booking.getEquipmentList()));
-
-        // https://www.baeldung.com/java-list-to-string
-        tidLabel.setText(booking.getBookingTimesList().stream()
-                .map(BookingTime::toString)
-                .collect(Collectors.joining(", ")));
+        tidLabel.setText(booking.toString());
     }
 
     private void goToHome() {

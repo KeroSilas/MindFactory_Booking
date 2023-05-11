@@ -14,7 +14,7 @@
    <center>
       <VBox alignment="TOP_CENTER" spacing="16.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Ønsker du at afbryde din booking, så skal du bare indtaste dit booking nummer du fik i din e-mail, da du først bookede hos os." wrapText="true" />
+            <Label text="Ønsker du at annulleredin booking, så skal du bare indtaste dit booking nummer du fik i din e-mail, da du først bookede hos os." wrapText="true" />
             <HBox alignment="CENTER_RIGHT" spacing="8.0">
                <children>
                   <Label text="Booking nummer:" />
@@ -49,7 +49,7 @@
                   <Color red="0.501960813999176" green="0.501960813999176" blue="0.501960813999176" />
                </color4>
             </MFXProgressSpinner>
-            <MFXButton fx:id="afbrydBtn" buttonType="RAISED" minHeight="30.0" minWidth="80.0" onAction="#handleAfbryd" prefHeight="30.0" prefWidth="80.0" rippleColor="WHITE" style="-fx-background-color: #BD2323FF;" text="Afbryd" textFill="WHITE" />
+            <MFXButton fx:id="afbrydBtn" buttonType="RAISED" minHeight="30.0" minWidth="80.0" onAction="#handleAfbryd" prefHeight="30.0" prefWidth="80.0" rippleColor="WHITE" style="-fx-background-color: #BD2323FF;" text="Annuller" textFill="WHITE" />
             <MFXButton buttonType="RAISED" minHeight="30.0" minWidth="80.0" onAction="#handleAnnuller" prefHeight="30.0" prefWidth="80.0" text="Luk" />
          </children>
          <padding>

@@ -15,9 +15,9 @@ public class BookingApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.getIcons().add(new Image("file:src/main/resources/group3/mindfactory_booking/images/MF_POSITVE_COLOR.png"));
         stage.setWidth(800);
-        stage.setHeight(725);
+        stage.setHeight(850);
         stage.setMinWidth(800);
-        stage.setMinHeight(725);
+        stage.setMinHeight(850);
         stage.setTitle("Mind Factory Booking");
         stage.setScene(scene);
         stage.show();

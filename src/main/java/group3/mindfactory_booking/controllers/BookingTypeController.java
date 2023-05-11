@@ -16,7 +16,7 @@ public class BookingTypeController {
 
     private Booking booking;
 
-    @FXML private MFXButton åbenSkoleBtn, organisationBtn, lærerBtn, næsteBtn, tilbageBtn;
+    @FXML private MFXButton skoleBtn, virksomhedBtn, næsteBtn, tilbageBtn;
 
     @FXML
     public void handleNæste() {
@@ -33,27 +33,17 @@ public class BookingTypeController {
     }
 
     @FXML
-    private void handleÅbenSkole() {
-        booking.setBookingType("Folkeskole");
-        åbenSkoleBtn.setStyle("-fx-background-color:  #94c83d; -fx-text-fill: #ffffff");
-        organisationBtn.setStyle("-fx-background-color:  #ffffff; -fx-text-fill: #000000");
-        lærerBtn.setStyle("-fx-background-color:  #ffffff; -fx-text-fill: #000000");
+    private void handleSkole() {
+        booking.setBookingType("Skole");
+        skoleBtn.setStyle("-fx-background-color:  #94c83d; -fx-text-fill: #ffffff");
+        virksomhedBtn.setStyle("-fx-background-color:  #ffffff; -fx-text-fill: #000000");
     }
 
     @FXML
-    private void handleOrganisation() {
-        booking.setBookingType("Organisation");
-        organisationBtn.setStyle("-fx-background-color:  #94c83d; -fx-text-fill: #ffffff");
-        åbenSkoleBtn.setStyle("-fx-background-color:  #ffffff; -fx-text-fill: #000000");
-        lærerBtn.setStyle("-fx-background-color:  #ffffff; -fx-text-fill: #000000");
-    }
-
-    @FXML
-    private void handleLærer() {
-        booking.setBookingType("Lærer");
-        lærerBtn.setStyle("-fx-background-color:  #94c83d; -fx-text-fill: #ffffff");
-        åbenSkoleBtn.setStyle("-fx-background-color:  #ffffff; -fx-text-fill: #000000");
-        organisationBtn.setStyle("-fx-background-color:  #ffffff; -fx-text-fill: #000000");
+    private void handleVirksomhed() {
+        booking.setBookingType("Virksomhed");
+        virksomhedBtn.setStyle("-fx-background-color:  #94c83d; -fx-text-fill: #ffffff");
+        skoleBtn.setStyle("-fx-background-color:  #ffffff; -fx-text-fill: #000000");
     }
 
     public void initialize() {
@@ -70,7 +60,7 @@ public class BookingTypeController {
 
         stage = (Stage) næsteBtn.getScene().getWindow();
         try {
-            root = FXMLLoader.load(Objects.requireNonNull(BookingApplication.class.getResource(Objects.equals(booking.getBookingType(), "Folkeskole") ? "aabenSkole-2-view.fxml" : "udstyrOgAktivitet-2-view.fxml")));
+            root = FXMLLoader.load(Objects.requireNonNull(BookingApplication.class.getResource(Objects.equals(booking.getBookingType(), "Skole") ? "skole-2-view.fxml" : "virksomhed-2-view.fxml")));
         } catch (IOException e) {
             e.printStackTrace();
             return;

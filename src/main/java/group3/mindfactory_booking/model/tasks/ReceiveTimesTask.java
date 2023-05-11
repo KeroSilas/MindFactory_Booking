@@ -1,7 +1,7 @@
 package group3.mindfactory_booking.model.tasks;
 
-import group3.mindfactory_booking.dao.BookingTimesDao;
-import group3.mindfactory_booking.dao.BookingTimesDaoImpl;
+import group3.mindfactory_booking.dao.BookingDao;
+import group3.mindfactory_booking.dao.BookingDaoImpl;
 import group3.mindfactory_booking.model.BookingTime;
 import javafx.concurrent.Task;
 
@@ -9,10 +9,10 @@ import java.util.List;
 
 public class ReceiveTimesTask extends Task<List<BookingTime>> {
 
-    private final BookingTimesDao bookingTimesDao;
+    private final BookingDao bookingTimesDao;
 
     public ReceiveTimesTask() {
-        bookingTimesDao = new BookingTimesDaoImpl();
+        bookingTimesDao = new BookingDaoImpl();
     }
 
     @Override

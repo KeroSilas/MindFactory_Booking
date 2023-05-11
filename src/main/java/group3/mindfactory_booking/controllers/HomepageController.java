@@ -21,7 +21,7 @@ public class HomepageController {
     @FXML
     void handleAfbrydBooking() {
         // Load the fxml file
-        FXMLLoader fxmlLoader = new FXMLLoader(BookingApplication.class.getResource("afbrydbooking-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(BookingApplication.class.getResource("annullerbooking-view.fxml"));
         try {
             Parent root = fxmlLoader.load();
 

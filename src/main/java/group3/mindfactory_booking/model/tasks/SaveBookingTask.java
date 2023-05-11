@@ -7,8 +7,6 @@ import javafx.concurrent.Task;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class SaveBookingTask extends Task<Boolean> {
 
@@ -34,7 +32,7 @@ public class SaveBookingTask extends Task<Boolean> {
 
             booking.setBookingID(randomNum);
             booking.setBookingDateTime(LocalDateTime.now());
-            bookingDao.saveBooking(booking, booking.getBookingTimesList());
+            bookingDao.saveBooking(booking);
         }
         catch (SQLException e) {
             success = false;

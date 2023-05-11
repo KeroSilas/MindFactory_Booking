@@ -3,14 +3,15 @@ package group3.mindfactory_booking.controllers;
 import group3.mindfactory_booking.BookingApplication;
 import group3.mindfactory_booking.model.singleton.Booking;
 import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
+import io.github.palexdev.materialfx.controls.MFXRadioButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,12 +21,11 @@ public class FolkeskoleController {
 
     private Booking booking;
 
-    @FXML private MFXTextField afgangTF, ankomstTF;
-    @FXML private MFXComboBox<String> forløbCB;
-    @FXML private MFXComboBox<String> transportCB;
+    @FXML private MFXTextField afgangTF, ankomstTF, fagTF, stillingTF;
+    @FXML private MFXComboBox<String> forløbCB, transportCB, skoleCB;
     @FXML private MFXButton næsteBtn, tilbageBtn;
-    @FXML private MFXCheckbox forløbCheckBox;
-    @FXML private Label forløbLabel;
+    @FXML private MFXRadioButton jaRB, nejRB;
+    @FXML private VBox åbenSkolePane;
 
     @FXML
     void handleNæste() {
@@ -46,61 +46,105 @@ public class FolkeskoleController {
     public void initialize() {
         booking = Booking.getInstance();
 
-        forløbCheckBox.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
-                forløbCB.setDisable(true);
-                forløbLabel.setDisable(true);
+        jaRB.setOnAction(e -> {
+            if (jaRB.isSelected()) {
+                åbenSkolePane.setVisible(true);
+                åbenSkolePane.setMinHeight(Region.USE_COMPUTED_SIZE);
+                åbenSkolePane.setPrefHeight(Region.USE_COMPUTED_SIZE);
             } else {
-                forløbCB.setDisable(false);
-                forløbLabel.setDisable(false);
+                åbenSkolePane.setVisible(false);
+                åbenSkolePane.setMinHeight(0);
+                åbenSkolePane.setPrefHeight(0);
             }
         });
 
+        nejRB.setOnAction(e -> {
+            if (nejRB.isSelected()) {
+                åbenSkolePane.setVisible(false);
+                åbenSkolePane.setMinHeight(0);
+                åbenSkolePane.setPrefHeight(0);
+            } else {
+                åbenSkolePane.setVisible(true);
+                åbenSkolePane.setMinHeight(Region.USE_COMPUTED_SIZE);
+                åbenSkolePane.setPrefHeight(Region.USE_COMPUTED_SIZE);
+            }
+        });
+
+        skoleCB.getItems().addAll("Tønder Gymnasium", "Det Blå Gymnasium", "EUC Syd", "Tønder Kommune - skole");
         forløbCB.getItems().addAll("Idéfabrikken", "Digital fabrikken med laserskærer", "Robot på job", "Robotten ryder op", "Naturisme ved Vadehavet", "Skab sikkerhed i Vadehavet");
-        transportCB.getItems().addAll("Lejet bus", "Offentlig transport");
+        transportCB.getItems().addAll("Jeg kommer i lejet bus", "Jeg kommer i offentlig transport");
     }
 
     private void importToBooking() {
-        booking.setTransportDeparture(afgangTF.getText());
-        booking.setTransportArrival(ankomstTF.getText());
-        booking.setTransportType(transportCB.getSelectionModel().getSelectedItem());
+        booking.setOrganization(skoleCB.getSelectionModel().getSelectedItem());
+        booking.setAfdeling(fagTF.getText());
+        booking.setPosition(stillingTF.getText());
 
-        if (forløbCheckBox.isSelected()) {
-            booking.setÅbenSkoleForløb("Ingen");
-        } else {
+        if (jaRB.isSelected()) {
             booking.setÅbenSkoleForløb(forløbCB.getSelectionModel().getSelectedItem());
+            booking.setTransportDeparture(afgangTF.getText());
+            booking.setTransportArrival(ankomstTF.getText());
+            booking.setTransportType(transportCB.getSelectionModel().getSelectedItem());
+        } else {
+            booking.setÅbenSkoleForløb("Ingen");
+            booking.setTransportDeparture("Ikke valgt");
+            booking.setTransportArrival("Ikke valgt");
+            booking.setTransportType("Ikke valgt");
         }
     }
 
     private boolean isInputValid() {
         boolean success = true;
 
-        if (afgangTF.getText().isEmpty()) {
-            afgangTF.setStyle("-fx-border-color: red");
+        if (skoleCB.getSelectionModel().getSelectedItem() == null) {
+            skoleCB.setStyle("-fx-border-color: red");
             success = false;
         } else {
-            afgangTF.setStyle("-fx-border-color: lightgrey");
+            skoleCB.setStyle("-fx-border-color: lightgrey");
         }
 
-        if (ankomstTF.getText().isEmpty()) {
-            ankomstTF.setStyle("-fx-border-color: red");
+        if (fagTF.getText().isEmpty()) {
+            fagTF.setStyle("-fx-border-color: red");
             success = false;
         } else {
-            ankomstTF.setStyle("-fx-border-color: lightgrey");
+            fagTF.setStyle("-fx-border-color: lightgrey");
         }
 
-        if (transportCB.getSelectionModel().getSelectedItem() == null) {
-            transportCB.setStyle("-fx-border-color: red");
+        if (stillingTF.getText().isEmpty()) {
+            stillingTF.setStyle("-fx-border-color: red");
             success = false;
         } else {
-            transportCB.setStyle("-fx-border-color: lightgrey");
+            stillingTF.setStyle("-fx-border-color: lightgrey");
         }
 
-        if (!forløbCheckBox.isSelected() && forløbCB.getSelectionModel().getSelectedItem() == null) {
-            forløbCB.setStyle("-fx-border-color: red");
-            success = false;
-        } else {
-            forløbCB.setStyle("-fx-border-color: lightgrey");
+        if (jaRB.isSelected()) {
+            if (forløbCB.getSelectionModel().getSelectedItem() == null) {
+                forløbCB.setStyle("-fx-border-color: red");
+                success = false;
+            } else {
+                forløbCB.setStyle("-fx-border-color: lightgrey");
+            }
+
+            if (transportCB.getSelectionModel().getSelectedItem() == null) {
+                transportCB.setStyle("-fx-border-color: red");
+                success = false;
+            } else {
+                transportCB.setStyle("-fx-border-color: lightgrey");
+            }
+
+            if (afgangTF.getText().isEmpty()) {
+                afgangTF.setStyle("-fx-border-color: red");
+                success = false;
+            } else {
+                afgangTF.setStyle("-fx-border-color: lightgrey");
+            }
+
+            if (ankomstTF.getText().isEmpty()) {
+                ankomstTF.setStyle("-fx-border-color: red");
+                success = false;
+            } else {
+                ankomstTF.setStyle("-fx-border-color: lightgrey");
+            }
         }
 
         return success;
