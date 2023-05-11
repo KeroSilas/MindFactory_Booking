@@ -42,7 +42,7 @@ public class InformationController {
     @FXML private MFXButton bekræftBtn, tilbageBtn;
     @FXML private MFXTextField efternavnTF, emailTF, fornavnTF, telefonTF;
     @FXML private TextArea beskedTA;
-    @FXML private Label alertLabel, fraLabel, tilLabel;
+    @FXML private Label alertLabel, fraLabel, tilLabel, specialLabel;
 
     @FXML
     void handleBekræft() {
@@ -155,7 +155,9 @@ public class InformationController {
                 endTimeList.clear();
 
                 fraCB.setDisable(false);
+                fraLabel.setDisable(false);
                 tilCB.setDisable(true);
+                tilLabel.setDisable(true);
 
                 // If there already is a booking on the selected date and it is a halfday booking before 12, then don't add the hours for the first half of the day
                 // If there already is a booking on the selected date and it is a halfday booking after 12, then don't add the hours for the second half of the day
@@ -201,6 +203,7 @@ public class InformationController {
         fraCB.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != oldValue) {
                 tilCB.setDisable(false);
+                tilLabel.setDisable(false);
 
                 endTimeList.clear();
 
@@ -219,6 +222,14 @@ public class InformationController {
                 } catch (NullPointerException e) {
                     System.out.println("No value selected");
                 }
+            }
+        });
+
+        tilCB.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.isAfter(LocalTime.of(18, 0))) {
+                specialLabel.setVisible(true);
+            } else {
+                specialLabel.setVisible(false);
             }
         });
     }

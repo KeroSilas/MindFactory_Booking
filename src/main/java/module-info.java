@@ -4,8 +4,8 @@ module group3.mindfactory_booking {
     requires java.sql;
     requires java.naming;
     requires com.microsoft.sqlserver.jdbc;
-    requires MaterialFX;
     requires java.mail;
+    requires MaterialFX;
 
 
     opens group3.mindfactory_booking to javafx.fxml;

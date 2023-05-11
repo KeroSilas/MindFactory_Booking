@@ -165,11 +165,25 @@
                   </HBox>
                   <HBox alignment="CENTER">
                      <children>
+                        <Label fx:id="specialLabel" prefWidth="240.0" text="Du har valgt en tid efter 18:00, din booking vil derfor kun blive en anmodning, og du skal forvente en bekræftelses e-mail." textAlignment="CENTER" textFill="#656565" visible="false" wrapText="true" />
+                     </children>
+                     <padding>
+                        <Insets top="8.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="32.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER">
+                     <children>
                         <Label fx:id="alertLabel" prefWidth="200.0" text="En tid og dato er lige blevet optaget. Prøv venligst igen." textAlignment="CENTER" textFill="RED" visible="false" wrapText="true" />
                      </children>
                      <padding>
                         <Insets top="8.0" />
                      </padding>
+                     <VBox.margin>
+                        <Insets left="32.0" />
+                     </VBox.margin>
                   </HBox>
                </children>
             </VBox>
