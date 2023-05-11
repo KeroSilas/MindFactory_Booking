@@ -3,10 +3,11 @@ package group3.mindfactory_booking.model;
 import java.time.LocalDate;
 
 public class BookingEmail {
-    private int bookingID;
-    private String name;
-    private String email;
-    private LocalDate startDate;
+
+    private final int bookingID;
+    private final String name;
+    private final String email;
+    private final LocalDate startDate;
 
     public BookingEmail(int bookingID, String name, String email, LocalDate startDate) {
         this.bookingID = bookingID;

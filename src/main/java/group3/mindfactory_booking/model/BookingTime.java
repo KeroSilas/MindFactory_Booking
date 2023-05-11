@@ -5,11 +5,11 @@ import java.time.LocalTime;
 
 public class BookingTime {
 
-    private LocalDate startDate;
-    private LocalTime startTime;
-    private LocalTime endTime;
-    private boolean isWholeDay;
-    private boolean isHalfDayEarly;
+    private final LocalDate startDate;
+    private final LocalTime startTime;
+    private final LocalTime endTime;
+    private final boolean isWholeDay;
+    private final boolean isHalfDayEarly;
 
     public BookingTime(LocalDate startDate, LocalTime startTime, LocalTime endTime, boolean isWholeDay, boolean isHalfDayEarly) {
         this.startDate = startDate;
