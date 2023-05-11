@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class FolkeskoleController {
+public class SkoleController {
 
     private Booking booking;
 

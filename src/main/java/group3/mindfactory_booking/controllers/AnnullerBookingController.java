@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class AfbrydBookingController {
+public class AnnullerBookingController {
 
     @FXML private Label statusLabel;
     @FXML private MFXProgressSpinner progressSpinner;

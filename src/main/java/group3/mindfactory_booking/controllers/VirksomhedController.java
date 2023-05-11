@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-public class OrgTeacherController {
+public class VirksomhedController {
 
     private Booking booking;
 
