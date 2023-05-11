@@ -1,4 +1,4 @@
-/* https://github.com/palexdev/MaterialFX/blob/main/demo/src/main/resources/io/github/palexdev/materialfx/demo/css/ComboBoxes.css */
+/* Adopted from https://github.com/palexdev/MaterialFX/blob/main/demo/src/main/resources/io/github/palexdev/materialfx/demo/css/ */
 
 .mfx-combo-box:focus-within {
     -fx-border-color: transparent transparent -common-gradient transparent;
@@ -19,3 +19,13 @@
 .mfx-combo-box .caret .mfx-ripple-generator {
     -mfx-ripple-color: rgba(145, 145, 145, 0.5);
 }
+
+.mfx-radio-button:selected {
+    -mfx-main: #94c83d;
+}
+
+.mfx-radio-button .mfx-ripple-generator {
+    -mfx-ripple-color: rgba(145, 145, 145, 0.5);
+}
+
+/* I wanted to change the highlight color of text in the text field, but I couldn't find a way to do it. */
