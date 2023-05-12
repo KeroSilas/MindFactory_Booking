@@ -49,8 +49,8 @@
                   <Color red="0.501960813999176" green="0.501960813999176" blue="0.501960813999176" />
                </color4>
             </MFXProgressSpinner>
-            <MFXButton fx:id="afbrydBtn" buttonType="RAISED" minHeight="30.0" minWidth="80.0" onAction="#handleAfbryd" prefHeight="30.0" prefWidth="80.0" rippleColor="WHITE" style="-fx-background-color: #BD2323FF;" text="Annuller" textFill="WHITE" />
-            <MFXButton buttonType="RAISED" minHeight="30.0" minWidth="80.0" onAction="#handleAnnuller" prefHeight="30.0" prefWidth="80.0" text="Luk" />
+            <MFXButton fx:id="annullerBtn" buttonType="RAISED" minHeight="30.0" minWidth="80.0" onAction="#handleAnnuller" prefHeight="30.0" prefWidth="80.0" rippleColor="WHITE" style="-fx-background-color: #BD2323FF;" text="Annuller" textFill="WHITE" />
+            <MFXButton buttonType="RAISED" minHeight="30.0" minWidth="80.0" onAction="#handleLuk" prefHeight="30.0" prefWidth="80.0" text="Luk" />
          </children>
          <padding>
             <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />

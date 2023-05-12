@@ -89,6 +89,7 @@ public class InformationController {
         } else {
             System.out.println("Input is not valid");
         }
+
     }
 
     @FXML

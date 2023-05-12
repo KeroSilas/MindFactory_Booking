@@ -13,21 +13,21 @@ public class AnnullerBookingController {
     @FXML private Label statusLabel;
     @FXML private MFXProgressSpinner progressSpinner;
     @FXML private MFXTextField bookingNummerTF;
-    @FXML private MFXButton afbrydBtn;
+    @FXML private MFXButton annullerBtn;
 
     @FXML
-    void handleAnnuller() {
+    void handleLuk() {
         Stage stage = (Stage) bookingNummerTF.getScene().getWindow();
         stage.close();
     }
 
     @FXML
-    void handleAfbryd() {
+    void handleAnnuller() {
         // Sets the statusLabel to empty, shows the progressSpinner and disables the afbrydBtn
         statusLabel.setText("");
         progressSpinner.setVisible(true);
-        afbrydBtn.setDisable(true);
-        afbrydBtn.setStyle("-fx-background-color: #ffffff; -fx-text-fill: #000000;");
+        annullerBtn.setDisable(true);
+        annullerBtn.setStyle("-fx-background-color: #ffffff; -fx-text-fill: #000000;");
 
         // Starts a new thread to delete the booking
         // If the booking is deleted, the statusLabel will be set to "Booking slettet" and the text color will be green
@@ -44,8 +44,8 @@ public class AnnullerBookingController {
                 statusLabel.setStyle("-fx-text-fill: red");
             }
             progressSpinner.setVisible(false);
-            afbrydBtn.setDisable(false);
-            afbrydBtn.setStyle("-fx-background-color: #BD2323FF; -fx-text-fill: #ffffff;");
+            annullerBtn.setDisable(false);
+            annullerBtn.setStyle("-fx-background-color: #BD2323FF; -fx-text-fill: #ffffff;");
         });
         Thread thread = new Thread(deleteBookingTask);
         thread.setDaemon(true);
