@@ -19,7 +19,6 @@ public class ReceiveTimesTask extends Task<List<BookingTime>> {
     public List<BookingTime> call() {
         while (!isCancelled()) { // Keep running until the task is cancelled
             updateValue(bookingTimesDao.getBookingTimeList());
-            System.out.println("Booked times updated");
             try {
                 Thread.sleep(5000L); // Sleep for the specified delay
             } catch (InterruptedException e) {

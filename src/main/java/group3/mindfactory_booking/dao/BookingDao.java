@@ -1,6 +1,5 @@
 package group3.mindfactory_booking.dao;
 
-import group3.mindfactory_booking.model.BookingEmail;
 import group3.mindfactory_booking.model.BookingTime;
 import group3.mindfactory_booking.model.singleton.Booking;
 
@@ -16,10 +15,8 @@ public interface BookingDao {
 
     List<BookingTime> getBookingTimeList();
 
-    List<BookingEmail> getOneWeekOutBookings();
-
     void deleteBooking(int bookingID) throws SQLException;
 
-    }
+}
 
 
