@@ -17,7 +17,7 @@
                   <Image url="@images/MF_POSITVE_COLOR.png" />
                </image>
                <VBox.margin>
-                  <Insets bottom="48.0" />
+                  <Insets bottom="46.0" />
                </VBox.margin>
             </ImageView>
             <MFXButton buttonType="RAISED" minHeight="50.0" minWidth="160.0" onAction="#handleBookNu" prefHeight="60.0" prefWidth="160.0" rippleColor="WHITE" style="-fx-background-color: #94c83d;" text="Book nu" textFill="WHITE">
