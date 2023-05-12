@@ -13,7 +13,7 @@ public class BookingApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(BookingApplication.class.getResource("homepage-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.getIcons().add(new Image("file:src/main/resources/group3/mindfactory_booking/images/MF_POSITVE_COLOR.png"));
+        stage.getIcons().add(new Image("file:src/main/resources/group3/mindfactory_booking/images/MF_POSITVE_LOGO_WHITE.png"));
         stage.setWidth(850);
         stage.setHeight(850);
         stage.setMinWidth(850);
