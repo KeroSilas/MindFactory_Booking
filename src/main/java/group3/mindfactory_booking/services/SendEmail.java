@@ -55,8 +55,7 @@ public class SendEmail {
             MimeBodyPart textPart = new MimeBodyPart();
 
             try {
-                File f = new File("src/main/resources/group3/mindfactory_booking/images/MF_POSITVE_COLOR.jpg");
-
+                File f = new File("src/main/resources/group3/mindfactory_booking/images/MF_POSITVE_LOGO_WHITE.png");
                 attachmentPart.attachFile(f);
                 textPart.setText(body);
                 multipart.addBodyPart(textPart);
