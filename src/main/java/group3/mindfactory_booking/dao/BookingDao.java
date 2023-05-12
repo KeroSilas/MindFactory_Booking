@@ -18,7 +18,7 @@ public interface BookingDao {
 
     List<BookingEmail> getOneWeekOutBookings();
 
-    void deleteBooking(int bookingID);
+    void deleteBooking(int bookingID) throws SQLException;
 
     }
 
