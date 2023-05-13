@@ -4,6 +4,7 @@
 <?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -49,8 +50,14 @@
                   <Color red="0.501960813999176" green="0.501960813999176" blue="0.501960813999176" />
                </color4>
             </MFXProgressSpinner>
-            <MFXButton fx:id="annullerBtn" buttonType="RAISED" minHeight="30.0" minWidth="80.0" onAction="#handleAnnuller" prefHeight="30.0" prefWidth="80.0" rippleColor="WHITE" style="-fx-background-color: #BD2323FF;" text="Annuller" textFill="WHITE" />
-            <MFXButton buttonType="RAISED" minHeight="30.0" minWidth="80.0" onAction="#handleLuk" prefHeight="30.0" prefWidth="80.0" text="Luk" />
+            <MFXButton fx:id="annullerBtn" buttonType="RAISED" minHeight="35.0" minWidth="80.0" onAction="#handleAnnuller" prefHeight="35.0" prefWidth="80.0" rippleColor="WHITE" style="-fx-background-color: #BD2323FF;" text="Annuller" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></MFXButton>
+            <MFXButton buttonType="RAISED" minHeight="35.0" minWidth="80.0" onAction="#handleLuk" prefHeight="35.0" prefWidth="80.0" text="Luk">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></MFXButton>
          </children>
          <padding>
             <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />

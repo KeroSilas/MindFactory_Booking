@@ -5,6 +5,7 @@
 <?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.BorderPane?>
@@ -132,6 +133,9 @@
                            <font>
                               <Font size="14.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </MFXComboBox>
                      </children>
                   </HBox>
@@ -146,6 +150,9 @@
                            <font>
                               <Font size="14.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </MFXComboBox>
                      </children>
                   </HBox>
@@ -160,6 +167,9 @@
                            <font>
                               <Font size="14.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </MFXComboBox>
                      </children>
                   </HBox>
@@ -208,8 +218,14 @@
       <HBox alignment="CENTER" prefHeight="60.0" spacing="12.0" style="-fx-background-color: #94c83d;" BorderPane.alignment="CENTER">
          <children>
             <HBox maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" prefHeight="30.0" prefWidth="30.0" />
-            <MFXButton fx:id="tilbageBtn" onAction="#handleTilbage" prefHeight="35.0" prefWidth="100.0" text="Tilbage" />
-            <MFXButton fx:id="bekræftBtn" onAction="#handleBekræft" prefHeight="35.0" prefWidth="100.0" text="Bekræft" />
+            <MFXButton fx:id="tilbageBtn" onAction="#handleTilbage" prefHeight="40.0" prefWidth="100.0" text="Tilbage">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></MFXButton>
+            <MFXButton fx:id="bekræftBtn" onAction="#handleBekræft" prefHeight="40.0" prefWidth="100.0" text="Bekræft">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></MFXButton>
             <HBox maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" prefHeight="30.0" prefWidth="30.0">
                <children>
                   <MFXProgressSpinner fx:id="progressSpinner" visible="false">

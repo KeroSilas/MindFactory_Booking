@@ -6,6 +6,7 @@
 <?import io.github.palexdev.materialfx.controls.MFXRadioButton?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.BorderPane?>
@@ -42,6 +43,9 @@
                            <font>
                               <Font size="14.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </MFXComboBox>
                      </children>
                   </HBox>
@@ -99,6 +103,9 @@
                            <font>
                               <Font size="14.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </MFXComboBox>
                      </children>
                   </HBox>
@@ -142,6 +149,9 @@
                            <font>
                               <Font size="14.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </MFXComboBox>
                      </children>
                   </HBox>
@@ -164,14 +174,23 @@
                            <font>
                               <Font size="14.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </MFXComboBox>
-                        <MFXButton fx:id="tilføjBtn" onAction="#handleTilføj" prefHeight="40.0" prefWidth="65.0" style="-fx-border-color: lightgrey; -fx-border-radius: 5;" text="Tilføj" />
+                        <MFXButton fx:id="tilføjBtn" onAction="#handleTilføj" prefHeight="40.0" prefWidth="65.0" style="-fx-border-color: lightgrey; -fx-border-radius: 5;" text="Tilføj">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></MFXButton>
                      </children>
                   </HBox>
                   <HBox alignment="TOP_RIGHT" spacing="5.0">
                      <children>
                         <MFXListView fx:id="udstyrLV" depthLevel="LEVEL0" maxHeight="175.0" maxWidth="1.7976931348623157E308" prefWidth="250.0" style="-fx-border-color: lightgrey;" />
-                        <MFXButton fx:id="sletBtn" onAction="#handleSlet" prefHeight="40.0" prefWidth="65.0" style="-fx-border-color: lightgrey; -fx-border-radius: 5;" text="Slet" />
+                        <MFXButton fx:id="sletBtn" onAction="#handleSlet" prefHeight="40.0" prefWidth="65.0" style="-fx-border-color: lightgrey; -fx-border-radius: 5;" text="Slet">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></MFXButton>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT">
@@ -192,17 +211,26 @@
                            <toggleGroup>
                               <ToggleGroup fx:id="assistanceType" />
                            </toggleGroup>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </MFXRadioButton>
                      </children>
                   </HBox>
                   <HBox>
                      <children>
-                        <MFXRadioButton fx:id="annesofieRB" text="Anne-Sofie Dideriksen" toggleGroup="$assistanceType" />
+                        <MFXRadioButton fx:id="annesofieRB" text="Anne-Sofie Dideriksen" toggleGroup="$assistanceType">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></MFXRadioButton>
                      </children>
                   </HBox>
                   <HBox>
                      <children>
-                        <MFXRadioButton text="Nej tak, jeg klarer mig selv" toggleGroup="$assistanceType" />
+                        <MFXRadioButton text="Nej tak, jeg klarer mig selv" toggleGroup="$assistanceType">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></MFXRadioButton>
                      </children>
                   </HBox>
                </children>
@@ -227,8 +255,14 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="60.0" spacing="12.0" style="-fx-background-color: #94c83d;" BorderPane.alignment="CENTER">
          <children>
-            <MFXButton fx:id="tilbageBtn" onAction="#handleTilbage" prefHeight="35.0" prefWidth="100.0" text="Tilbage" />
-            <MFXButton fx:id="næsteBtn" onAction="#handleNæste" prefHeight="35.0" prefWidth="100.0" text="Næste" />
+            <MFXButton fx:id="tilbageBtn" onAction="#handleTilbage" prefHeight="40.0" prefWidth="100.0" text="Tilbage">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></MFXButton>
+            <MFXButton fx:id="næsteBtn" onAction="#handleNæste" prefHeight="40.0" prefWidth="100.0" text="Næste">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></MFXButton>
          </children>
       </HBox>
    </bottom>

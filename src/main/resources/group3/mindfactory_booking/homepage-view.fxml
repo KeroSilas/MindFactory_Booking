@@ -2,6 +2,7 @@
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -20,15 +21,21 @@
                   <Insets bottom="46.0" />
                </VBox.margin>
             </ImageView>
-            <MFXButton buttonType="RAISED" minHeight="50.0" minWidth="160.0" onAction="#handleBookNu" prefHeight="60.0" prefWidth="160.0" rippleColor="WHITE" style="-fx-background-color: #94c83d;" text="Book nu" textFill="WHITE">
+            <MFXButton buttonType="RAISED" minHeight="60.0" minWidth="160.0" onAction="#handleBookNu" prefHeight="60.0" prefWidth="160.0" rippleColor="WHITE" style="-fx-background-color: #94c83d;" text="Book nu" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </MFXButton>
-            <MFXButton buttonType="RAISED" minHeight="35.0" minWidth="160.0" onAction="#handleAfbrydBooking" prefHeight="40.0" prefWidth="160.0" text="Annuller booking">
+            <MFXButton buttonType="RAISED" minHeight="40.0" minWidth="160.0" onAction="#handleAfbrydBooking" prefHeight="40.0" prefWidth="160.0" text="Annuller booking">
                <font>
                   <Font size="14.0" />
-               </font></MFXButton>
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></MFXButton>
          </children>
          <padding>
             <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
