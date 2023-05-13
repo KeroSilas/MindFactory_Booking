@@ -55,6 +55,22 @@ public class VirksomhedController {
     public void initialize() {
         booking = Booking.getInstance();
 
+        udstyrCB.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                tilføjBtn.setDisable(false);
+            } else {
+                tilføjBtn.setDisable(true);
+            }
+        });
+
+        udstyrLV.getSelectionModel().selectionProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                sletBtn.setDisable(false);
+            } else {
+                sletBtn.setDisable(true);
+            }
+        });
+
         virksomhedCB.getItems().addAll("ECCO", "Tønder Kommune - organisation", "Andet udleje", "Mind Factory's egne aktiviteter");
         udstyrCB.getItems().addAll("Robotter", "Sakse");
         aktivitetCB.getItems().addAll("Ingen", "Kreativt Spark", "IdéGeneratoren", "Team-event: Kreativ Tech");

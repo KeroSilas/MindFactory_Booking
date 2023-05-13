@@ -15,7 +15,7 @@
    <center>
       <VBox alignment="TOP_CENTER" spacing="16.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Ønsker du at annulleredin booking, så skal du bare indtaste dit booking nummer du fik i din e-mail, da du først bookede hos os." wrapText="true" />
+            <Label text="Ønsker du at annullere din booking, så skal du bare indtaste dit booking nummer du fik i din e-mail, da du først bookede hos os." wrapText="true" />
             <HBox alignment="CENTER_RIGHT" spacing="8.0">
                <children>
                   <Label text="Booking nummer:" />

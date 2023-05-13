@@ -178,7 +178,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </MFXComboBox>
-                        <MFXButton fx:id="tilføjBtn" onAction="#handleTilføj" prefHeight="40.0" prefWidth="65.0" style="-fx-border-color: lightgrey; -fx-border-radius: 5;" text="Tilføj">
+                        <MFXButton fx:id="tilføjBtn" disable="true" onAction="#handleTilføj" prefHeight="40.0" prefWidth="65.0" style="-fx-border-color: lightgrey; -fx-border-radius: 5;" text="Tilføj">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></MFXButton>
@@ -187,7 +187,7 @@
                   <HBox alignment="TOP_RIGHT" spacing="5.0">
                      <children>
                         <MFXListView fx:id="udstyrLV" depthLevel="LEVEL0" maxHeight="175.0" maxWidth="1.7976931348623157E308" prefWidth="250.0" style="-fx-border-color: lightgrey;" />
-                        <MFXButton fx:id="sletBtn" onAction="#handleSlet" prefHeight="40.0" prefWidth="65.0" style="-fx-border-color: lightgrey; -fx-border-radius: 5;" text="Slet">
+                        <MFXButton fx:id="sletBtn" disable="true" onAction="#handleSlet" prefHeight="40.0" prefWidth="65.0" style="-fx-border-color: lightgrey; -fx-border-radius: 5;" text="Slet">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></MFXButton>
