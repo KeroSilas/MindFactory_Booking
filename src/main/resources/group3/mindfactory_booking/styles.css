@@ -1,10 +1,6 @@
 /* Adopted from https://github.com/palexdev/MaterialFX/blob/main/demo/src/main/resources/io/github/palexdev/materialfx/demo/css/ */
 
-.mfx-combo-box:focus-within {
-    -fx-border-color: transparent transparent -common-gradient transparent;
-}
-
-.mfx-combo-box:focus-within .caret .mfx-font-icon {
+.mfx-combo-box .caret .mfx-font-icon {
     -mfx-color: #000000;
 }
 
