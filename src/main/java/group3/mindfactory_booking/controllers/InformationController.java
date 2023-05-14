@@ -121,7 +121,6 @@ public class InformationController {
                 }
 
                 // Remove the dates that are already booked if the booking is a wholeday booking
-                // Binged hard on this one. I'm sorry.
                 Iterator<LocalDate> dateIterator = dateList.iterator();
                 int sameDayCounter = 0;
                 while (dateIterator.hasNext()) {
@@ -147,7 +146,6 @@ public class InformationController {
         thread.setDaemon(true);
         thread.start();
 
-        // Spaghetti code incoming
         datoCB.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != oldValue) {
                 fraCB.getSelectionModel().clearSelection();
