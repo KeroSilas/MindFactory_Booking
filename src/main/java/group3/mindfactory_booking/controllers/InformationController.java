@@ -129,6 +129,7 @@ public class InformationController {
                         }
                     }
                 }
+
             }
         });
         Thread thread = new Thread(getBookingTimesTask);
@@ -136,7 +137,7 @@ public class InformationController {
         thread.start();
 
         datoCB.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != oldValue) {
+            if (newValue != null) {
                 fraCB.getSelectionModel().clearSelection();
                 tilCB.getSelectionModel().clearSelection();
                 startTimeList.clear();
@@ -168,35 +169,31 @@ public class InformationController {
 
         // If the selected time is a halfday booking before 12, then don't add the hours for the first half of the day
         fraCB.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != oldValue) {
+            if (newValue != null) {
                 tilCB.getSelectionModel().clearSelection();
+                endTimeList.clear();
+
                 tilCB.setDisable(false);
                 tilLabel.setDisable(false);
 
-                endTimeList.clear();
-
-                try {
-                    // I heard you like spaghetti, so I put spaghetti in your spaghetti
-                    int hour = newValue.plusHours(1).getHour();
-                    for (int i = hour; i < 24; i++) {
-                        endTimeList.add(LocalTime.of(i,0));
-                    }
-                    Iterator<LocalTime> endTimeIterator = endTimeList.iterator();
-                    while (endTimeIterator.hasNext()) {
-                        LocalTime lt = endTimeIterator.next();
-                        for (BookingTime bt : bookedTimes) {
-                            if (newValue.isBefore(bt.getStartTime()) && datoCB.getValue().equals(bt.getStartDate())) {
-                                if ((lt.isAfter(bt.getStartTime()))) {
-                                    endTimeIterator.remove();
-                                    break;
-                                }
+                // I heard you like spaghetti, so I put spaghetti in your spaghetti
+                int hour = newValue.plusHours(1).getHour();
+                for (int i = hour; i < 24; i++) {
+                    endTimeList.add(LocalTime.of(i,0));
+                }
+                Iterator<LocalTime> endTimeIterator = endTimeList.iterator();
+                while (endTimeIterator.hasNext()) {
+                    LocalTime lt = endTimeIterator.next();
+                    for (BookingTime bt : bookedTimes) {
+                        if (newValue.isBefore(bt.getStartTime()) && datoCB.getValue().equals(bt.getStartDate())) {
+                            if ((lt.isAfter(bt.getStartTime()))) {
+                                endTimeIterator.remove();
+                                break;
                             }
                         }
                     }
-
-                } catch (NullPointerException e) {
-                    System.out.println("No value selected");
                 }
+
             }
         });
 
