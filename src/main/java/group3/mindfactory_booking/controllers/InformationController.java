@@ -140,18 +140,6 @@ public class InformationController {
                     }
                     sameDayCounter = 0;
                 }
-
-                /*// NEW CODE
-                Iterator<LocalDate> dateIterator = dateList.iterator();
-                while (dateIterator.hasNext()) {
-                    LocalDate ld = dateIterator.next();
-                    for (BookingTime bt : bookedTimes) {
-                        if (bt.isWholeDay() && bt.getStartDate().equals(ld)) {
-                            dateIterator.remove();
-                            break;
-                        }
-                    }
-                }*/
             }
         });
         Thread thread = new Thread(receiveTimesTask);
@@ -207,22 +195,6 @@ public class InformationController {
                         startTimeList.add(LocalTime.of(i, 0));
                     }
                 }
-
-
-                /*// NEW CODE
-                for (int i = 7; i < 23; i++) {
-                    startTimeList.add(LocalTime.of(i,0));
-                }
-                Iterator<LocalTime> startTimeIterator = startTimeList.iterator();
-                while (startTimeIterator.hasNext()) {
-                    LocalTime lt = startTimeIterator.next();
-                    for (BookingTime bt : bookedTimes) {
-                        if (lt.isAfter(bt.getStartTime()) && lt.isBefore(bt.getEndTime())) {
-                            startTimeIterator.remove();
-                            break;
-                        }
-                    }
-                }*/
             }
         });
 
@@ -246,23 +218,6 @@ public class InformationController {
                             endTimeList.add(LocalTime.of(i, 0));
                         }
                     }
-
-
-                    /*// NEW CODE
-                    int hour = newValue.plusHours(1).getHour();
-                    for (int i = hour; i < 24; i++) {
-                        endTimeList.add(LocalTime.of(i,0));
-                    }
-                    Iterator<LocalTime> endTimeIterator = endTimeList.iterator();
-                    while (endTimeIterator.hasNext()) {
-                        LocalTime lt = endTimeIterator.next();
-                        for (BookingTime bt : bookedTimes) {
-                            if (lt.isAfter(bt.getStartTime())) {
-                                endTimeIterator.remove();
-                                break;
-                            }
-                        }
-                    }*/
 
                 } catch (NullPointerException e) {
                     System.out.println("No value selected");
