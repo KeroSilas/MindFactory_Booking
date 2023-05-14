@@ -7,11 +7,11 @@ import javafx.concurrent.Task;
 
 import java.util.List;
 
-public class ReceiveTimesTask extends Task<List<BookingTime>> {
+public class GetBookingTimesTask extends Task<List<BookingTime>> {
 
     private final BookingDao bookingTimesDao;
 
-    public ReceiveTimesTask() {
+    public GetBookingTimesTask() {
         bookingTimesDao = new BookingDaoImpl();
     }
 

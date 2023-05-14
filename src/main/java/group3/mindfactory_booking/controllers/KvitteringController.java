@@ -31,21 +31,29 @@ public class KvitteringController {
     public void initialize() {
         booking = Booking.getInstance();
 
-        afgangLabel.setText(booking.getTransportDeparture());
-        ankomstLabel.setText(booking.getTransportArrival());
-        assistanceLabel.setText(booking.getAssistance());
-        deltagereLabel.setText(String.valueOf(booking.getParticipants()));
-        efternavnLabel.setText(booking.getLastName());
-        emailLabel.setText(booking.getEmail());
-        fornavnLabel.setText(booking.getFirstName());
-        telefonLabel.setText(booking.getPhone());
-        transportLabel.setText(booking.getTransportType());
-        afdelingLabel.setText(booking.getAfdeling());
-        stillingLabel.setText(booking.getPosition());
-        forplejningLabel.setText(booking.getCatering());
-        organisationLabel.setText(booking.getOrganization());
-        forløbLabel.setText(booking.getÅbenSkoleForløb());
-        aktivitetLabel.setText(booking.getActivity());
+        if (booking.getÅbenSkoleForløb() != null) {
+            forløbLabel.setText(booking.getÅbenSkoleForløb().getÅbenSkoleForløb());
+            transportLabel.setText(booking.getÅbenSkoleForløb().getTransportType());
+            afgangLabel.setText(booking.getÅbenSkoleForløb().getTransportDeparture());
+            ankomstLabel.setText(booking.getÅbenSkoleForløb().getTransportArrival());
+        }
+
+        if (booking.getActivity() != null) {
+            aktivitetLabel.setText(booking.getActivity().getActivity());
+        }
+
+        if (booking.getCatering() != null) {
+            forplejningLabel.setText(booking.getCatering().getCatering());
+        }
+        assistanceLabel.setText(booking.getOrganization().getAssistance());
+        deltagereLabel.setText(String.valueOf(booking.getOrganization().getParticipants()));
+        efternavnLabel.setText(booking.getCustomer().getLastName());
+        emailLabel.setText(booking.getCustomer().getEmail());
+        fornavnLabel.setText(booking.getCustomer().getFirstName());
+        telefonLabel.setText(booking.getCustomer().getPhone());
+        afdelingLabel.setText(booking.getCustomer().getDepartment());
+        stillingLabel.setText(booking.getCustomer().getPosition());
+        organisationLabel.setText(booking.getOrganization().getOrganization());
         udstyrLabel.setText(String.join(", ", booking.getEquipmentList()));
         tidLabel.setText(booking.toString());
     }

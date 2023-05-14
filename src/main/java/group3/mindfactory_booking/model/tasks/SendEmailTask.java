@@ -33,7 +33,7 @@ public class SendEmailTask extends Task<Boolean> {
 
         if (isSpecial) {
             executorService.submit(() -> sendEmail.sendEmail(
-                    booking.getEmail(),
+                    booking.getCustomer().getEmail(),
                     "Du bede venligst tjekke administrations programmet.",
                     booking.getOrganization() + " har lige booket en tid uden for normal åbningstid. Booking ID: " + booking.getBookingID(),
                     false)
@@ -41,7 +41,7 @@ public class SendEmailTask extends Task<Boolean> {
         }
 
         executorService.submit(() -> sendEmail.sendEmail(
-                booking.getEmail(),
+                booking.getCustomer().getEmail(),
                 String.valueOf(booking.getBookingID()),
                 "Her er din bookingkode til Mindfactory by ECCO",
                 false)

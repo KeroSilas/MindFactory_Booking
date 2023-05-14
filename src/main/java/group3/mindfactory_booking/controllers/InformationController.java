@@ -3,7 +3,7 @@ package group3.mindfactory_booking.controllers;
 import group3.mindfactory_booking.BookingApplication;
 import group3.mindfactory_booking.model.BookingTime;
 import group3.mindfactory_booking.model.singleton.Booking;
-import group3.mindfactory_booking.model.tasks.ReceiveTimesTask;
+import group3.mindfactory_booking.model.tasks.GetBookingTimesTask;
 import group3.mindfactory_booking.model.tasks.SaveBookingEquipmentTask;
 import group3.mindfactory_booking.model.tasks.SaveBookingTask;
 import group3.mindfactory_booking.model.tasks.SendEmailTask;
@@ -34,7 +34,6 @@ public class InformationController {
     private final ObservableList<LocalDate> dateList = FXCollections.observableArrayList();
     private final ObservableList<LocalTime> startTimeList = FXCollections.observableArrayList();
     private final ObservableList<LocalTime> endTimeList = FXCollections.observableArrayList();
-    private boolean isHalfDayEarly;
 
     @FXML private MFXProgressSpinner progressSpinner;
     @FXML private MFXComboBox<LocalDate> datoCB;
@@ -106,8 +105,8 @@ public class InformationController {
         tilCB.setItems(endTimeList);
 
         // Gets the already booked times from the database every 5 seconds
-        ReceiveTimesTask receiveTimesTask = new ReceiveTimesTask();
-        receiveTimesTask.valueProperty().addListener((observable, oldValue, newValue) -> {
+        GetBookingTimesTask getBookingTimesTask = new GetBookingTimesTask();
+        getBookingTimesTask.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 bookedTimes = newValue;
 
@@ -120,9 +119,7 @@ public class InformationController {
                     }
                 }
 
-                // Remove the dates that are already booked if the booking is a wholeday booking
                 Iterator<LocalDate> dateIterator = dateList.iterator();
-                int sameDayCounter = 0;
                 while (dateIterator.hasNext()) {
                     LocalDate ld = dateIterator.next();
                     for (BookingTime bt : bookedTimes) {
@@ -130,31 +127,11 @@ public class InformationController {
                             dateIterator.remove();
                             break;
                         }
-                        if (bt.getStartDate().equals(ld)) {
-                            sameDayCounter++;
-                            if (sameDayCounter == 2) {
-                                dateIterator.remove();
-                                break;
-                            }
-                        }
                     }
-                    sameDayCounter = 0;
                 }
-
-                /*// NEW CODE
-                Iterator<LocalDate> dateIterator = dateList.iterator();
-                while (dateIterator.hasNext()) {
-                    LocalDate ld = dateIterator.next();
-                    for (BookingTime bt : bookedTimes) {
-                        if (bt.isWholeDay() && bt.getStartDate().equals(ld)) {
-                            dateIterator.remove();
-                            break;
-                        }
-                    }
-                }*/
             }
         });
-        Thread thread = new Thread(receiveTimesTask);
+        Thread thread = new Thread(getBookingTimesTask);
         thread.setDaemon(true);
         thread.start();
 
@@ -170,46 +147,6 @@ public class InformationController {
                 tilCB.setDisable(true);
                 tilLabel.setDisable(true);
 
-                // If there already is a booking on the selected date and it is a halfday booking before 12, then don't add the hours for the first half of the day
-                // If there already is a booking on the selected date and it is a halfday booking after 12, then don't add the hours for the second half of the day
-                // Otherwise show all the hours
-                for (BookingTime bt : bookedTimes) {
-                    if (bt.getStartDate().equals(newValue) && !bt.isHalfDayEarly()) {
-
-                        startTimeList.clear();
-                        for (int i = 7; i < 12; i++) {
-                            startTimeList.add(LocalTime.of(i, 0));
-                            isHalfDayEarly = true;
-                        }
-                        break;
-
-                    } else if (bt.getStartDate().equals(newValue) && bt.isHalfDayEarly()) {
-
-                        startTimeList.clear();
-                        for (int i = 12; i < 23; i++) {
-                            startTimeList.add(LocalTime.of(i, 0));
-                            isHalfDayEarly = false;
-                        }
-                        break;
-
-                    } else {
-
-                        startTimeList.clear();
-                        for (int i = 7; i < 23; i++) {
-                            startTimeList.add(LocalTime.of(i, 0));
-                        }
-                    }
-                }
-
-                if (bookedTimes.isEmpty()) {
-                    startTimeList.clear();
-                    for (int i = 7; i < 23; i++) {
-                        startTimeList.add(LocalTime.of(i, 0));
-                    }
-                }
-
-
-                /*// NEW CODE
                 for (int i = 7; i < 23; i++) {
                     startTimeList.add(LocalTime.of(i,0));
                 }
@@ -217,12 +154,12 @@ public class InformationController {
                 while (startTimeIterator.hasNext()) {
                     LocalTime lt = startTimeIterator.next();
                     for (BookingTime bt : bookedTimes) {
-                        if (lt.isAfter(bt.getStartTime()) && lt.isBefore(bt.getEndTime())) {
+                        if ((lt.isAfter(bt.getStartTime()) || lt.equals(bt.getStartTime())) && (lt.isBefore(bt.getEndTime()) || lt.equals(bt.getEndTime()))) {
                             startTimeIterator.remove();
                             break;
                         }
                     }
-                }*/
+                }
             }
         });
 
@@ -234,21 +171,7 @@ public class InformationController {
 
                 endTimeList.clear();
 
-                // Since we already declared the boolean isHalfDayEarly in the listener for the date ComboBox, we can use it here, instead of having to loop through the bookedTimes again
                 try {
-                    int hour = newValue.plusHours(1).getHour();
-                    if (isHalfDayEarly) {
-                        for (int i = hour; i <= 12; i++) {
-                            endTimeList.add(LocalTime.of(i, 0));
-                        }
-                    } else {
-                        for (int i = hour; i < 24; i++) {
-                            endTimeList.add(LocalTime.of(i, 0));
-                        }
-                    }
-
-
-                    /*// NEW CODE
                     int hour = newValue.plusHours(1).getHour();
                     for (int i = hour; i < 24; i++) {
                         endTimeList.add(LocalTime.of(i,0));
@@ -257,12 +180,12 @@ public class InformationController {
                     while (endTimeIterator.hasNext()) {
                         LocalTime lt = endTimeIterator.next();
                         for (BookingTime bt : bookedTimes) {
-                            if (lt.isAfter(bt.getStartTime())) {
+                            if ((lt.isAfter(bt.getStartTime()) || lt.equals(bt.getStartTime())) && (lt.isBefore(bt.getEndTime()) || lt.equals(bt.getEndTime()))) {
                                 endTimeIterator.remove();
                                 break;
                             }
                         }
-                    }*/
+                    }
 
                 } catch (NullPointerException e) {
                     System.out.println("No value selected");
@@ -284,10 +207,10 @@ public class InformationController {
         booking.setStartTime(fraCB.getValue());
         booking.setEndTime(tilCB.getValue());
         booking.setMessageToAS(beskedTA.getText());
-        booking.setLastName(efternavnTF.getText());
-        booking.setEmail(emailTF.getText());
-        booking.setFirstName(fornavnTF.getText());
-        booking.setPhone(telefonTF.getText());
+        booking.getCustomer().setFirstName(fornavnTF.getText());
+        booking.getCustomer().setLastName(efternavnTF.getText());
+        booking.getCustomer().setEmail(emailTF.getText());
+        booking.getCustomer().setPhone(telefonTF.getText());
     }
 
     private boolean isInputValid() {
