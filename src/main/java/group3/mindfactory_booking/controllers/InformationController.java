@@ -154,9 +154,11 @@ public class InformationController {
                 while (startTimeIterator.hasNext()) {
                     LocalTime lt = startTimeIterator.next();
                     for (BookingTime bt : bookedTimes) {
-                        if ((lt.isAfter(bt.getStartTime()) || lt.equals(bt.getStartTime())) && (lt.isBefore(bt.getEndTime()) || lt.equals(bt.getEndTime()))) {
-                            startTimeIterator.remove();
-                            break;
+                        if (datoCB.getValue().equals(bt.getStartDate())) {
+                            if ((lt.isAfter(bt.getStartTime()) || lt.equals(bt.getStartTime())) && (lt.isBefore(bt.getEndTime()) || lt.equals(bt.getEndTime()))) {
+                                startTimeIterator.remove();
+                                break;
+                            }
                         }
                     }
                 }
@@ -167,6 +169,7 @@ public class InformationController {
         // If the selected time is a halfday booking before 12, then don't add the hours for the first half of the day
         fraCB.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != oldValue) {
+                tilCB.getSelectionModel().clearSelection();
                 tilCB.setDisable(false);
                 tilLabel.setDisable(false);
 
@@ -182,7 +185,7 @@ public class InformationController {
                     while (endTimeIterator.hasNext()) {
                         LocalTime lt = endTimeIterator.next();
                         for (BookingTime bt : bookedTimes) {
-                            if (newValue.plusHours(1).isBefore(bt.getStartTime())) {
+                            if (newValue.isBefore(bt.getStartTime()) && datoCB.getValue().equals(bt.getStartDate())) {
                                 if ((lt.isAfter(bt.getStartTime()))) {
                                     endTimeIterator.remove();
                                     break;
@@ -198,10 +201,8 @@ public class InformationController {
         });
 
         tilCB.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.isAfter(LocalTime.of(18, 0))) {
-                specialLabel.setVisible(true);
-            } else {
-                specialLabel.setVisible(false);
+            if (newValue != null) {
+                specialLabel.setVisible(newValue.isAfter(LocalTime.of(18, 0)));
             }
         });
     }
