@@ -160,6 +160,7 @@ public class InformationController {
                         }
                     }
                 }
+
             }
         });
 
@@ -172,6 +173,7 @@ public class InformationController {
                 endTimeList.clear();
 
                 try {
+                    // I heard you like spaghetti, so I put spaghetti in your spaghetti
                     int hour = newValue.plusHours(1).getHour();
                     for (int i = hour; i < 24; i++) {
                         endTimeList.add(LocalTime.of(i,0));
@@ -180,9 +182,11 @@ public class InformationController {
                     while (endTimeIterator.hasNext()) {
                         LocalTime lt = endTimeIterator.next();
                         for (BookingTime bt : bookedTimes) {
-                            if ((lt.isAfter(bt.getStartTime()) || lt.equals(bt.getStartTime())) && (lt.isBefore(bt.getEndTime()) || lt.equals(bt.getEndTime()))) {
-                                endTimeIterator.remove();
-                                break;
+                            if (newValue.plusHours(1).isBefore(bt.getStartTime())) {
+                                if ((lt.isAfter(bt.getStartTime()))) {
+                                    endTimeIterator.remove();
+                                    break;
+                                }
                             }
                         }
                     }

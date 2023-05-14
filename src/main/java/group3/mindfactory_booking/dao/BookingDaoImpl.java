@@ -24,62 +24,77 @@ public class BookingDaoImpl implements BookingDao {
         Connection con = databaseConnector.getConnection();
         try {
             con.setAutoCommit(false);
-            PreparedStatement ps = con.prepareStatement("INSERT INTO Customer VALUES(?,?,?,?,?,?);");
 
-            ps.setString(1, booking.getCustomer().getFirstName());
-            ps.setString(2, booking.getCustomer().getLastName());
-            ps.setString(3, booking.getCustomer().getPhone());
-            ps.setString(4, booking.getCustomer().getEmail());
-            ps.setString(5, booking.getCustomer().getDepartment());
-            ps.setString(6, booking.getCustomer().getPosition());
+            try {
+                PreparedStatement ps = con.prepareStatement("INSERT INTO Customer VALUES(?,?,?,?,?,?);");
+
+                ps.setString(1, booking.getCustomer().getFirstName());
+                ps.setString(2, booking.getCustomer().getLastName());
+                ps.setString(3, booking.getCustomer().getPhone());
+                ps.setString(4, booking.getCustomer().getEmail());
+                ps.setString(5, booking.getCustomer().getDepartment());
+                ps.setString(6, booking.getCustomer().getPosition());
+                ps.executeUpdate();
+
+            } catch (SQLException e) {
+                // If customer already exists, update customer
+                PreparedStatement ps = con.prepareStatement("UPDATE Customer SET firstName = ?, lastName = ?, phone = ?, department = ?, position = ? WHERE email = ?;");
+
+                ps.setString(1, booking.getCustomer().getFirstName());
+                ps.setString(2, booking.getCustomer().getLastName());
+                ps.setString(3, booking.getCustomer().getPhone());
+                ps.setString(4, booking.getCustomer().getDepartment());
+                ps.setString(5, booking.getCustomer().getPosition());
+                ps.setString(6, booking.getCustomer().getEmail());
+                ps.executeUpdate();
+            }
+
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Booking VALUES(?,?,?,?,?,?,?,?,?,?,?);");
+
+            ps.setInt(1, booking.getBookingID());
+            ps.setString(2, booking.getCustomer().getEmail());
+            ps.setTimestamp(3, Timestamp.valueOf(booking.getBookingDateTime()));
+            ps.setDate(4, Date.valueOf(booking.getStartDate()));
+            ps.setTime(5, Time.valueOf(booking.getStartTime()));
+            ps.setTime(6, Time.valueOf(booking.getEndTime()));
+            ps.setBoolean(7, booking.isWholeDay());
+            ps.setBoolean(8, booking.isNoShow());
+            ps.setBoolean(9, booking.isEmailSent());
+            ps.setString(10, booking.getMessageToAS());
+            ps.setString(11, booking.getPersonalNote());
             ps.executeUpdate();
 
-            PreparedStatement ps2 = con.prepareStatement("INSERT INTO Booking VALUES(?,?,?,?,?,?,?,?,?,?,?);");
-
-            ps2.setInt(1, booking.getBookingID());
-            ps2.setString(2, booking.getCustomer().getEmail());
-            ps2.setTimestamp(3, Timestamp.valueOf(booking.getBookingDateTime()));
-            ps2.setDate(4, Date.valueOf(booking.getStartDate()));
-            ps2.setTime(5, Time.valueOf(booking.getStartTime()));
-            ps2.setTime(6, Time.valueOf(booking.getEndTime()));
-            ps2.setBoolean(7, booking.isWholeDay());
-            ps2.setBoolean(8, booking.isNoShow());
-            ps2.setBoolean(9, booking.isEmailSent());
-            ps2.setString(10, booking.getMessageToAS());
-            ps2.setString(11, booking.getPersonalNote());
-            ps2.executeUpdate();
-
             if (booking.getCatering() != null) {
-                PreparedStatement ps3 = con.prepareStatement("INSERT INTO BookingCatering VALUES(?,?);");
-                ps3.setInt(1, booking.getBookingID());
-                ps3.setInt(2, booking.getCatering().getCateringID());
-                ps3.executeUpdate();
+                PreparedStatement ps2 = con.prepareStatement("INSERT INTO BookingCatering VALUES(?,?);");
+                ps2.setInt(1, booking.getBookingID());
+                ps2.setInt(2, booking.getCatering().getCateringID());
+                ps2.executeUpdate();
             }
 
             if (booking.getActivity() != null) {
-                PreparedStatement ps4 = con.prepareStatement("INSERT INTO BookingActivity VALUES(?,?);");
-                ps4.setInt(1, booking.getBookingID());
-                ps4.setInt(2, booking.getActivity().getActivityID());
-                ps4.executeUpdate();
+                PreparedStatement ps3 = con.prepareStatement("INSERT INTO BookingActivity VALUES(?,?);");
+                ps3.setInt(1, booking.getBookingID());
+                ps3.setInt(2, booking.getActivity().getActivityID());
+                ps3.executeUpdate();
             }
 
             if (booking.getOrganization() != null) {
-                PreparedStatement ps5 = con.prepareStatement("INSERT INTO BookingOrganisation VALUES(?,?,?,?);");
-                ps5.setInt(1, booking.getBookingID());
-                ps5.setInt(2, booking.getOrganization().getOrganizationID());
-                ps5.setString(3, booking.getOrganization().getAssistance());
-                ps5.setInt(4, booking.getOrganization().getParticipants());
-                ps5.executeUpdate();
+                PreparedStatement ps4 = con.prepareStatement("INSERT INTO BookingOrganisation VALUES(?,?,?,?);");
+                ps4.setInt(1, booking.getBookingID());
+                ps4.setInt(2, booking.getOrganization().getOrganizationID());
+                ps4.setString(3, booking.getOrganization().getAssistance());
+                ps4.setInt(4, booking.getOrganization().getParticipants());
+                ps4.executeUpdate();
             }
 
             if (booking.getÅbenSkoleForløb() != null) {
-                PreparedStatement ps6 = con.prepareStatement("INSERT INTO BookingForløb VALUES(?,?,?,?,?);");
-                ps6.setInt(1, booking.getBookingID());
-                ps6.setInt(2, booking.getÅbenSkoleForløb().getForløbID());
-                ps.setString(3, booking.getÅbenSkoleForløb().getTransportType());
-                ps.setString(4, booking.getÅbenSkoleForløb().getTransportArrival());
-                ps.setString(5, booking.getÅbenSkoleForløb().getTransportDeparture());
-                ps6.executeUpdate();
+                PreparedStatement ps5 = con.prepareStatement("INSERT INTO BookingForløb VALUES(?,?,?,?,?);");
+                ps5.setInt(1, booking.getBookingID());
+                ps5.setInt(2, booking.getÅbenSkoleForløb().getForløbID());
+                ps5.setString(3, booking.getÅbenSkoleForløb().getTransportType());
+                ps5.setString(4, booking.getÅbenSkoleForløb().getTransportArrival());
+                ps5.setString(5, booking.getÅbenSkoleForløb().getTransportDeparture());
+                ps5.executeUpdate();
             }
 
             con.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
