@@ -1,7 +1,13 @@
 package group3.mindfactory_booking.controllers;
 
 import group3.mindfactory_booking.BookingApplication;
+import group3.mindfactory_booking.model.Activity;
+import group3.mindfactory_booking.model.Catering;
+import group3.mindfactory_booking.model.Organization;
 import group3.mindfactory_booking.model.singleton.Booking;
+import group3.mindfactory_booking.model.tasks.GetActivitiesTask;
+import group3.mindfactory_booking.model.tasks.GetCateringTask;
+import group3.mindfactory_booking.model.tasks.GetOrganisationsTask;
 import io.github.palexdev.materialfx.controls.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +23,10 @@ public class VirksomhedController {
 
     private Booking booking;
 
-    @FXML private MFXComboBox<String> aktivitetCB, udstyrCB, virksomhedCB, forplejningCB;
+    @FXML private MFXComboBox<String> udstyrCB;
+    @FXML private MFXComboBox<Organization> virksomhedCB;
+    @FXML private MFXComboBox<Catering> forplejningCB;
+    @FXML private MFXComboBox<Activity> aktivitetCB;
     @FXML private MFXTextField afdelingTF, stillingTF, deltagereTF;
     @FXML private MFXRadioButton annesofieRB, læringsRB;
     @FXML private MFXButton næsteBtn, tilbageBtn, tilføjBtn, sletBtn;
@@ -56,39 +65,53 @@ public class VirksomhedController {
         booking = Booking.getInstance();
 
         udstyrCB.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                tilføjBtn.setDisable(false);
-            } else {
-                tilføjBtn.setDisable(true);
-            }
+            tilføjBtn.setDisable(newValue == null);
         });
 
         udstyrLV.getSelectionModel().selectionProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                sletBtn.setDisable(false);
-            } else {
-                sletBtn.setDisable(true);
-            }
+            sletBtn.setDisable(newValue == null);
         });
 
-        virksomhedCB.getItems().addAll("ECCO", "Tønder Kommune - organisation", "Andet udleje", "Mind Factory's egne aktiviteter");
+        GetOrganisationsTask getOrganisationsTask = new GetOrganisationsTask();
+        getOrganisationsTask.setOnSucceeded(e -> {
+            List<Organization> organisations = getOrganisationsTask.getValue();
+            List<Organization> virksomheder = organisations.subList(0, 4);
+            virksomhedCB.getItems().addAll(virksomheder);
+        });
+        Thread thread = new Thread(getOrganisationsTask);
+        thread.start();
+
+        GetActivitiesTask getActivitiesTask = new GetActivitiesTask();
+        getActivitiesTask.setOnSucceeded(e -> {
+            List<Activity> activities = getActivitiesTask.getValue();
+            aktivitetCB.getItems().addAll(activities);
+        });
+        Thread thread2 = new Thread(getActivitiesTask);
+        thread2.start();
+
+        GetCateringTask getCateringTask = new GetCateringTask();
+        getCateringTask.setOnSucceeded(e -> {
+            List<Catering> catering = getCateringTask.getValue();
+            forplejningCB.getItems().addAll(catering);
+        });
+        Thread thread3 = new Thread(getCateringTask);
+        thread3.start();
+
         udstyrCB.getItems().addAll("Robotter", "Sakse");
-        aktivitetCB.getItems().addAll("Ingen", "Kreativt Spark", "IdéGeneratoren", "Team-event: Kreativ Tech");
-        forplejningCB.getItems().addAll("Ingen", "Halvdags kaffemøde", "Halvdagsmødepakke", "Heldagsmødepakke");
     }
 
     private void importToBooking() {
-        booking.setAfdeling(afdelingTF.getText());
-        booking.setPosition(stillingTF.getText());
+        booking.getCustomer().setDepartment(afdelingTF.getText());
+        booking.getCustomer().setPosition(stillingTF.getText());
         booking.setOrganization(virksomhedCB.getSelectionModel().getSelectedItem());
         booking.setActivity(aktivitetCB.getSelectionModel().getSelectedItem());
         booking.setEquipmentList(udstyrLV.getItems());
         if (læringsRB.isSelected()) {
-            booking.setAssistance("Læring konsulent");
+            booking.getOrganization().setAssistance("Læring konsulent");
         } else if (annesofieRB.isSelected()) {
-            booking.setAssistance("Anne-Sofie Dideriksen");
+            booking.getOrganization().setAssistance("Anne-Sofie Dideriksen");
         } else {
-            booking.setAssistance("Ingen");
+            booking.getOrganization().setAssistance("Ingen");
         }
     }
 

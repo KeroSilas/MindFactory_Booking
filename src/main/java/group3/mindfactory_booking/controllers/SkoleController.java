@@ -1,7 +1,11 @@
 package group3.mindfactory_booking.controllers;
 
 import group3.mindfactory_booking.BookingApplication;
+import group3.mindfactory_booking.model.Forløb;
+import group3.mindfactory_booking.model.Organization;
 import group3.mindfactory_booking.model.singleton.Booking;
+import group3.mindfactory_booking.model.tasks.GetForløbTask;
+import group3.mindfactory_booking.model.tasks.GetOrganisationsTask;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXRadioButton;
@@ -15,6 +19,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 public class SkoleController {
@@ -22,7 +27,9 @@ public class SkoleController {
     private Booking booking;
 
     @FXML private MFXTextField afgangTF, ankomstTF, fagTF, stillingTF;
-    @FXML private MFXComboBox<String> forløbCB, transportCB, skoleCB;
+    @FXML private MFXComboBox<String> transportCB;
+    @FXML private MFXComboBox<Organization> skoleCB;
+    @FXML private MFXComboBox<Forløb> forløbCB;
     @FXML private MFXButton næsteBtn, tilbageBtn;
     @FXML private MFXRadioButton jaRB, nejRB;
     @FXML private VBox åbenSkolePane;
@@ -70,26 +77,36 @@ public class SkoleController {
             }
         });
 
-        skoleCB.getItems().addAll("Tønder Gymnasium", "Det Blå Gymnasium", "EUC Syd", "Tønder Kommune - skole");
-        forløbCB.getItems().addAll("Idéfabrikken", "Digital fabrikken med laserskærer", "Robot på job", "Robotten ryder op", "Naturisme ved Vadehavet", "Skab sikkerhed i Vadehavet");
+        GetOrganisationsTask getOrganisationsTask = new GetOrganisationsTask();
+        getOrganisationsTask.setOnSucceeded(e -> {
+            List<Organization> organisations = getOrganisationsTask.getValue();
+            List<Organization> schools = organisations.subList(4, 8);
+            skoleCB.getItems().addAll(schools);
+        });
+        Thread thread = new Thread(getOrganisationsTask);
+        thread.start();
+
+        GetForløbTask getForløbTask = new GetForløbTask();
+        getForløbTask.setOnSucceeded(e -> {
+            List<Forløb> forløb = getForløbTask.getValue();
+            forløbCB.getItems().addAll(forløb);
+        });
+        Thread thread2 = new Thread(getForløbTask);
+        thread2.start();
+
         transportCB.getItems().addAll("Jeg kommer i lejet bus", "Jeg kommer i offentlig transport");
     }
 
     private void importToBooking() {
         booking.setOrganization(skoleCB.getSelectionModel().getSelectedItem());
-        booking.setAfdeling(fagTF.getText());
-        booking.setPosition(stillingTF.getText());
+        booking.getCustomer().setDepartment(fagTF.getText());
+        booking.getCustomer().setPosition(stillingTF.getText());
 
         if (jaRB.isSelected()) {
             booking.setÅbenSkoleForløb(forløbCB.getSelectionModel().getSelectedItem());
-            booking.setTransportDeparture(afgangTF.getText());
-            booking.setTransportArrival(ankomstTF.getText());
-            booking.setTransportType(transportCB.getSelectionModel().getSelectedItem());
-        } else {
-            booking.setÅbenSkoleForløb("Ingen");
-            booking.setTransportDeparture("Ikke valgt");
-            booking.setTransportArrival("Ikke valgt");
-            booking.setTransportType("Ikke valgt");
+            booking.getÅbenSkoleForløb().setTransportDeparture(afgangTF.getText());
+            booking.getÅbenSkoleForløb().setTransportArrival(ankomstTF.getText());
+            booking.getÅbenSkoleForløb().setTransportType(transportCB.getSelectionModel().getSelectedItem());
         }
     }
 

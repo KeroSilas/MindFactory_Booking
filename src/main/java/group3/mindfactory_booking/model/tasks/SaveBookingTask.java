@@ -35,6 +35,7 @@ public class SaveBookingTask extends Task<Boolean> {
             bookingDao.saveBooking(booking);
         }
         catch (SQLException e) {
+            e.printStackTrace();
             success = false;
         }
 

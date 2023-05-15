@@ -24,36 +24,78 @@ public class BookingDaoImpl implements BookingDao {
         Connection con = databaseConnector.getConnection();
         try {
             con.setAutoCommit(false);
-            PreparedStatement ps = con.prepareStatement("INSERT INTO Booking VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
+
+            try {
+                PreparedStatement ps = con.prepareStatement("INSERT INTO Customer VALUES(?,?,?,?,?,?);");
+
+                ps.setString(1, booking.getCustomer().getFirstName());
+                ps.setString(2, booking.getCustomer().getLastName());
+                ps.setString(3, booking.getCustomer().getPhone());
+                ps.setString(4, booking.getCustomer().getEmail());
+                ps.setString(5, booking.getCustomer().getDepartment());
+                ps.setString(6, booking.getCustomer().getPosition());
+                ps.executeUpdate();
+
+            } catch (SQLException e) {
+                // If customer already exists, update customer
+                PreparedStatement ps = con.prepareStatement("UPDATE Customer SET firstName = ?, lastName = ?, phone = ?, department = ?, position = ? WHERE email = ?;");
+
+                ps.setString(1, booking.getCustomer().getFirstName());
+                ps.setString(2, booking.getCustomer().getLastName());
+                ps.setString(3, booking.getCustomer().getPhone());
+                ps.setString(4, booking.getCustomer().getDepartment());
+                ps.setString(5, booking.getCustomer().getPosition());
+                ps.setString(6, booking.getCustomer().getEmail());
+                ps.executeUpdate();
+            }
+
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Booking VALUES(?,?,?,?,?,?,?,?,?,?,?);");
 
             ps.setInt(1, booking.getBookingID());
-            ps.setString(2, booking.getBookingType());
-            ps.setString(3, booking.getCatering());
-            ps.setString(4, booking.getActivity());
-            ps.setString(5, booking.getOrganization());
-            ps.setString(6, booking.getÅbenSkoleForløb());
-            ps.setString(7, booking.getFirstName());
-            ps.setString(8, booking.getLastName());
-            ps.setString(9, booking.getPosition());
-            ps.setString(10, booking.getAfdeling());
-            ps.setString(11, booking.getPhone());
-            ps.setString(12, booking.getEmail());
-            ps.setString(13, booking.getAssistance());
-            ps.setString(14, booking.getTransportType());
-            ps.setString(15, booking.getTransportArrival());
-            ps.setString(16, booking.getTransportDeparture());
-            ps.setInt(17, booking.getParticipants());
-            ps.setTimestamp(18, Timestamp.valueOf(booking.getBookingDateTime()));
-            ps.setDate(19, Date.valueOf(booking.getStartDate()));
-            ps.setTime(20, Time.valueOf(booking.getStartTime()));
-            ps.setTime(21, Time.valueOf(booking.getEndTime()));
-            ps.setBoolean(22, booking.isWholeDay());
-            ps.setBoolean(23, booking.isHalfDayEarly());
-            ps.setBoolean(24, booking.isNoShow());
-            ps.setBoolean(25, booking.isEmailSent());
-            ps.setString(26, booking.getMessageToAS());
-            ps.setString(27, booking.getPersonalNote());
+            ps.setString(2, booking.getCustomer().getEmail());
+            ps.setTimestamp(3, Timestamp.valueOf(booking.getBookingDateTime()));
+            ps.setDate(4, Date.valueOf(booking.getStartDate()));
+            ps.setTime(5, Time.valueOf(booking.getStartTime()));
+            ps.setTime(6, Time.valueOf(booking.getEndTime()));
+            ps.setBoolean(7, booking.isWholeDay());
+            ps.setBoolean(8, booking.isNoShow());
+            ps.setBoolean(9, booking.isEmailSent());
+            ps.setString(10, booking.getMessageToAS());
+            ps.setString(11, booking.getPersonalNote());
             ps.executeUpdate();
+
+            if (booking.getCatering() != null) {
+                PreparedStatement ps2 = con.prepareStatement("INSERT INTO BookingCatering VALUES(?,?);");
+                ps2.setInt(1, booking.getBookingID());
+                ps2.setInt(2, booking.getCatering().getCateringID());
+                ps2.executeUpdate();
+            }
+
+            if (booking.getActivity() != null) {
+                PreparedStatement ps3 = con.prepareStatement("INSERT INTO BookingActivity VALUES(?,?);");
+                ps3.setInt(1, booking.getBookingID());
+                ps3.setInt(2, booking.getActivity().getActivityID());
+                ps3.executeUpdate();
+            }
+
+            if (booking.getOrganization() != null) {
+                PreparedStatement ps4 = con.prepareStatement("INSERT INTO BookingOrganisation VALUES(?,?,?,?);");
+                ps4.setInt(1, booking.getBookingID());
+                ps4.setInt(2, booking.getOrganization().getOrganizationID());
+                ps4.setString(3, booking.getOrganization().getAssistance());
+                ps4.setInt(4, booking.getOrganization().getParticipants());
+                ps4.executeUpdate();
+            }
+
+            if (booking.getÅbenSkoleForløb() != null) {
+                PreparedStatement ps5 = con.prepareStatement("INSERT INTO BookingForløb VALUES(?,?,?,?,?);");
+                ps5.setInt(1, booking.getBookingID());
+                ps5.setInt(2, booking.getÅbenSkoleForløb().getForløbID());
+                ps5.setString(3, booking.getÅbenSkoleForløb().getTransportType());
+                ps5.setString(4, booking.getÅbenSkoleForløb().getTransportArrival());
+                ps5.setString(5, booking.getÅbenSkoleForløb().getTransportDeparture());
+                ps5.executeUpdate();
+            }
 
             con.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
             con.commit();
@@ -91,7 +133,7 @@ public class BookingDaoImpl implements BookingDao {
     public List<BookingTime> getBookingTimeList() {
         List<BookingTime> bookingTimeList = new ArrayList<>();
         try (Connection con = databaseConnector.getConnection()){
-            PreparedStatement ps = con.prepareStatement("SELECT startDate, startTime, endTime, isWholeDay, isHalfDayEarly FROM Booking;");
+            PreparedStatement ps = con.prepareStatement("SELECT startDate, startTime, endTime, isWholeDay FROM Booking;");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -99,8 +141,7 @@ public class BookingDaoImpl implements BookingDao {
                 LocalTime startTime = rs.getTime("startTime").toLocalTime();
                 LocalTime endTime = rs.getTime("endTime").toLocalTime();
                 boolean isWholeDay = rs.getBoolean("isWholeDay");
-                boolean isHalfDayEarly = rs.getBoolean("isHalfDayEarly");
-                bookingTimeList.add(new BookingTime(startDate, startTime, endTime, isWholeDay, isHalfDayEarly));
+                bookingTimeList.add(new BookingTime(startDate, startTime, endTime, isWholeDay));
             }
 
         } catch (SQLException e) {
@@ -113,7 +154,7 @@ public class BookingDaoImpl implements BookingDao {
     public void deleteBooking(int bookingID) throws SQLException {
         int rowsAffected;
         try (Connection con = databaseConnector.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("DELETE FROM Booking WHERE BookingID = ?");
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Booking WHERE bookingID = ?");
             ps.setInt(1, bookingID);
             rowsAffected = ps.executeUpdate(); // https://stackoverflow.com/questions/2571915/return-number-of-rows-affected-by-sql-update-statement-in-java
 

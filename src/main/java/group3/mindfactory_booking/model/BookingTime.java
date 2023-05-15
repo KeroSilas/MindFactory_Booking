@@ -9,14 +9,12 @@ public class BookingTime {
     private final LocalTime startTime;
     private final LocalTime endTime;
     private final boolean isWholeDay;
-    private final boolean isHalfDayEarly;
 
-    public BookingTime(LocalDate startDate, LocalTime startTime, LocalTime endTime, boolean isWholeDay, boolean isHalfDayEarly) {
+    public BookingTime(LocalDate startDate, LocalTime startTime, LocalTime endTime, boolean isWholeDay) {
         this.startDate = startDate;
         this.startTime = startTime;
         this.endTime = endTime;
         this.isWholeDay = isWholeDay;
-        this.isHalfDayEarly = isHalfDayEarly;
     }
 
     public LocalDate getStartDate() {
@@ -33,9 +31,5 @@ public class BookingTime {
 
     public boolean isWholeDay() {
         return isWholeDay;
-    }
-
-    public boolean isHalfDayEarly() {
-        return isHalfDayEarly;
     }
 }
