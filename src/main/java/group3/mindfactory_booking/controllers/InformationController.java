@@ -159,10 +159,11 @@ public class InformationController {
                             if ((lt.isAfter(bt.getStartTime()) || lt.equals(bt.getStartTime())) && (lt.isBefore(bt.getEndTime()) || lt.equals(bt.getEndTime()))) {
                                 startTimeIterator.remove();
                                 break;
-                            
+                            }
                         }
                     }
                 }
+
             }
         });
 
