@@ -97,6 +97,16 @@ public class BookingDaoImpl implements BookingDao {
                 ps5.executeUpdate();
             }
 
+            String sql = "INSERT INTO BookingEquipment VALUES(?,?);";
+            PreparedStatement ps6 = con.prepareStatement(sql);
+
+            for (String equipment : booking.getEquipmentList()) {
+                ps6.setInt(1, booking.getBookingID());
+                ps6.setString(2, equipment);
+                ps6.addBatch();
+            }
+            ps6.executeBatch();
+
             con.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
             con.commit();
             con.setAutoCommit(true);
