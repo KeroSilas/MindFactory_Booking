@@ -20,4 +20,6 @@ module group3.mindfactory_booking {
     opens group3.mindfactory_booking.model.singleton to javafx.fxml;
     exports group3.mindfactory_booking.services;
     opens group3.mindfactory_booking.services to javafx.fxml;
+    exports group3.mindfactory_booking.dao.singleton;
+    opens group3.mindfactory_booking.dao.singleton to javafx.fxml;
 }
