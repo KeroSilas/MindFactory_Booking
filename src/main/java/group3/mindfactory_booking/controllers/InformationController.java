@@ -4,7 +4,6 @@ import group3.mindfactory_booking.BookingApplication;
 import group3.mindfactory_booking.model.BookingTime;
 import group3.mindfactory_booking.model.singleton.Booking;
 import group3.mindfactory_booking.model.tasks.GetBookingTimesTask;
-import group3.mindfactory_booking.model.tasks.SaveBookingEquipmentTask;
 import group3.mindfactory_booking.model.tasks.SaveBookingTask;
 import group3.mindfactory_booking.model.tasks.SendEmailTask;
 import io.github.palexdev.materialfx.controls.*;
@@ -56,13 +55,10 @@ public class InformationController {
                 if (saveBookingTask.getValue()) {
                     System.out.println("Booking successfully saved");
 
-                    // Send email and save booking equipment in a new thread
                     // This only happens when the booking is saved successfully
                     ExecutorService executorService = Executors.newCachedThreadPool();
                     SendEmailTask sendEmailTask = new SendEmailTask();
-                    SaveBookingEquipmentTask saveBookingEquipmentTask = new SaveBookingEquipmentTask();
                     executorService.submit(sendEmailTask);
-                    executorService.submit(saveBookingEquipmentTask);
                     executorService.shutdown();
 
                     nextPage();

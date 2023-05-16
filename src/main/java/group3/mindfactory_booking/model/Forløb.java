@@ -8,6 +8,9 @@ public class Forløb {
     private String transportArrival;
     private String transportDeparture;
 
+    public Forløb() {
+    }
+
     public Forløb(int forløbID, String åbenSkoleForløb) {
         this.forløbID = forløbID;
         this.åbenSkoleForløb = åbenSkoleForløb;

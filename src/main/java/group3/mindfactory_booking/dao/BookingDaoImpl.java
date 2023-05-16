@@ -64,21 +64,21 @@ public class BookingDaoImpl implements BookingDao {
             ps.setString(11, booking.getPersonalNote());
             ps.executeUpdate();
 
-            if (booking.getCatering() != null) {
+            if (booking.getCatering().getCatering() != null) {
                 PreparedStatement ps2 = con.prepareStatement("INSERT INTO BookingCatering VALUES(?,?);");
                 ps2.setInt(1, booking.getBookingID());
                 ps2.setInt(2, booking.getCatering().getCateringID());
                 ps2.executeUpdate();
             }
 
-            if (booking.getActivity() != null) {
+            if (booking.getActivity().getActivity() != null) {
                 PreparedStatement ps3 = con.prepareStatement("INSERT INTO BookingActivity VALUES(?,?);");
                 ps3.setInt(1, booking.getBookingID());
                 ps3.setInt(2, booking.getActivity().getActivityID());
                 ps3.executeUpdate();
             }
 
-            if (booking.getOrganization() != null) {
+            if (booking.getOrganization().getOrganization() != null) {
                 PreparedStatement ps4 = con.prepareStatement("INSERT INTO BookingOrganisation VALUES(?,?,?,?);");
                 ps4.setInt(1, booking.getBookingID());
                 ps4.setInt(2, booking.getOrganization().getOrganizationID());
@@ -87,7 +87,7 @@ public class BookingDaoImpl implements BookingDao {
                 ps4.executeUpdate();
             }
 
-            if (booking.getÅbenSkoleForløb() != null) {
+            if (booking.getÅbenSkoleForløb().getÅbenSkoleForløb() != null) {
                 PreparedStatement ps5 = con.prepareStatement("INSERT INTO BookingForløb VALUES(?,?,?,?,?);");
                 ps5.setInt(1, booking.getBookingID());
                 ps5.setInt(2, booking.getÅbenSkoleForløb().getForløbID());

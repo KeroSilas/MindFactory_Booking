@@ -5,6 +5,9 @@ public class Activity {
     private int activityID;
     private String activity;
 
+    public Activity() {
+    }
+
     public Activity(int activityID, String activity) {
         this.activityID = activityID;
         this.activity = activity;

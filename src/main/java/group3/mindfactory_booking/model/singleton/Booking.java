@@ -118,6 +118,9 @@ public class Booking {
     }
 
     public Catering getCatering() {
+        if (catering == null) {
+            catering = new Catering();
+        }
         return catering;
     }
 
@@ -126,6 +129,9 @@ public class Booking {
     }
 
     public Activity getActivity() {
+        if (activity == null) {
+            activity = new Activity();
+        }
         return activity;
     }
 
@@ -134,6 +140,9 @@ public class Booking {
     }
 
     public Organization getOrganization() {
+        if (organization == null) {
+            organization = new Organization();
+        }
         return organization;
     }
 
@@ -142,6 +151,9 @@ public class Booking {
     }
 
     public Forløb getÅbenSkoleForløb() {
+        if (åbenSkoleForløb == null) {
+            åbenSkoleForløb = new Forløb();
+        }
         return åbenSkoleForløb;
     }
 

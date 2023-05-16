@@ -5,6 +5,9 @@ public class Catering {
     private int cateringID;
     private String catering;
 
+    public Catering() {
+    }
+
     public Catering(int cateringID, String catering) {
         this.cateringID = cateringID;
         this.catering = catering;

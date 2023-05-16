@@ -106,6 +106,8 @@ public class VirksomhedController {
         booking.setOrganization(virksomhedCB.getSelectionModel().getSelectedItem());
         booking.setActivity(aktivitetCB.getSelectionModel().getSelectedItem());
         booking.setEquipmentList(udstyrLV.getItems());
+        booking.getOrganization().setParticipants(Integer.parseInt(deltagereTF.getText()));
+        booking.setCatering(forplejningCB.getSelectionModel().getSelectedItem());
         if (læringsRB.isSelected()) {
             booking.getOrganization().setAssistance("Læring konsulent");
         } else if (annesofieRB.isSelected()) {
