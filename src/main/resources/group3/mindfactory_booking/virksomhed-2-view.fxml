@@ -207,7 +207,7 @@
                   </HBox>
                   <HBox>
                      <children>
-                        <MFXRadioButton fx:id="læringsRB" text="Lærings konsulent">
+                        <MFXRadioButton fx:id="læringsRB" text="Læringskonsulent">
                            <toggleGroup>
                               <ToggleGroup fx:id="assistanceType" />
                            </toggleGroup>
