@@ -10,6 +10,8 @@ public class Organization {
     public Organization(int organizationID, String organization) {
         this.organizationID = organizationID;
         this.organization = organization;
+        assistance = "Ingen";
+        participants = 0;
     }
 
     public Organization(int organizationID, String organization, int participants, String assistance) {
