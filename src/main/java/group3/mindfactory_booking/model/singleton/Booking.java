@@ -21,7 +21,6 @@ public class Booking {
     private LocalTime startTime;
     private LocalTime endTime;
     private boolean isWholeDay;
-    private boolean isNoShow;
     private boolean isEmailSent;
     private String messageToAS;
     private String personalNote;
@@ -60,10 +59,6 @@ public class Booking {
 
     public boolean isEmailSent() {
         return isEmailSent;
-    }
-
-    public void setEmailSent(boolean isEmailSent) {
-        this.isEmailSent = isEmailSent;
     }
 
     public String getMessageToAS() {
@@ -111,10 +106,6 @@ public class Booking {
             isWholeDay = true;
         }
         return isWholeDay;
-    }
-
-    public boolean isNoShow() {
-        return isNoShow;
     }
 
     public Catering getCatering() {
@@ -168,10 +159,6 @@ public class Booking {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
     public String getBookingType() {
         return bookingType;
     }
@@ -182,10 +169,6 @@ public class Booking {
 
     public String getPersonalNote() {
         return personalNote;
-    }
-
-    public void setPersonalNote (String personalNote) {
-        this.personalNote = personalNote;
     }
 
     public void clearBooking() {

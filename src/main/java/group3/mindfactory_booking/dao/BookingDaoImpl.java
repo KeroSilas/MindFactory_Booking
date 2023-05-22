@@ -59,7 +59,7 @@ public class BookingDaoImpl implements BookingDao {
             ps.setTime(5, Time.valueOf(booking.getStartTime()));
             ps.setTime(6, Time.valueOf(booking.getEndTime()));
             ps.setBoolean(7, booking.isWholeDay());
-            ps.setBoolean(8, booking.isNoShow());
+            ps.setBoolean(8, false);
             ps.setBoolean(9, booking.isEmailSent());
             ps.setString(10, booking.getMessageToAS());
             ps.setString(11, booking.getPersonalNote());

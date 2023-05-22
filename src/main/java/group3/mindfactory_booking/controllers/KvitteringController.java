@@ -13,6 +13,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
+/*
+ * This class controls the 4th view in the sequence.
+ * It shows all the information that the user has entered and saved to the database.
+ */
+
 public class KvitteringController {
 
     private Booking booking;

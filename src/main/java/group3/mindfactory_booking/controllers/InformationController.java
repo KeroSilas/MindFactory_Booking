@@ -26,6 +26,12 @@ import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/*
+ * This class controls the 3rd view in the sequence.
+ * It takes all the input from the user and saves it to the Booking object.
+ * It also pulls and filters the available times from the database.
+ */
+
 public class InformationController {
 
     private Booking booking;
@@ -44,14 +50,17 @@ public class InformationController {
 
     @FXML
     void handleBekræft() {
+        // Checks if the input is valid, if it is, then the fields are saved to the Booking object
         if (isInputValid()) {
             progressSpinner.setVisible(true);
             bekræftBtn.setDisable(true);
             alertLabel.setVisible(false);
             importToBooking();
 
+            // Start a task that handles the bookingDao and saves the data from the Booking object to the database
             SaveBookingTask saveBookingTask = new SaveBookingTask();
             saveBookingTask.setOnSucceeded(e -> {
+                // If the booking is saved successfully, then an email will be sent to the user and the next page will be loaded
                 if (saveBookingTask.getValue()) {
                     System.out.println("Booking successfully saved");
 
@@ -115,6 +124,7 @@ public class InformationController {
                     }
                 }
 
+                // Remove the dates from the dateList that are already booked
                 Iterator<LocalDate> dateIterator = dateList.iterator();
                 while (dateIterator.hasNext()) {
                     LocalDate ld = dateIterator.next();
@@ -134,6 +144,7 @@ public class InformationController {
 
         datoCB.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
+                // When a new date is selected, the ComboBoxes for start and end time are cleared
                 fraCB.getSelectionModel().clearSelection();
                 tilCB.getSelectionModel().clearSelection();
                 startTimeList.clear();
@@ -147,6 +158,8 @@ public class InformationController {
                 for (int i = 7; i < 23; i++) {
                     startTimeList.add(LocalTime.of(i,0));
                 }
+
+                // Remove the times from the startTimeList that are already booked. Checks for overlap in time
                 Iterator<LocalTime> startTimeIterator = startTimeList.iterator();
                 while (startTimeIterator.hasNext()) {
                     LocalTime lt = startTimeIterator.next();
@@ -172,11 +185,14 @@ public class InformationController {
                 tilCB.setDisable(false);
                 tilLabel.setDisable(false);
 
-                // I heard you like spaghetti, so I put spaghetti in your spaghetti
+                // Sets the minimum time for the end time to be 1 hour after the start time
                 int hour = newValue.plusHours(1).getHour();
                 for (int i = hour; i < 24; i++) {
                     endTimeList.add(LocalTime.of(i,0));
                 }
+
+                // Remove the times from the endTimeList that are already booked. Only allows the user to book up until the next booking
+                // For example, if 10:00 - 12:00 is booked, if the user picks a start time of 8:00, then the user can only pick up to 10:00
                 Iterator<LocalTime> endTimeIterator = endTimeList.iterator();
                 while (endTimeIterator.hasNext()) {
                     LocalTime lt = endTimeIterator.next();
@@ -193,6 +209,7 @@ public class InformationController {
             }
         });
 
+        // If the time is after 18:00, then notify the user
         tilCB.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 specialLabel.setVisible(newValue.isAfter(LocalTime.of(18, 0)));
@@ -229,9 +246,11 @@ public class InformationController {
         }
 
         // https://stackoverflow.com/questions/60282362/regex-pattern-for-email
+        // Uses a regular expression to check if the textfield is an email
         if (emailTF.getText().isEmpty() || !emailTF.getText().matches("^[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*$")) {
             emailTF.setStyle("-fx-border-color: red");
             success = false;
+            // If the bookingType is "Skole", then the email address must end with "skoletdr.dk"
         } else if (booking.getBookingType().equals("Skole") && !emailTF.getText().substring(emailTF.getText().length() - 11).equals("skoletdr.dk")) {
             emailTF.setStyle("-fx-border-color: red");
             success = false;
@@ -239,6 +258,7 @@ public class InformationController {
             emailTF.setStyle("-fx-border-color: lightgrey");
         }
 
+        // https://stackoverflow.com/questions/273141/regex-for-numbers-only
         if (telefonTF.getText().isEmpty() || !telefonTF.getText().matches("^[0-9]+$")) {
             telefonTF.setStyle("-fx-border-color: red");
             success = false;

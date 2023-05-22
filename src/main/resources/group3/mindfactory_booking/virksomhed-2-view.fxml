@@ -79,7 +79,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT">
                      <children>
-                        <Label text="Aktivitet">
+                        <Label text="Formål">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -94,7 +94,7 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" spacing="8.0">
                      <children>
-                        <Label text="Aktivitet">
+                        <Label text="Formål">
                            <font>
                               <Font size="14.0" />
                            </font>

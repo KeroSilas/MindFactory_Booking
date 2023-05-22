@@ -19,6 +19,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
+/*
+ * This class controls the 2nd view in the sequence.
+ * It handles the user input and imports it to the Booking class.
+ */
+
 public class VirksomhedController {
 
     private Booking booking;
@@ -45,6 +50,8 @@ public class VirksomhedController {
     @FXML
     void handleTilbage() {
         previousPage();
+
+        // Reset booking type if user goes back
         booking.setBookingType(null);
     }
 
@@ -55,7 +62,9 @@ public class VirksomhedController {
 
     @FXML
     void handleSlet() {
+        // Get selected items from ListView
         List<String> equipmentList = udstyrLV.getSelectionModel().getSelectedValues();
+        // Remove selected items from ListView
         for (String equipment : equipmentList) {
             udstyrLV.getItems().remove(equipment);
         }
@@ -72,6 +81,7 @@ public class VirksomhedController {
             sletBtn.setDisable(newValue == null);
         });
 
+        // Start tasks to get data from database
         GetOrganisationsTask getOrganisationsTask = new GetOrganisationsTask();
         getOrganisationsTask.setOnSucceeded(e -> {
             List<Organization> organisations = getOrganisationsTask.getValue();

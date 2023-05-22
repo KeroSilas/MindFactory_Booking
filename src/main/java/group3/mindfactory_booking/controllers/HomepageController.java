@@ -13,6 +13,11 @@ import java.util.Objects;
 
 import static javafx.stage.Modality.APPLICATION_MODAL;
 
+/*
+ * This class controls the homepage view.
+ * Here the user can choose to either make a new booking or remove a booking.
+ */
+
 public class HomepageController {
 
     @FXML private BorderPane openingBP;

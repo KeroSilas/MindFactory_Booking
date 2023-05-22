@@ -22,6 +22,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
+/*
+ * This class controls the 2nd view in the sequence.
+ * It handles the user input and imports it to the Booking class.
+ */
+
 public class SkoleController {
 
     private Booking booking;
@@ -53,6 +58,7 @@ public class SkoleController {
     public void initialize() {
         booking = Booking.getInstance();
 
+        // If the user picks yes, then show more options
         jaRB.setOnAction(e -> {
             if (jaRB.isSelected()) {
                 åbenSkolePane.setVisible(true);
@@ -65,6 +71,7 @@ public class SkoleController {
             }
         });
 
+        // If the user picks no, then hide the options
         nejRB.setOnAction(e -> {
             if (nejRB.isSelected()) {
                 åbenSkolePane.setVisible(false);
@@ -77,6 +84,7 @@ public class SkoleController {
             }
         });
 
+        // Start a task that fills
         GetOrganisationsTask getOrganisationsTask = new GetOrganisationsTask();
         getOrganisationsTask.setOnSucceeded(e -> {
             List<Organization> organisations = getOrganisationsTask.getValue();
@@ -134,6 +142,7 @@ public class SkoleController {
             stillingTF.setStyle("-fx-border-color: lightgrey");
         }
 
+        // Only if the user picks yes, then check the rest of the fields
         if (jaRB.isSelected()) {
             if (forløbCB.getSelectionModel().getSelectedItem() == null) {
                 forløbCB.setStyle("-fx-border-color: red");

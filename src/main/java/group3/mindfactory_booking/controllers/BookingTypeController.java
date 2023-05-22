@@ -12,6 +12,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
+/*
+ * This class controls the 1st view in the sequence.
+ * It checks which booking type the user selects, and directs the user to the next relevant view.
+ */
+
 public class BookingTypeController {
 
     private Booking booking;

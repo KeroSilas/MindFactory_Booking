@@ -8,6 +8,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+/*
+ * This class controls the view that allows the user to delete a booking.
+ */
+
 public class AnnullerBookingController {
 
     @FXML private Label statusLabel;
