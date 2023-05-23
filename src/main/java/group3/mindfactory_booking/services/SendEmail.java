@@ -16,7 +16,7 @@ import javax.mail.internet.MimeMultipart;
 // To fix a small error: https://stackoverflow.com/questions/55276768/how-to-prevent-java-mail-expected-resource-not-found-warnings-from-camel-smtp
 public class SendEmail {
 
-    public void sendEmail(String email, String body, String title, boolean ccAdmin) {
+    public void sendEmail(String email, String body, String title, boolean ccAdmin, boolean sendAttachment) {
         // Get system properties
         Properties properties = System.getProperties();
 
@@ -55,11 +55,13 @@ public class SendEmail {
             MimeBodyPart textPart = new MimeBodyPart();
 
             try {
-                File f = new File("src/main/resources/other/Forplejningsformular.pdf");
-                attachmentPart.attachFile(f);
+                if (sendAttachment) {
+                    File f = new File("src/main/resources/group3/mindfactory_booking/other/Forplejningsformular.pdf");
+                    attachmentPart.attachFile(f);
+                    multipart.addBodyPart(attachmentPart);
+                }
                 textPart.setText(body);
                 multipart.addBodyPart(textPart);
-                multipart.addBodyPart(attachmentPart);
 
             } catch (IOException e) {
                 e.printStackTrace();
