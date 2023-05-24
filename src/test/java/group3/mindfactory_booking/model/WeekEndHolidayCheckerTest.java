@@ -13,8 +13,11 @@ class WeekEndHolidayCheckerTest {
         // Arrange
         WeekEndHolidayChecker checker = new WeekEndHolidayChecker();
 
-        // Act + Assert
-        assertTrue(checker.isWeekendOrHoliday(LocalDate.of(2023, 5, 20)));
+        // Act
+        boolean isWeekendOrHoliday = checker.isWeekendOrHoliday(LocalDate.of(2023, 5, 20));
+
+        // Assert
+        assertTrue(isWeekendOrHoliday);
     }
 
     @Test
@@ -22,8 +25,11 @@ class WeekEndHolidayCheckerTest {
         // Arrange
         WeekEndHolidayChecker checker = new WeekEndHolidayChecker();
 
-        // Act + Assert
-        assertFalse(checker.isWeekendOrHoliday(LocalDate.of(2023, 5, 19)));
+        // Act
+        boolean isWeekendOrHoliday = checker.isWeekendOrHoliday(LocalDate.of(2023, 5, 19));
+
+        // Assert
+        assertFalse(isWeekendOrHoliday);
     }
 
     @Test
@@ -31,8 +37,11 @@ class WeekEndHolidayCheckerTest {
         // Arrange
         WeekEndHolidayChecker checker = new WeekEndHolidayChecker();
 
-        // Act + Assert
-        assertTrue(checker.isWeekendOrHoliday(LocalDate.of(2023, 6, 5)));
+        // Act
+        boolean isWeekendOrHoliday = checker.isWeekendOrHoliday(LocalDate.of(2023, 5, 25));
+
+        // Assert
+        assertTrue(isWeekendOrHoliday);
     }
 
     @Test
